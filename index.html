@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="개발 공부와 프로젝트 경험을 소개하는 임희재의 한 페이지 사이트" />
+  <title>임희재 | Developer in Progress</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="처음으로 이동">
+      <span class="brand-mark" aria-hidden="true">HJ</span>
+      <span>Heejae Lim</span>
+    </a>
+
+    <nav aria-label="주요 메뉴">
+      <a href="#about">소개</a>
+      <a href="#focus">관심 분야</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#principles">작업 방식</a>
+    </nav>
+
+    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="화면 테마 전환">
+      <span aria-hidden="true">◐</span>
+      <span class="theme-label">Dark</span>
+    </button>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <p class="eyebrow">SOFTWARE · WEB · ARCHIVE</p>
+      <h1 id="hero-title">
+        오래된 기술을 다시 이해하고,<br />
+        <span>새로운 방식으로 연결합니다.</span>
+      </h1>
+      <p class="hero-copy">
+        안녕하세요. 임희재입니다. 소프트웨어 개발을 공부하며 웹·백엔드와
+        오래된 게임 및 소프트웨어 복원 프로젝트를 통해 문제를 분석하고 직접 구현하는 경험을 쌓고 있습니다.
+      </p>
+      <p class="purpose">
+        <strong>이 페이지의 목적:</strong>
+        함께 공부하거나 일할 사람이 제가 무엇을 좋아하고 어떤 방식으로 문제를 해결하는지 한눈에 볼 수 있도록 소개합니다.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button primary" href="#projects">프로젝트 보기</a>
+        <a class="button ghost" href="https://github.com/Huihuing" target="_blank" rel="noreferrer">GitHub 열기</a>
+      </div>
+
+      <dl class="quick-facts" aria-label="간단한 소개">
+        <div>
+          <dt>Focus</dt>
+          <dd>Software Development</dd>
+        </div>
+        <div>
+          <dt>Explore</dt>
+          <dd>Legacy &amp; Web</dd>
+        </div>
+        <div>
+          <dt>Method</dt>
+          <dd>Build · Test · Record</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <p class="eyebrow">01 · ABOUT</p>
+        <h2 id="about-title">저는 이런 개발자가 되고 있습니다.</h2>
+      </div>
+
+      <div class="about-grid">
+        <p class="lead">
+          완성된 답을 외우기보다, 문제가 생긴 이유를 추적하고 작은 단위로 검증하면서
+          실제로 동작하는 결과를 만드는 과정을 좋아합니다.
+        </p>
+        <div class="about-note">
+          <p>현재는 웹과 백엔드 개발의 기본기를 계속 다지는 동시에, 오래된 프로그램과 게임을 현대 환경에서 다시 살펴보는 개인 프로젝트를 진행하고 있습니다.</p>
+          <p>코드뿐 아니라 조사 과정, 시행착오, 결정 이유를 문서로 남기는 것도 프로젝트의 일부라고 생각합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="focus" aria-labelledby="focus-title">
+      <div class="section-heading">
+        <p class="eyebrow">02 · FOCUS</p>
+        <h2 id="focus-title">지금 집중하는 세 가지</h2>
+      </div>
+
+      <div class="focus-grid">
+        <article class="focus-card">
+          <span class="card-number" aria-hidden="true">01</span>
+          <h3>Backend &amp; Web</h3>
+          <p>서버 구조, 인증, 데이터 흐름을 이해하고 웹에서 실제로 사용할 수 있는 기능으로 연결합니다.</p>
+        </article>
+        <article class="focus-card">
+          <span class="card-number" aria-hidden="true">02</span>
+          <h3>Legacy Software</h3>
+          <p>오래된 Android·J2ME·Flash 환경을 조사하며 호환성 문제와 실행 구조를 분석합니다.</p>
+        </article>
+        <article class="focus-card">
+          <span class="card-number" aria-hidden="true">03</span>
+          <h3>Archive &amp; Restore</h3>
+          <p>남아 있는 원본 자료를 우선 수집하고 출처와 변경 과정을 기록하며 재현 가능한 복원을 지향합니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading project-heading">
+        <div>
+          <p class="eyebrow">03 · PROJECTS</p>
+          <h2 id="projects-title">최근 다루는 프로젝트</h2>
+        </div>
+        <div class="filters" aria-label="프로젝트 필터">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">전체</button>
+          <button class="filter" type="button" data-filter="development" aria-pressed="false">개발</button>
+          <button class="filter" type="button" data-filter="archive" aria-pressed="false">복원</button>
+        </div>
+      </div>
+
+      <div class="project-grid" aria-live="polite">
+        <article class="project-card" data-category="development">
+          <div class="project-meta"><span>BACKEND</span><span>SPRING</span></div>
+          <h3>Stock Service</h3>
+          <p>Spring Boot 기반 서비스에서 인증·회원·데이터 처리 흐름을 구현하며 백엔드 구조를 학습한 프로젝트입니다.</p>
+          <p class="project-foot">Authentication · API · Database</p>
+        </article>
+
+        <article class="project-card" data-category="development archive">
+          <div class="project-meta"><span>ANDROID</span><span>EMULATOR</span></div>
+          <h3>OmniDroid</h3>
+          <p>구형 Android 앱과 게임의 실행 호환성을 높이는 환경을 조사하고, 에뮬레이터 구성과 배포 방식을 실험합니다.</p>
+          <a href="https://github.com/Huihuing/OmniDroid" target="_blank" rel="noreferrer">Repository ↗</a>
+        </article>
+
+        <article class="project-card" data-category="development archive">
+          <div class="project-meta"><span>J2ME</span><span>LEGACY</span></div>
+          <h3>WIPIRevive</h3>
+          <p>과거 피처폰 게임의 실행 구조와 기기별 차이를 조사하고 PC 환경에서의 재현 가능성을 탐색합니다.</p>
+          <a href="https://github.com/Huihuing/WIPIRevive" target="_blank" rel="noreferrer">Repository ↗</a>
+        </article>
+
+        <article class="project-card" data-category="archive">
+          <div class="project-meta"><span>WEB</span><span>ARCHIVE</span></div>
+          <h3>Web Restoration</h3>
+          <p>웹 아카이브에 남은 자료와 원본 에셋을 바탕으로 과거 웹 콘텐츠의 구조와 동작을 기록하고 복원합니다.</p>
+          <p class="project-foot">Research · Provenance · Reconstruction</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="principles" aria-labelledby="principles-title">
+      <div class="section-heading">
+        <p class="eyebrow">04 · PRINCIPLES</p>
+        <h2 id="principles-title">제가 작업을 이어가는 방식</h2>
+      </div>
+
+      <ol class="principle-list">
+        <li>
+          <span>01</span>
+          <div><strong>먼저 확인합니다.</strong><p>추측보다 현재 상태와 실제 자료를 먼저 확인합니다.</p></div>
+        </li>
+        <li>
+          <span>02</span>
+          <div><strong>작게 검증합니다.</strong><p>문제를 작은 단위로 나누고 하나씩 동작 여부를 확인합니다.</p></div>
+        </li>
+        <li>
+          <span>03</span>
+          <div><strong>과정을 남깁니다.</strong><p>실패한 시도와 결정 이유까지 기록해 다음 작업의 근거로 사용합니다.</p></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <p class="eyebrow">KEEP BUILDING</p>
+      <h2 id="closing-title">배우고, 만들어 보고,<br />기록하며 앞으로 갑니다.</h2>
+      <a class="button primary" href="https://github.com/Huihuing" target="_blank" rel="noreferrer">GitHub에서 작업 보기</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Heejae Lim.</p>
+    <p>이 페이지에는 연락처, 상세 주소, 계정 비밀값 등 비공개 정보를 포함하지 않습니다.</p>
+  </footer>
+</body>
+</html>
