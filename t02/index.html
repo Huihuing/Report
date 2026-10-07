@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="30초 안에 올바른 좌우 문을 골라 통과하는 브라우저 미니게임" />
+  <title>Gate Sprint 30 | 좌우 문 통과 게임</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <section class="game-card" aria-labelledby="game-title">
+      <header class="game-header">
+        <div>
+          <p class="eyebrow">T02 · MINI GAME</p>
+          <h1 id="game-title">Gate Sprint 30</h1>
+          <p class="subtitle">30초 안에 안전한 문을 골라 8개의 관문을 통과하세요.</p>
+        </div>
+        <div class="status-badge" id="statusBadge" aria-live="polite">대기</div>
+      </header>
+
+      <section class="rule-panel" aria-labelledby="rule-title">
+        <h2 id="rule-title">게임 규칙</h2>
+        <ul>
+          <li><strong>행동:</strong> 화면의 목표 색을 보고 왼쪽 또는 오른쪽 문을 선택합니다.</li>
+          <li><strong>성공:</strong> 30초 안에 관문 8개를 모두 통과합니다.</li>
+          <li><strong>실패:</strong> 잘못된 문을 고르거나 제한시간이 끝나면 실패합니다.</li>
+        </ul>
+        <p class="control-help"><strong>조작:</strong> ← / A = 왼쪽 · → / D = 오른쪽 · 화면 버튼도 사용 가능</p>
+      </section>
+
+      <section class="hud" aria-label="현재 게임 상태">
+        <div>
+          <span>상태</span>
+          <strong id="stateText">시작 전</strong>
+        </div>
+        <div>
+          <span>남은 시간</span>
+          <strong><span id="timeText">30.0</span>초</strong>
+        </div>
+        <div>
+          <span>진행</span>
+          <strong><span id="progressText">0</span> / 8</strong>
+        </div>
+      </section>
+
+      <section class="arena" id="arena" tabindex="0" aria-label="게임 영역. 시작 후 방향키 또는 A D 키로 문을 선택하세요.">
+        <div class="prompt">
+          <span>이번 목표</span>
+          <strong id="targetText">게임을 시작하세요</strong>
+        </div>
+
+        <div class="doors" aria-label="왼쪽 문과 오른쪽 문">
+          <button class="door" id="leftDoor" type="button" data-side="left" disabled>
+            <span class="door-side">왼쪽</span>
+            <span class="door-color" id="leftColor">?</span>
+          </button>
+
+          <div class="runner" aria-hidden="true">▲</div>
+
+          <button class="door" id="rightDoor" type="button" data-side="right" disabled>
+            <span class="door-side">오른쪽</span>
+            <span class="door-color" id="rightColor">?</span>
+          </button>
+        </div>
+
+        <p class="round-message" id="roundMessage" aria-live="assertive">
+          시작 버튼을 누르면 첫 관문이 열립니다.
+        </p>
+      </section>
+
+      <div class="actions">
+        <button class="primary-button" id="startButton" type="button">게임 시작</button>
+        <button class="secondary-button" id="restartButton" type="button" hidden>다시 시작</button>
+      </div>
+
+      <p class="test-note">한 번의 좌·우 입력은 관문 선택 한 번으로만 처리됩니다. 키를 길게 눌러도 반복 입력은 무시합니다.</p>
+    </section>
+  </main>
+</body>
+</html>
