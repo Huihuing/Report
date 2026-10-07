@@ -3,5 +3,30 @@
   "signal_id": "seoul.temperature_2m",
   "record_timezone": "Asia/Seoul",
   "source_name": "Open-Meteo Forecast API",
-  "records": []
+  "records": [
+    {
+      "record_id": "live-seoul.temperature_2m-2026-10-07",
+      "record_date": "2026-10-07",
+      "server_created_at": "2026-10-07T10:14:24.186Z",
+      "source_url": "https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&current=temperature_2m&timezone=Asia%2FSeoul",
+      "source_observed_at": "2026-10-07T19:00:00+09:00",
+      "normalized_value": 17.6,
+      "unit": "°C",
+      "raw": {
+        "latitude": 37.55,
+        "longitude": 127,
+        "timezone": "Asia/Seoul",
+        "timezone_abbreviation": "GMT+9",
+        "current_units": {
+          "time": "iso8601",
+          "temperature_2m": "°C"
+        },
+        "current": {
+          "time": "2026-10-07T19:00",
+          "interval": 900,
+          "temperature_2m": 17.6
+        }
+      }
+    }
+  ]
 }
