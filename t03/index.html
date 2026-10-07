@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="PNG·JPEG 이미지와 한글 문구를 조합해 즉시 미리 보는 브라우저 카드 편집기" />
+  <meta name="description" content="PNG·JPEG 이미지와 한글 문구를 조합하고 템플릿·JSON·PNG 내보내기를 지원하는 카드 편집기" />
   <title>짤·카드 스튜디오 | T03</title>
   <link rel="stylesheet" href="./styles.css" />
   <script src="./script.js" defer></script>
@@ -17,21 +17,18 @@
     <header class="intro">
       <p class="eyebrow">T03 · CARD STUDIO</p>
       <h1>짤·카드 스튜디오</h1>
-      <p>이미지를 불러오고 한글 문구의 위치·크기·색을 바꾸면 오른쪽 미리보기에 즉시 반영됩니다.</p>
+      <p>이미지와 한글 문구를 조합하고 1:1·4:5·9:16 미리보기를 그대로 PNG 파일로 저장합니다.</p>
     </header>
 
     <section class="safety-note" aria-label="이미지 사용 안내">
       <strong>공개 안전 안내</strong>
-      <span>직접 만들었거나 사용 권한이 있는 이미지만 사용하세요. 미리보기는 브라우저 캔버스에 다시 그리므로 원본 EXIF 같은 메타데이터를 결과 화면에 전달하지 않습니다.</span>
+      <span>직접 만들었거나 사용 권한이 있는 이미지만 사용하세요. 업로드 이미지는 브라우저 canvas에 다시 그려지며 내려받는 PNG에는 원본 EXIF·GPS 메타데이터를 전달하지 않습니다.</span>
     </section>
 
     <section class="studio" aria-label="이미지와 문구 편집 도구">
       <div class="controls">
         <section class="tool-card" aria-labelledby="image-tool-title">
-          <div class="tool-heading">
-            <span>01</span>
-            <h2 id="image-tool-title">이미지 편집</h2>
-          </div>
+          <div class="tool-heading"><span>01</span><h2 id="image-tool-title">이미지 편집</h2></div>
 
           <label class="file-picker" for="imageInput">
             <span>PNG 또는 JPEG 불러오기</span>
@@ -48,14 +45,11 @@
         </section>
 
         <section class="tool-card" aria-labelledby="text-tool-title">
-          <div class="tool-heading">
-            <span>02</span>
-            <h2 id="text-tool-title">문구 편집</h2>
-          </div>
+          <div class="tool-heading"><span>02</span><h2 id="text-tool-title">문구 편집</h2></div>
 
           <label class="field">
             <span>문구</span>
-            <textarea id="captionInput" rows="3" maxlength="120">오늘도 한 걸음 앞으로</textarea>
+            <textarea id="captionInput" rows="4" maxlength="500">오늘도 한 걸음 앞으로</textarea>
           </label>
 
           <label class="field range-field">
@@ -79,23 +73,96 @@
             <output id="colorValue">#ffffff</output>
           </label>
         </section>
+
+        <section class="tool-card" aria-labelledby="ratio-tool-title">
+          <div class="tool-heading"><span>03</span><h2 id="ratio-tool-title">화면비와 저장</h2></div>
+          <div class="ratio-group" id="ratioGroup" aria-label="화면비 선택">
+            <button type="button" class="ratio-button is-active" data-ratio="square" aria-pressed="true">1:1</button>
+            <button type="button" class="ratio-button" data-ratio="portrait" aria-pressed="false">4:5</button>
+            <button type="button" class="ratio-button" data-ratio="story" aria-pressed="false">9:16</button>
+          </div>
+          <button type="button" class="primary-action" id="downloadButton">현재 미리보기 PNG 저장</button>
+          <p class="tool-help">미리보기와 내려받기는 동일한 canvas 픽셀을 사용합니다.</p>
+        </section>
       </div>
 
       <section class="preview-panel" aria-labelledby="preview-title">
         <div class="preview-heading">
-          <div>
-            <p class="eyebrow">LIVE PREVIEW</p>
-            <h2 id="preview-title">미리보기</h2>
-          </div>
-          <span id="previewState">대기</span>
+          <div><p class="eyebrow">LIVE PREVIEW</p><h2 id="preview-title">미리보기</h2></div>
+          <span id="previewState">1:1 · 이미지 대기</span>
         </div>
-
-        <div class="canvas-wrap">
+        <div class="canvas-wrap" id="canvasWrap">
           <canvas id="previewCanvas" width="1080" height="1080" aria-label="편집 결과 미리보기"></canvas>
         </div>
-
-        <p class="preview-help">이미지 업로드가 없어도 문구 편집은 시험할 수 있습니다. 지원하지 않는 파일을 넣으면 현재 미리보기는 그대로 유지됩니다.</p>
+        <p class="preview-help">지원하지 않는 파일이나 손상된 이미지를 넣어도 현재 문구·비율·이미지는 사라지지 않습니다.</p>
       </section>
+    </section>
+
+    <section class="data-grid" aria-label="템플릿과 JSON 관리">
+      <section class="manager-card" aria-labelledby="template-title">
+        <div class="section-title"><p class="eyebrow">TEMPLATE CRUD</p><h2 id="template-title">사용자 템플릿</h2></div>
+        <div class="inline-form">
+          <label for="templateName">템플릿 이름</label>
+          <input id="templateName" type="text" maxlength="40" placeholder="예: 공지 카드" />
+          <button type="button" id="createTemplateButton">현재 설정으로 생성</button>
+          <button type="button" class="secondary-action" id="createSamplesButton">검사용 3개 생성</button>
+        </div>
+        <p class="manager-status" id="templateStatus" role="status" aria-live="polite">저장된 템플릿이 없습니다.</p>
+        <div class="template-list" id="templateList"></div>
+      </section>
+
+      <section class="manager-card" aria-labelledby="json-title">
+        <div class="section-title"><p class="eyebrow">PORTABLE JSON</p><h2 id="json-title">옮겨 쓰기</h2></div>
+        <div class="json-actions">
+          <button type="button" id="exportJsonButton">템플릿 JSON 내보내기</button>
+          <label class="json-picker" for="jsonInput">JSON 가져오기<input id="jsonInput" type="file" accept=".json,application/json" /></label>
+        </div>
+        <p class="manager-status" id="jsonStatus" role="status" aria-live="polite">가져온 JSON은 전체 검증을 통과한 뒤에만 기존 템플릿을 바꿉니다.</p>
+      </section>
+    </section>
+
+    <section class="evidence-section" aria-labelledby="examples-title">
+      <div class="section-title">
+        <p class="eyebrow">FINISHED PNG</p>
+        <h2 id="examples-title">완성 이미지 3개</h2>
+        <p>외부 저작물을 사용하지 않고 브라우저 canvas로 직접 만든 검사용 완성본입니다.</p>
+      </div>
+
+      <div class="example-grid">
+        <article class="example-card">
+          <img id="exampleSquare" alt="본인 제작 1대1 완성 이미지" />
+          <h3>1:1 · BUILD / TEST</h3>
+          <a id="exampleSquareDownload" download="t03-finished-1x1.png">PNG 내려받기</a>
+        </article>
+        <article class="example-card">
+          <img id="examplePortrait" alt="본인 제작 4대5 완성 이미지" />
+          <h3>4:5 · MAKE IT CLEAR</h3>
+          <a id="examplePortraitDownload" download="t03-finished-4x5.png">PNG 내려받기</a>
+        </article>
+        <article class="example-card">
+          <img id="exampleStory" alt="본인 제작 9대16 완성 이미지" />
+          <h3>9:16 · ONE STEP</h3>
+          <a id="exampleStoryDownload" download="t03-finished-9x16.png">PNG 내려받기</a>
+        </article>
+      </div>
+
+      <details class="test-log">
+        <summary>극단 입력 12건 검사 기록 보기</summary>
+        <ol>
+          <li><strong>긴 한글:</strong> 수정 전 FAIL(60자 이후 잘림) → 수정 후 PASS(폭 기준 자동 줄바꿈).</li>
+          <li><strong>한글+English+123:</strong> PASS — 혼합 문자를 그대로 보존.</li>
+          <li><strong>명시적 줄바꿈 3줄:</strong> PASS — 입력한 줄 경계를 유지.</li>
+          <li><strong>이모지 😀🚀✨:</strong> PASS — grapheme 단위 줄바꿈.</li>
+          <li><strong>빈 문구:</strong> PASS — 이미지는 유지하고 글자만 그리지 않음.</li>
+          <li><strong>세로 이미지:</strong> PASS — cover 기준 중앙 잘림.</li>
+          <li><strong>가로 이미지:</strong> PASS — cover 기준 중앙 잘림.</li>
+          <li><strong>투명 PNG:</strong> PASS — 투명 영역을 canvas에 합성.</li>
+          <li><strong>왼쪽 5% 위치:</strong> PASS — 짧은 문구 위치 반영.</li>
+          <li><strong>오른쪽 95% 위치:</strong> PASS — 짧은 문구 위치 반영.</li>
+          <li><strong>최소 18px:</strong> PASS — 크기 하한 유지.</li>
+          <li><strong>최대 96px:</strong> PASS — 크기 상한 유지.</li>
+        </ol>
+      </details>
     </section>
   </main>
 </body>

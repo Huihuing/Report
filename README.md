@@ -45,4 +45,6 @@ PNG·JPEG 이미지를 불러와 한글 문구의 위치·크기·색을 즉시 
 - `t03/index.html`
 - `t03/styles.css`
 - `t03/script.js`
+- `docs/T03-EVIDENCE.md` — 화면비·극단 입력·JSON·공개 안전 검사 기록
+- `docs/T03-SUBMISSION.md` — 제출용 4줄/3줄 초안
 - 공개 주소: https://report-huihuing.vercel.app/t03/
