@@ -20,6 +20,7 @@ Vercel 프로젝트는 반드시 기존 `report` 하나만 사용합니다.
 - T01: `https://report-huihuing.vercel.app/`
 - T02: `https://report-huihuing.vercel.app/t02/`
 - T03: `https://report-huihuing.vercel.app/t03/`
+- T04: `https://report-huihuing.vercel.app/t04/`
 - 이후 과제도 같은 도메인 아래 하위 경로로 배포합니다.
 - 과제별로 별도 Vercel 프로젝트를 새로 만들지 않습니다.
 - 별도 Vercel 프로젝트가 이미 존재하더라도 제출 URL에는 사용하지 않습니다.
@@ -39,6 +40,14 @@ Vercel 프로젝트는 반드시 기존 `report` 하나만 사용합니다.
 - 카드별로 구현된 항목, 자동/정적 검사 가능한 항목, 실제 브라우저에서 수동 확인이 필요한 항목을 구분합니다.
 - 과제 작업이 끝날 때 결과물 URL, 최신 full commit URL, 재현·통과 확인 4가지, AI와 내 판단 3줄을 함께 정리합니다.
 - 이전에 카드 일부만 받은 상태에서 구현했다면 전체 카드가 추가 제공되는 즉시 기존 결과물을 다시 감사합니다.
+
+## T04 실제 날짜 규칙
+
+- T04의 합성 D1/D2 fixture는 실제 날짜 증거로 계산하지 않습니다.
+- 실제 공개 원천 기록은 `t04/data/live-history.json`에 서로 다른 Asia/Seoul 날짜별로 최대 2건만 보존합니다.
+- 같은 KST 날짜에는 두 번째 실제 기록을 새로 만들지 않습니다.
+- 둘째 실제 기록은 다음 KST 날짜에 실제 API를 다시 조회한 뒤에만 추가합니다.
+- 실제 기록의 값·단위·source URL·source observed time·조회 시각을 임의로 수정하거나 추정하지 않습니다.
 
 ## 구현 원칙
 
@@ -63,6 +72,13 @@ Vercel 프로젝트는 반드시 기존 `report` 하나만 사용합니다.
 │  ├─ index.html     # T03 짤·카드 스튜디오
 │  ├─ styles.css
 │  └─ script.js
+├─ t04/
+│  ├─ index.html     # T04 오늘의 진짜 정보판
+│  ├─ styles.css
+│  ├─ script.js
+│  ├─ assets/
+│  └─ data/live-history.json
+├─ api/t04-live.js
 ├─ docs/
 └─ AGENTS.md
 ```
