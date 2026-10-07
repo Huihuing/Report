@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="실제 공개 데이터와 합성 실패 상태를 함께 확인하는 T04 정보판" />
+  <title>오늘의 진짜 정보판 | T04</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <nav class="task-nav" aria-label="ALEPH 과제 이동">
+      <a href="../">← T01 · 과제 홈으로</a>
+    </nav>
+
+    <header class="intro">
+      <p class="eyebrow">T04 · REAL INFORMATION BOARD</p>
+      <h1>오늘의 서울 기온</h1>
+      <p>Open-Meteo의 공개 데이터를 조회해 <strong>서울 2m 기온</strong>을 기록합니다. 실제 값과 합성 장애 재생은 완전히 분리합니다.</p>
+    </header>
+
+    <section class="notice" aria-label="데이터 원칙">
+      <strong>실제 데이터</strong>
+      <span>서울 고정 좌표의 공개 날씨만 사용합니다. 개인 위치·계정·API 키는 사용하지 않습니다.</span>
+      <strong>기준 시간대</strong>
+      <span>Asia/Seoul · 같은 KST 날짜는 한 일별 기록으로 보고 다음 실제 날짜만 새 기록으로 인정합니다.</span>
+    </section>
+
+    <section class="live-grid">
+      <section class="card live-card" aria-labelledby="live-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">LIVE SOURCE</p>
+            <h2 id="live-title">실제 공개 원천 조회</h2>
+          </div>
+          <span class="state-pill" id="liveStatus">조회 중</span>
+        </div>
+
+        <div class="value-row">
+          <strong id="liveValue">--</strong>
+          <span id="liveUnit">°C</span>
+        </div>
+
+        <dl class="meta-grid">
+          <div><dt>출처</dt><dd><a id="sourceLink" href="#" target="_blank" rel="noreferrer">Open-Meteo</a></dd></div>
+          <div><dt>출처 시각</dt><dd id="sourceTime">--</dd></div>
+          <div><dt>조회 시각</dt><dd id="fetchedAt">--</dd></div>
+          <div><dt>기준 시간대</dt><dd>Asia/Seoul</dd></div>
+          <div><dt>조회 날짜 키</dt><dd id="recordDate">--</dd></div>
+          <div><dt>상태</dt><dd id="freshness">fresh / none</dd></div>
+        </dl>
+
+        <div class="actions">
+          <button type="button" class="primary" id="refreshLiveButton">실제 값 다시 조회</button>
+        </div>
+        <p class="status-copy" id="liveMessage" role="status" aria-live="polite">공개 API를 확인하고 있습니다.</p>
+      </section>
+
+      <section class="card" aria-labelledby="days-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">REAL KST DAYS</p>
+            <h2 id="days-title">보존된 실제 날짜 기록</h2>
+          </div>
+          <span class="state-pill" id="dayCount">0 / 2</span>
+        </div>
+
+        <div id="deltaBox" class="delta-box">
+          <span>어제 대비</span>
+          <strong id="deltaValue">계산 대기</strong>
+          <p id="deltaExplanation">서로 다른 실제 KST 날짜 2건이 모이면 저장값으로 다시 계산합니다.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>KST 날짜</th><th>값</th><th>원천 시각</th><th>조회 시각</th></tr></thead>
+            <tbody id="liveHistoryBody"><tr><td colspan="4">보존 기록을 불러오는 중입니다.</td></tr></tbody>
+          </table>
+        </div>
+        <p class="pending-note" id="twoDayNote">합성 D1/D2는 이 실제 날짜 기록을 대신하지 않습니다.</p>
+      </section>
+    </section>
+
+    <section class="card comparison-card" aria-labelledby="match-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">RAW → STORED → DISPLAY</p>
+          <h2 id="match-title">정상 한 건 값 대조</h2>
+        </div>
+        <span class="state-pill" id="matchState">대기</span>
+      </div>
+      <div class="triple-grid">
+        <article>
+          <span>원자료</span>
+          <pre id="rawPreview">아직 조회 전</pre>
+        </article>
+        <article>
+          <span>정규화·저장값</span>
+          <pre id="storedPreview">아직 조회 전</pre>
+        </article>
+        <article>
+          <span>화면값</span>
+          <pre id="displayPreview">아직 조회 전</pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="package-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PUBLIC FIXTURE PACKAGE</p>
+          <h2 id="package-title">정본 패키지와 SHA-256</h2>
+        </div>
+        <span class="state-pill" id="hashState">미검사</span>
+      </div>
+      <p class="section-copy">package ID: <code>aleph-t04-real-information-board-public-contract-v2</code></p>
+      <div class="actions">
+        <button type="button" class="secondary" id="verifyHashesButton">README · contract · manifest 해시 확인</button>
+      </div>
+      <div class="hash-list" id="hashList"></div>
+    </section>
+
+    <section class="card replay-card" aria-labelledby="replay-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SYNTHETIC REPLAY</p>
+          <h2 id="replay-title">외부 실패 다섯 종류 재생</h2>
+        </div>
+        <span class="state-pill" id="replayStatus">reset</span>
+      </div>
+
+      <p class="warning">아래 D1/D2와 오류 값은 <strong>전부 합성 fixture</strong>입니다. 실제 날짜 증거로 사용하지 않습니다.</p>
+
+      <div class="fixture-actions">
+        <button type="button" data-fixture="timeout">느림 · timeout</button>
+        <button type="button" data-fixture="auth-401">외부 401 · auth</button>
+        <button type="button" data-fixture="rate-429">호출 제한 · rate_limit</button>
+        <button type="button" data-fixture="offline">오프라인 · offline</button>
+        <button type="button" data-fixture="schema-break">형식 변경 · schema_error</button>
+      </div>
+
+      <div class="replay-state">
+        <dl class="meta-grid">
+          <div><dt>freshness</dt><dd id="replayFreshness">none</dd></div>
+          <div><dt>error_code</dt><dd id="replayError">none</dd></div>
+          <div><dt>마지막 정상값</dt><dd id="replayValue">--</dd></div>
+          <div><dt>일별 행</dt><dd id="replayRows">0</dd></div>
+          <div><dt>변화값</dt><dd id="replayDelta">--</dd></div>
+          <div><dt>fixture</dt><dd id="replayFixture">--</dd></div>
+        </dl>
+        <p class="status-copy" id="replayMessage">실패 버튼을 누르면 D1-A → D1-B → 해당 실패 순서로 재생합니다.</p>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="primary" id="recoverButton" disabled>다시 시도 · T04-RECOVER-D2</button>
+        <button type="button" class="secondary" id="successSequenceButton">같은 날 2회 + 다음 날 정상 재생</button>
+        <button type="button" class="secondary" id="resetReplayButton">합성 상태 reset</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>record ID</th><th>합성 날짜</th><th>값</th><th>첫 조회</th><th>마지막 조회</th></tr></thead>
+          <tbody id="replayHistoryBody"><tr><td colspan="5">합성 행 없음</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="privacy-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PUBLIC SAFETY</p>
+          <h2 id="privacy-title">공개 안전 확인</h2>
+        </div>
+      </div>
+      <ul class="check-list">
+        <li>실제 개인 위치나 개인 기록을 조회하지 않음</li>
+        <li>브라우저 코드·응답·배포 파일에 API 키가 필요하지 않음</li>
+        <li>다섯 실패는 정본 합성 fixture 값만 사용</li>
+        <li>실제 날짜 2건이 되기 전에는 완료로 표시하지 않음</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
