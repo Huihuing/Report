@@ -327,6 +327,48 @@ h1 span { color: var(--accent); }
 }
 .project-card a { color: var(--accent-ink); text-underline-offset: 4px; }
 
+.assignment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.assignment-card {
+  display: flex;
+  min-height: 250px;
+  flex-direction: column;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.assignment-kicker {
+  margin: 0 0 14px;
+  color: var(--accent-ink);
+  font: 800 11px/1 monospace;
+  letter-spacing: .14em;
+}
+.assignment-card h3 {
+  margin: 0 0 12px;
+  font-size: 28px;
+  letter-spacing: -.035em;
+}
+.assignment-card p:not(.assignment-kicker) {
+  margin: 0;
+  color: var(--muted);
+}
+.assignment-link,
+.assignment-status {
+  margin-top: auto;
+  padding-top: 28px;
+  font-weight: 800;
+}
+.assignment-link {
+  color: var(--accent-ink);
+  text-underline-offset: 4px;
+}
+.assignment-status { color: var(--muted); }
+
 .scope-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -409,6 +451,7 @@ footer {
   .project-heading { align-items: start; }
   .filters { justify-self: start; }
   .project-grid { grid-template-columns: 1fr; }
+  .assignment-grid { grid-template-columns: 1fr; }
   .scope-grid { grid-template-columns: 1fr; }
 }
 
