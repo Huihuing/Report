@@ -90,8 +90,13 @@ nav a {
   font-weight: 650;
 }
 nav a:hover { color: var(--text); }
-.theme-toggle {
+.header-actions {
   justify-self: end;
+  display: flex;
+  gap: 8px;
+}
+.theme-toggle,
+.motion-toggle {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -105,7 +110,7 @@ nav a:hover { color: var(--text); }
   font-size: 13px;
 }
 
-main { overflow: hidden; }
+main { min-width: 0; }
 .hero, .section, .closing, footer {
   width: min(1180px, 90vw);
   margin-inline: auto;
@@ -115,7 +120,7 @@ main { overflow: hidden; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 88px 0 64px;
+  padding: 44px 0 34px;
 }
 .eyebrow {
   margin: 0 0 18px;
@@ -128,20 +133,20 @@ h1, h2, h3, p { text-wrap: pretty; }
 h1 {
   max-width: 1050px;
   margin: 0;
-  font-size: clamp(48px, 7.7vw, 112px);
+  font-size: clamp(44px, 5.2vw, 76px);
   line-height: .98;
   letter-spacing: -.065em;
 }
 h1 span { color: var(--accent); }
 .hero-copy {
   max-width: 760px;
-  margin: 40px 0 0;
+  margin: 20px 0 0;
   color: var(--muted);
-  font-size: clamp(17px, 2vw, 21px);
+  font-size: clamp(15px, 1.45vw, 18px);
 }
 .purpose {
   max-width: 760px;
-  margin: 18px 0 0;
+  margin: 10px 0 0;
   padding-left: 16px;
   border-left: 3px solid var(--accent);
   color: var(--muted);
@@ -151,7 +156,7 @@ h1 span { color: var(--accent); }
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 32px;
+  margin-top: 18px;
 }
 .button {
   display: inline-flex;
@@ -166,24 +171,42 @@ h1 span { color: var(--accent); }
 }
 .button.primary { background: var(--text); color: var(--bg); }
 .button.ghost { background: transparent; }
-.quick-facts {
+.hero-proof {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  margin: 72px 0 0;
+  margin-top: 22px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
-.quick-facts div { padding: 18px 18px 18px 0; }
-.quick-facts div + div { padding-left: 18px; border-left: 1px solid var(--line); }
-.quick-facts dt {
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+.hero-proof article {
+  min-width: 0;
+  padding: 13px 16px 13px 0;
 }
-.quick-facts dd { margin: 5px 0 0; font-weight: 760; }
+.hero-proof article + article {
+  padding-left: 16px;
+  border-left: 1px solid var(--line);
+}
+.hero-proof span {
+  display: block;
+  color: var(--accent-ink);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .12em;
+}
+.hero-proof strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 14px;
+}
+.hero-proof p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.hero-proof a {
+  color: var(--accent-ink);
+  text-underline-offset: 3px;
+}
 
 .section {
   padding: 120px 0;
@@ -369,6 +392,73 @@ h1 span { color: var(--accent); }
 }
 .assignment-status { color: var(--muted); }
 
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.evidence-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  padding: 26px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+.evidence-label {
+  margin: 0 0 14px;
+  color: var(--accent-ink);
+  font: 800 11px/1 monospace;
+  letter-spacing: .08em;
+}
+.evidence-card h3 {
+  margin: 0 0 22px;
+  font-size: 25px;
+  line-height: 1.18;
+  letter-spacing: -.035em;
+}
+.evidence-card dl { margin: 0; }
+.evidence-card dl div {
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.evidence-card dt {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 850;
+}
+.evidence-card dd {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.evidence-link {
+  margin-top: auto;
+  padding-top: 22px;
+  color: var(--accent-ink);
+  font-weight: 800;
+  text-underline-offset: 4px;
+}
+.work-detail {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.work-detail summary {
+  padding: 16px 18px;
+  cursor: pointer;
+  font-weight: 800;
+}
+.work-detail > div {
+  padding: 0 18px 18px;
+  color: var(--muted);
+}
+.work-detail p { margin-bottom: 0; }
+
 .scope-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -441,9 +531,18 @@ footer {
   .site-header {
     grid-template-columns: 1fr auto;
     min-height: 68px;
+    padding-top: 9px;
+    padding-bottom: 9px;
   }
-  nav { display: none; }
-  .hero { min-height: auto; padding-top: 100px; }
+  nav {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 2px 0 4px;
+    scrollbar-width: thin;
+  }
+  .hero { min-height: auto; padding-top: 74px; }
   .section { padding: 88px 0; }
   .section-heading, .about-grid { grid-template-columns: 1fr; }
   .section-heading { gap: 8px; }
@@ -451,6 +550,7 @@ footer {
   .project-heading { align-items: start; }
   .filters { justify-self: start; }
   .project-grid { grid-template-columns: 1fr; }
+  .evidence-grid { grid-template-columns: 1fr; }
   .assignment-grid { grid-template-columns: 1fr; }
   .scope-grid { grid-template-columns: 1fr; }
 }
@@ -460,8 +560,8 @@ footer {
   .hero { width: min(92vw, 1180px); padding-top: 72px; }
   h1 { font-size: clamp(42px, 15vw, 68px); }
   .hero-copy { margin-top: 28px; }
-  .quick-facts { grid-template-columns: 1fr; }
-  .quick-facts div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .hero-proof { grid-template-columns: 1fr; }
+  .hero-proof article + article { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
   .section, .closing, footer { width: 92vw; }
   .focus-card, .project-card { min-height: 260px; }
   .principle-list li { grid-template-columns: 46px 1fr; }
@@ -475,4 +575,11 @@ footer {
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
+}
+
+:root[data-motion="reduced"] { scroll-behavior: auto; }
+:root[data-motion="reduced"] *, :root[data-motion="reduced"] *::before, :root[data-motion="reduced"] *::after {
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
 }
