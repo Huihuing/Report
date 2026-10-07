@@ -9,6 +9,7 @@ Vercel은 `report` 프로젝트 하나만 사용합니다.
 - T01: https://report-huihuing.vercel.app/
 - T02: https://report-huihuing.vercel.app/t02/
 - T03: https://report-huihuing.vercel.app/t03/
+- T04: https://report-huihuing.vercel.app/t04/
 - 이후 과제: `/t03/`, `/t04/`처럼 같은 도메인 아래 추가
 
 세부 운영 규칙은 `AGENTS.md`를 따릅니다.
@@ -50,3 +51,17 @@ PNG·JPEG 이미지를 불러와 한글 문구의 위치·크기·색을 즉시 
 - `docs/T03-EVIDENCE.md` — 화면비·극단 입력·JSON·공개 안전 검사 기록
 - `docs/T03-SUBMISSION.md` — 제출용 4줄/3줄 초안
 - 공개 주소: https://report-huihuing.vercel.app/t03/
+
+
+## T04 — 오늘의 진짜 정보판
+
+Open-Meteo의 공개 서울 2m 기온을 실제로 조회하고, 합성 fixture로 timeout·401/403·rate limit·offline·schema change를 재생합니다.
+
+- `t04/index.html`
+- `t04/styles.css`
+- `t04/script.js`
+- `api/t04-live.js` — 비밀키 없는 서버 경로
+- `t04/data/live-history.json` — 실제 KST 날짜별 보존 기록
+- `docs/T04-EVIDENCE.md` — package/hash·실패 재생·실제 날짜 기록
+- `docs/T04-SUBMISSION.md` — 제출용 4줄/3줄 및 미완료 날짜 안내
+- 공개 주소: https://report-huihuing.vercel.app/t04/
