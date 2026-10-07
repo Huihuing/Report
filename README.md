@@ -32,6 +32,8 @@ Vercel은 `report` 프로젝트 하나만 사용합니다.
 - `t02/index.html`
 - `t02/styles.css`
 - `t02/script.js`
+- `docs/T02-EVIDENCE.md` — PC 경계·난이도·저장·효과 검사 기록
+- `docs/T02-SUBMISSION.md` — 제출용 4줄/3줄 및 최종 확인 목록
 
 ## 로컬 실행
 
