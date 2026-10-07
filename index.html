@@ -20,16 +20,23 @@
     <nav aria-label="주요 메뉴">
       <a href="#about">소개</a>
       <a href="#focus">관심 분야</a>
+      <a href="#evidence">근거</a>
       <a href="#projects">프로젝트</a>
       <a href="#assignments">과제</a>
       <a href="#scope">공개 범위</a>
       <a href="#principles">작업 방식</a>
     </nav>
 
-    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="화면 테마 전환">
-      <span aria-hidden="true">◐</span>
-      <span class="theme-label">Dark</span>
-    </button>
+    <div class="header-actions">
+      <button class="theme-toggle" type="button" aria-pressed="false" aria-label="화면 테마 전환">
+        <span aria-hidden="true">◐</span>
+        <span class="theme-label">Dark</span>
+      </button>
+      <button class="motion-toggle" type="button" aria-pressed="false" aria-label="움직임 줄이기 전환">
+        <span aria-hidden="true">↘</span>
+        <span class="motion-label">Motion</span>
+      </button>
+    </div>
   </header>
 
   <main id="main">
@@ -54,20 +61,23 @@
         <a class="button ghost" href="#principles">작업 방식 보기</a>
       </div>
 
-      <dl class="quick-facts" aria-label="간단한 소개">
-        <div>
-          <dt>Focus</dt>
-          <dd>Software Development</dd>
-        </div>
-        <div>
-          <dt>Explore</dt>
-          <dd>Legacy &amp; Web</dd>
-        </div>
-        <div>
-          <dt>Method</dt>
-          <dd>Build · Test · Record</dd>
-        </div>
-      </dl>
+      <div class="hero-proof" aria-label="첫 화면 핵심 소개">
+        <article>
+          <span>소개</span>
+          <strong>Software Development</strong>
+          <p>웹·백엔드와 레거시 소프트웨어를 공부합니다.</p>
+        </article>
+        <article>
+          <span>활동</span>
+          <strong>Build · Test · Record</strong>
+          <p>작게 만들고 직접 확인한 뒤 과정을 기록합니다.</p>
+        </article>
+        <article>
+          <span>근거</span>
+          <strong>공개 결과물로 확인</strong>
+          <p><a href="./t02/">T02 미니게임</a> · <a href="./t03/">T03 카드 스튜디오</a></p>
+        </article>
+      </div>
     </section>
 
     <section class="section" id="about" aria-labelledby="about-title">
@@ -113,10 +123,60 @@
       </div>
     </section>
 
+    <section class="section" id="evidence" aria-labelledby="evidence-title">
+      <div class="section-heading">
+        <p class="eyebrow">03 · EVIDENCE</p>
+        <h2 id="evidence-title">말보다 확인할 수 있는 근거를 남깁니다.</h2>
+      </div>
+
+      <div class="evidence-grid">
+        <article class="evidence-card">
+          <p class="evidence-label">01 · 작은 단위로 검증</p>
+          <h3>짧은 게임도 상태를 나눠 확인했습니다.</h3>
+          <dl>
+            <div><dt>상황</dt><dd>30초 안에 시작·입력·성공/실패·재시작이 이어지는 미니게임이 필요했습니다.</dd></div>
+            <div><dt>행동</dt><dd>대기·플레이·성공·실패 상태와 타이머를 분리하고 좌우 입력을 한 번씩 처리했습니다.</dd></div>
+            <div><dt>결과</dt><dd>로그인 없이 직접 실행할 수 있는 30초 게임으로 공개했습니다.</dd></div>
+          </dl>
+          <a class="evidence-link" href="./t02/">근거 보기 · Gate Sprint 30 →</a>
+        </article>
+
+        <article class="evidence-card">
+          <p class="evidence-label">02 · 화면과 파일을 같은 기준으로</p>
+          <h3>편집 결과가 저장 파일과 달라지지 않게 만들었습니다.</h3>
+          <dl>
+            <div><dt>상황</dt><dd>1:1·4:5·9:16 미리보기와 내려받은 이미지의 배치가 같아야 했습니다.</dd></div>
+            <div><dt>행동</dt><dd>이미지와 문구를 하나의 canvas 렌더러에서 그린 뒤 같은 픽셀을 PNG로 저장했습니다.</dd></div>
+            <div><dt>결과</dt><dd>세 화면비 편집과 저장, 템플릿·JSON 검증까지 가능한 공개 도구로 연결했습니다.</dd></div>
+          </dl>
+          <a class="evidence-link" href="./t03/">근거 보기 · 짤·카드 스튜디오 →</a>
+        </article>
+
+        <article class="evidence-card">
+          <p class="evidence-label">03 · 공개 범위를 먼저 결정</p>
+          <h3>보여줄 것과 숨길 것을 먼저 나눴습니다.</h3>
+          <dl>
+            <div><dt>상황</dt><dd>프로젝트 소개에는 개인정보와 공개 권한이 불분명한 자료가 섞일 수 있었습니다.</dd></div>
+            <div><dt>행동</dt><dd>공개·비공개 항목을 먼저 적고, 제3자 원본이나 비공개 저장소는 결과물에서 제외했습니다.</dd></div>
+            <div><dt>결과</dt><dd>연락처·비밀값 없이 관심 분야와 공개 가능한 작업만 소개하는 페이지를 만들었습니다.</dd></div>
+          </dl>
+          <a class="evidence-link" href="#scope">근거 보기 · 공개 범위 점검 →</a>
+        </article>
+      </div>
+
+      <details class="work-detail">
+        <summary>제가 문제를 확인하고 해결하는 흐름 펼쳐 보기</summary>
+        <div>
+          <strong>확인 → 작게 검증 → 기록</strong>
+          <p>현재 상태를 먼저 확인하고, 한 번에 하나씩 바꾼 뒤 같은 조건으로 다시 검사합니다. 실패한 시도와 결정 이유도 다음 작업의 근거로 남깁니다.</p>
+        </div>
+      </details>
+    </section>
+
     <section class="section" id="projects" aria-labelledby="projects-title">
       <div class="section-heading project-heading">
         <div>
-          <p class="eyebrow">03 · PROJECTS</p>
+          <p class="eyebrow">04 · PROJECTS</p>
           <h2 id="projects-title">최근 다루는 프로젝트</h2>
         </div>
         <div class="filters" aria-label="프로젝트 필터">
@@ -188,7 +248,7 @@
 
     <section class="section" id="assignments" aria-labelledby="assignments-title">
       <div class="section-heading">
-        <p class="eyebrow">04 · ALEPH TASKS</p>
+        <p class="eyebrow">05 · ALEPH TASKS</p>
         <h2 id="assignments-title">진행한 과제를 한곳에서 확인합니다.</h2>
       </div>
 
@@ -218,7 +278,7 @@
 
     <section class="section" id="scope" aria-labelledby="scope-title">
       <div class="section-heading">
-        <p class="eyebrow">05 · SCOPE</p>
+        <p class="eyebrow">06 · SCOPE</p>
         <h2 id="scope-title">무엇을 보여주고, 무엇은 공개하지 않는지 정했습니다.</h2>
       </div>
 
@@ -247,7 +307,7 @@
 
     <section class="section" id="principles" aria-labelledby="principles-title">
       <div class="section-heading">
-        <p class="eyebrow">06 · PRINCIPLES</p>
+        <p class="eyebrow">07 · PRINCIPLES</p>
         <h2 id="principles-title">제가 작업을 이어가는 방식</h2>
       </div>
 
