@@ -8,6 +8,7 @@ Vercel은 `report` 프로젝트 하나만 사용합니다.
 
 - T01: https://report-huihuing.vercel.app/
 - T02: https://report-huihuing.vercel.app/t02/
+- T03: https://report-huihuing.vercel.app/t03/
 - 이후 과제: `/t03/`, `/t04/`처럼 같은 도메인 아래 추가
 
 세부 운영 규칙은 `AGENTS.md`를 따릅니다.
@@ -35,3 +36,13 @@ Vercel은 `report` 프로젝트 하나만 사용합니다.
 ## 로컬 실행
 
 별도 빌드가 필요하지 않습니다. 저장소를 내려받은 뒤 루트 `index.html` 또는 각 과제 폴더의 `index.html`을 브라우저에서 열면 됩니다.
+
+
+## T03 — 짤·카드 스튜디오
+
+PNG·JPEG 이미지를 불러와 한글 문구의 위치·크기·색을 즉시 미리보기에 반영하는 브라우저 편집기입니다.
+
+- `t03/index.html`
+- `t03/styles.css`
+- `t03/script.js`
+- 공개 주소: https://report-huihuing.vercel.app/t03/

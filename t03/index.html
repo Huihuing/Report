@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="PNG·JPEG 이미지와 한글 문구를 조합해 즉시 미리 보는 브라우저 카드 편집기" />
+  <title>짤·카드 스튜디오 | T03</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <nav class="task-nav" aria-label="ALEPH 과제 이동">
+      <a href="../">← T01 · 과제 홈으로</a>
+    </nav>
+
+    <header class="intro">
+      <p class="eyebrow">T03 · CARD STUDIO</p>
+      <h1>짤·카드 스튜디오</h1>
+      <p>이미지를 불러오고 한글 문구의 위치·크기·색을 바꾸면 오른쪽 미리보기에 즉시 반영됩니다.</p>
+    </header>
+
+    <section class="safety-note" aria-label="이미지 사용 안내">
+      <strong>공개 안전 안내</strong>
+      <span>직접 만들었거나 사용 권한이 있는 이미지만 사용하세요. 미리보기는 브라우저 캔버스에 다시 그리므로 원본 EXIF 같은 메타데이터를 결과 화면에 전달하지 않습니다.</span>
+    </section>
+
+    <section class="studio" aria-label="이미지와 문구 편집 도구">
+      <div class="controls">
+        <section class="tool-card" aria-labelledby="image-tool-title">
+          <div class="tool-heading">
+            <span>01</span>
+            <h2 id="image-tool-title">이미지 편집</h2>
+          </div>
+
+          <label class="file-picker" for="imageInput">
+            <span>PNG 또는 JPEG 불러오기</span>
+            <input id="imageInput" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg" />
+          </label>
+
+          <div class="drop-zone" id="dropZone" tabindex="0" role="button" aria-label="PNG 또는 JPEG 파일을 이 영역에 놓거나 Enter 키로 파일 선택">
+            파일을 여기에 놓아도 됩니다
+            <small>PNG · JPG · JPEG</small>
+          </div>
+
+          <p class="file-meta" id="fileMeta">아직 불러온 이미지가 없습니다.</p>
+          <p class="file-status" id="fileStatus" role="status" aria-live="polite">PNG 또는 JPEG 파일을 선택하세요.</p>
+        </section>
+
+        <section class="tool-card" aria-labelledby="text-tool-title">
+          <div class="tool-heading">
+            <span>02</span>
+            <h2 id="text-tool-title">문구 편집</h2>
+          </div>
+
+          <label class="field">
+            <span>문구</span>
+            <textarea id="captionInput" rows="3" maxlength="120">오늘도 한 걸음 앞으로</textarea>
+          </label>
+
+          <label class="field range-field">
+            <span>가로 위치 <output id="xValue">50%</output></span>
+            <input id="xInput" type="range" min="5" max="95" value="50" />
+          </label>
+
+          <label class="field range-field">
+            <span>세로 위치 <output id="yValue">82%</output></span>
+            <input id="yInput" type="range" min="8" max="92" value="82" />
+          </label>
+
+          <label class="field range-field">
+            <span>문구 크기 <output id="sizeValue">54px</output></span>
+            <input id="sizeInput" type="range" min="18" max="96" value="54" />
+          </label>
+
+          <label class="field color-field">
+            <span>문구 색</span>
+            <input id="colorInput" type="color" value="#ffffff" />
+            <output id="colorValue">#ffffff</output>
+          </label>
+        </section>
+      </div>
+
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <div class="preview-heading">
+          <div>
+            <p class="eyebrow">LIVE PREVIEW</p>
+            <h2 id="preview-title">미리보기</h2>
+          </div>
+          <span id="previewState">대기</span>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="previewCanvas" width="1080" height="1080" aria-label="편집 결과 미리보기"></canvas>
+        </div>
+
+        <p class="preview-help">이미지 업로드가 없어도 문구 편집은 시험할 수 있습니다. 지원하지 않는 파일을 넣으면 현재 미리보기는 그대로 유지됩니다.</p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

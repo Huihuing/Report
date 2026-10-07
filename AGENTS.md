@@ -19,6 +19,7 @@ Vercel 프로젝트는 반드시 기존 `report` 하나만 사용합니다.
 - production base URL: `https://report-huihuing.vercel.app/`
 - T01: `https://report-huihuing.vercel.app/`
 - T02: `https://report-huihuing.vercel.app/t02/`
+- T03: `https://report-huihuing.vercel.app/t03/`
 - 이후 과제도 같은 도메인 아래 하위 경로로 배포합니다.
 - 과제별로 별도 Vercel 프로젝트를 새로 만들지 않습니다.
 - 별도 Vercel 프로젝트가 이미 존재하더라도 제출 URL에는 사용하지 않습니다.
@@ -49,6 +50,10 @@ Vercel 프로젝트는 반드시 기존 `report` 하나만 사용합니다.
 ├─ script.js
 ├─ t02/
 │  ├─ index.html     # T02 Gate Sprint 30
+│  ├─ styles.css
+│  └─ script.js
+├─ t03/
+│  ├─ index.html     # T03 짤·카드 스튜디오
 │  ├─ styles.css
 │  └─ script.js
 ├─ docs/
