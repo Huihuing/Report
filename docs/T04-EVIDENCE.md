@@ -1,6 +1,6 @@
 # T04 전체 카드 및 정본 조건 검사 기록
 
-검사 기준일: 2026-10-07 (Asia/Seoul)  
+검사 기준일: 2026-10-08 (Asia/Seoul)  
 결과물: https://report-huihuing.vercel.app/t04/
 
 ## 정본 package 확인
@@ -57,6 +57,37 @@
 ```
 
 저장값 `17.6 °C`와 공개 화면 표시값은 같은 record를 사용한다.
+
+### 2026-10-08 실제 기록 #2
+
+- signal_id: `seoul.temperature_2m`
+- source_url: `https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&current=temperature_2m&timezone=Asia%2FSeoul`
+- source_observed_at: `2026-10-08T08:15:00+09:00`
+- server_created_at / fetched_at: `2026-10-07T23:16:37.292Z` = 2026-10-08 08:16:37 KST
+- normalized_value: `12.5`
+- unit: `°C`
+- record_date: `2026-10-08`
+
+원자료:
+```json
+{
+  "latitude": 37.55,
+  "longitude": 127,
+  "timezone": "Asia/Seoul",
+  "timezone_abbreviation": "GMT+9",
+  "current_units": {
+    "time": "iso8601",
+    "temperature_2m": "°C"
+  },
+  "current": {
+    "time": "2026-10-08T08:15",
+    "interval": 900,
+    "temperature_2m": 12.5
+  }
+}
+```
+
+저장값 `12.5 °C`와 공개 화면 표시값은 같은 record를 사용한다.
 
 ## 카드 2 — 비밀 없는 호출
 
@@ -116,15 +147,22 @@
 현재 실제 기록:
 
 1. 2026-10-07 — 17.6 °C — 보존 완료
-2. **다음 실제 KST 날짜 대기**
+2. 2026-10-08 — 12.5 °C — 보존 완료
+
+두 기록은 서로 다른 Asia/Seoul 실제 날짜다.
+
+어제 대비 재계산:
+
+- 첫날: 17.6 °C
+- 둘째 날: 12.5 °C
+- 계산: `12.5 - 17.6 = -5.1 °C`
+- 화면 의미: 전일 대비 5.1 °C 감소
 
 따라서 현재 상태:
 
-- T04-C22: NOT YET — 실제 날짜 기록 1/2
-- T04-C23: NOT YET — 두 번째 실제 기록이 아직 없음
-- T04-C24: NOT YET — 실제 두 값의 어제 대비 재계산은 둘째 날 뒤 가능
-
-다음 KST 날짜가 되기 전 두 번째 값을 임의 생성하거나 합성 fixture로 대체하지 않는다.
+- T04-C22: PASS — 서로 다른 실제 KST 날짜 기록 정확히 2건
+- T04-C23: PASS — 두 기록의 source URL·관측 시각·정규화 값·단위를 보존
+- T04-C24: PASS — 두 저장값으로 재계산한 변화값이 `-5.1 °C`
 
 ## 추가 정본 조건 C29~C35
 
