@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "signal_id": "seoul.temperature_2m",
+  "record_timezone": "Asia/Seoul",
+  "source_name": "Open-Meteo Forecast API",
+  "records": []
+}
