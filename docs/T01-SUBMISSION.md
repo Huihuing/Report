@@ -4,8 +4,8 @@
 
 ## 결과물
 
-- 결과물 주소: 배포 후 입력
-- 소스 주소: https://github.com/Huihuing/Report
+- 결과물 주소: 공개 배포 후 입력
+- 소스 주소: 저장소 공개 전환 후 `https://github.com/Huihuing/Report/commit/<40자리-full-commit-sha>` 형식으로 입력
 
 ## 짧은 확인 방법 4줄
 
@@ -53,5 +53,5 @@
 
 - T01-C01: 최종 배포 후 결과물·소스 URL을 새 시크릿 창에서 검사
 - T01-C03: 첫 화면에 페이지 대상과 목적을 한 문장으로 명시
-- T01-C04: `docs/T01-SCOPE.md`에 공개 정보 3개 이상 명시
-- T01-C05: `docs/T01-SCOPE.md`에 비공개 정보 3개 이상 명시
+- T01-C04: 결과물의 `#scope` 영역과 `docs/T01-SCOPE.md`에 공개 정보 3개 이상 명시
+- T01-C05: 결과물의 `#scope` 영역과 `docs/T01-SCOPE.md`에 비공개 정보 3개 이상 명시
