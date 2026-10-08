@@ -1,0 +1,236 @@
+{
+  "evidence_type": "actual_deployed_T07_HTTP_POST_tests",
+  "tested_at_kst_date": "2026-10-08",
+  "test_runner_url": "https://sckjbblzivbcoofabhqd.supabase.co/functions/v1/t07-security-proof",
+  "test_runner_disabled_after_test": true,
+  "original_T07_url": "https://sckjbblzivbcoofabhqd.supabase.co/functions/v1/t07-pds",
+  "request_method": "POST",
+  "auth_format": "Authorization: Bearer [REDACTED]",
+  "test_accounts": "two temporary Auth accounts automatically created and deleted",
+  "checked_result_count": 31,
+  "passed_count": 31,
+  "all_recorded_assertions_passed": true,
+  "execution_fully_completed": false,
+  "uncompleted_step": "Account deletion via authenticated HTTP returned no result because Auth rate limit stopped execution before that step",
+  "cleanup_ok": true,
+  "notes": "Tester stopped after 31 assertions passed due Supabase Auth rate limit; no passwords, tokens, emails or real account IDs are preserved. This is not an overall pass of unfinished cases.",
+  "checks": [
+    {
+      "name": "two_test_users_same_password_distinct_bcrypt",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "account_A_login",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "account_B_login",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "session_has_future_expiry",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "A_create_own_plan",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "B_create_own_plan",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "A_create_own_task",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "B_create_own_task",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "A_list_excludes_B",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "B_list_excludes_A",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "A_get_own_plan",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "B_get_own_task",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "A_to_B_read_plan_404",
+      "pass": true,
+      "status": 404,
+      "expected": 404,
+      "response_error": "NOT_FOUND"
+    },
+    {
+      "name": "B_to_A_read_plan_404",
+      "pass": true,
+      "status": 404,
+      "expected": 404,
+      "response_error": "NOT_FOUND"
+    },
+    {
+      "name": "A_to_B_read_task_404",
+      "pass": true,
+      "status": 404,
+      "expected": 404,
+      "response_error": "NOT_FOUND"
+    },
+    {
+      "name": "B_to_A_read_task_404",
+      "pass": true,
+      "status": 404,
+      "expected": 404,
+      "response_error": "NOT_FOUND"
+    },
+    {
+      "name": "A_to_B_update_task_404",
+      "pass": true,
+      "status": 404,
+      "expected": 404,
+      "response_error": "NOT_FOUND"
+    },
+    {
+      "name": "B_to_A_update_task_404",
+      "pass": true,
+      "status": 404,
+      "expected": 404,
+      "response_error": "NOT_FOUND"
+    },
+    {
+      "name": "A_to_B_delete_task_404",
+      "pass": true,
+      "status": 404,
+      "expected": 404,
+      "response_error": "NOT_FOUND"
+    },
+    {
+      "name": "B_to_A_delete_task_404",
+      "pass": true,
+      "status": 404,
+      "expected": 404,
+      "response_error": "NOT_FOUND"
+    },
+    {
+      "name": "B_to_A_create_task_404",
+      "pass": true,
+      "status": 404,
+      "expected": 404,
+      "response_error": "NOT_FOUND"
+    },
+    {
+      "name": "B_spoof_owner_in_url_header_body",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "A_data_unchanged_after_denials",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "B_data_unchanged_after_denials",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "unauthenticated_state_401",
+      "pass": true,
+      "status": 401,
+      "expected": 401,
+      "response_error": "UNAUTHORIZED"
+    },
+    {
+      "name": "unknown_email_and_wrong_password_same_error",
+      "pass": true,
+      "status": 401,
+      "expected": 401,
+      "response_error": "INVALID_CREDENTIALS"
+    },
+    {
+      "name": "logout_A_200",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "same_POST_state_after_logout_A_401",
+      "pass": true,
+      "status": 401,
+      "expected": 401,
+      "response_error": "UNAUTHORIZED"
+    },
+    {
+      "name": "B_password_change",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    },
+    {
+      "name": "B_old_session_after_password_change_401",
+      "pass": true,
+      "status": 401,
+      "expected": 401,
+      "response_error": "UNAUTHORIZED"
+    },
+    {
+      "name": "B_login_new_password",
+      "pass": true,
+      "status": 200,
+      "expected": 200,
+      "response_error": null
+    }
+  ]
+}
