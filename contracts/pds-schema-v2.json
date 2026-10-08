@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "contract_id": "aleph-t06-pds-schema-v2",
+  "timezone": "Asia/Seoul",
+  "public_access_notice": "지금은 로그인이 없어 링크를 아는 사람은 누구나 볼 수 있습니다. 남이 봐도 괜찮은 내용만 넣으세요",
+  "storage": {
+    "kind": "server_database",
+    "engine": "PostgreSQL (Supabase)",
+    "browser_direct_table_access": false,
+    "public_api": "Supabase Edge Function t06-pds",
+    "secret_policy": "브라우저에는 DB secret/service role 원문을 넣지 않고 Edge Function 환경변수에서만 사용"
+  },
+  "tables": {
+    "t06_plans": {
+      "primary_key": "id uuid",
+      "fields": [
+        "title",
+        "start_date",
+        "end_date",
+        "priority",
+        "success_criteria",
+        "expected_minutes",
+        "next_from_reflection",
+        "created_at",
+        "updated_at"
+      ],
+      "notes": "현재 계획 값"
+    },
+    "t06_plan_revisions": {
+      "primary_key": "id bigint",
+      "fields": [
+        "plan_id",
+        "revision_no",
+        "snapshot jsonb",
+        "changed_at"
+      ],
+      "relationship": "plan_id -> t06_plans.id",
+      "notes": "계획 수정 직전 snapshot을 별도 행으로 보존"
+    },
+    "t06_tasks": {
+      "primary_key": "id uuid",
+      "fields": [
+        "plan_id",
+        "title",
+        "due_date",
+        "priority",
+        "tags[]",
+        "expected_minutes",
+        "completed",
+        "completed_at",
+        "completion_cycle",
+        "deleted_at",
+        "created_at",
+        "updated_at"
+      ],
+      "relationship": "plan_id -> t06_plans.id",
+      "deletion": "soft delete via deleted_at"
+    },
+    "t06_completion_events": {
+      "primary_key": "id uuid",
+      "fields": [
+        "task_id",
+        "cycle_no",
+        "completed_at"
+      ],
+      "relationship": "task_id -> t06_tasks.id",
+      "unique": "(task_id, cycle_no)",
+      "notes": "미완료→완료 상태 전이가 실제로 일어날 때만 1건 생성"
+    },
+    "t06_execution_logs": {
+      "primary_key": "id uuid",
+      "fields": [
+        "task_id",
+        "started_at",
+        "ended_at",
+        "actual_minutes",
+        "blocker_reason",
+        "created_at"
+      ],
+      "relationship": "task_id -> t06_tasks.id"
+    },
+    "t06_reflections": {
+      "primary_key": "id uuid",
+      "fields": [
+        "plan_id",
+        "improvement_note",
+        "next_plan_id",
+        "created_at"
+      ],
+      "relationships": [
+        "plan_id -> t06_plans.id",
+        "next_plan_id -> t06_plans.id"
+      ]
+    }
+  },
+  "date_rules": {
+    "stored_timestamp": "timestamptz / ISO-8601",
+    "date_only": "YYYY-MM-DD",
+    "review_today": "Asia/Seoul 기준 오늘",
+    "delayed": "completed=false AND due_date < Asia/Seoul today",
+    "completed_not_delayed": true
+  },
+  "review_rules": {
+    "plan_count": "선택한 plan_id의 deleted_at IS NULL인 할 일 수",
+    "completed_count": "그중 completed=true인 할 일 수",
+    "delayed_count": "그중 completed=false이고 due_date가 KST 오늘보다 앞선 할 일 수",
+    "blocked_count": "실행 기록 blocker_reason이 비어 있지 않은 할 일의 중복 제거 수",
+    "expected_minutes": "대상 할 일 expected_minutes 합계",
+    "actual_minutes": "대상 할 일 execution_logs.actual_minutes 합계",
+    "difference_minutes": "actual_minutes - expected_minutes"
+  },
+  "sorting_rule": "due_date ASC -> priority high/medium/low -> created_at ASC",
+  "xss_rule": "사용자 저장 문자열은 DOM textContent/value로만 출력하고 HTML로 해석하지 않는다"
+}
