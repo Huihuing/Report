@@ -51,5 +51,40 @@
       "result_file": "t05/ai-b-results.json",
       "public_report": "/t05/"
     }
-  ]
+  ],
+  "final_evaluation": {
+    "order": [
+      "AI_A_START",
+      "AI_A_END_HANDOFF",
+      "AI_B_FINAL_START",
+      "AI_B_FINAL_END"
+    ],
+    "preliminary_b_record_policy": "기존 AI_B_START/AI_B_END 기록은 동일 모델의 예비 continuation으로 보존하며 C39 판정용 최종 AI B에서 제외",
+    "records": [
+      {
+        "event": "AI_B_FINAL_START",
+        "at": "2026-10-08T10:39:00+09:00",
+        "model_label": "GPT-6 Sol",
+        "model_label_provenance": "사용자 지정 표기",
+        "source_start_sha": "51723acd54106289b6088e8cb4c16083214cb562",
+        "handoff": "t05/HANDOFF.md",
+        "previous_chat_used": false
+      },
+      {
+        "event": "AI_B_FINAL_END",
+        "at": "2026-10-08T10:42:25.354+09:00",
+        "model_label": "GPT-6 Sol",
+        "source_end_sha": "9aa7f16d07b1c23b25b0b9409da22d032597eb3b",
+        "final_record_commit_sha": "e1667ea007b6b7133bc3d8f903a970f2395c05e8",
+        "test_result": "10/10 PASS",
+        "fail_ids": [],
+        "elapsed_minutes": 3.42,
+        "requests_or_tool_calls": 11,
+        "github_api_calls_completed": 15,
+        "error_rounds": 1,
+        "previous_chat_used": false,
+        "result_file": "t05/ai-b-final-gpt6-sol-2026-10-08.json"
+      }
+    ]
+  }
 }
