@@ -21,6 +21,8 @@ Vercel 프로젝트는 반드시 기존 `report` 하나만 사용합니다.
 - T02: `https://report-huihuing.vercel.app/t02/`
 - T03: `https://report-huihuing.vercel.app/t03/`
 - T04: `https://report-huihuing.vercel.app/t04/`
+- T05: `https://report-huihuing.vercel.app/t05/`
+- T06: `https://report-huihuing.vercel.app/t06/`
 - 이후 과제도 같은 도메인 아래 하위 경로로 배포합니다.
 - 과제별로 별도 Vercel 프로젝트를 새로 만들지 않습니다.
 - 별도 Vercel 프로젝트가 이미 존재하더라도 제출 URL에는 사용하지 않습니다.
@@ -48,6 +50,17 @@ Vercel 프로젝트는 반드시 기존 `report` 하나만 사용합니다.
 - 같은 KST 날짜에는 두 번째 실제 기록을 새로 만들지 않습니다.
 - 둘째 실제 기록은 다음 KST 날짜에 실제 API를 다시 조회한 뒤에만 추가합니다.
 - 실제 기록의 값·단위·source URL·source observed time·조회 시각을 임의로 수정하거나 추정하지 않습니다.
+
+## T06 공개 DB 규칙
+
+- T06에는 로그인을 붙이지 않습니다. 링크를 아는 사람은 누구나 공개 화면과 허용된 T06 조작을 사용할 수 있습니다.
+- 개인 일기·연락처·상세 위치 등 민감한 내용은 넣지 않고 공개 가능한 ALEPH 진행 기록만 사용합니다.
+- 브라우저는 Supabase 테이블에 직접 접속하지 않고 공개 Edge Function `t06-pds`만 호출합니다.
+- DB secret/service-role 원문은 저장소·브라우저·네트워크 응답에 넣지 않습니다.
+- T06 테이블은 RLS를 켜고 anon/authenticated 직접 권한을 회수한 상태를 유지합니다.
+- 데이터 계약 정본은 `contracts/pds-schema-v2.json`입니다.
+- 계획 수정은 기존 계획 snapshot을 `t06_plan_revisions`에 먼저 보존합니다.
+- 완료 이벤트는 미완료→완료 전이 한 번당 한 건만 남기며 중복 완료 요청은 새 이벤트를 만들지 않습니다.
 
 ## 구현 원칙
 
@@ -79,6 +92,15 @@ Vercel 프로젝트는 반드시 기존 `report` 하나만 사용합니다.
 │  ├─ assets/
 │  └─ data/live-history.json
 ├─ api/t04-live.js
+├─ t06/
+│  ├─ index.html
+│  ├─ styles.css
+│  ├─ script.js
+│  └─ schema.sql
+├─ contracts/pds-schema-v2.json
+├─ supabase/functions/t06-pds/
+│  ├─ index.ts
+│  └─ deno.json
 ├─ docs/
 └─ AGENTS.md
 ```
