@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "task": "T05",
+  "kind": "independent_reverification",
+  "executed_at_utc": "2026-10-08T01:33:52.546Z",
+  "source_repository": "https://github.com/Huihuing/Report",
+  "source_commit": "c411542c949bb1cdab9b5b8400c99858d3d968c7",
+  "command": "node t05/run-fixed-tests.mjs",
+  "runtime": "Node.js v22.16.0 (isolated container)",
+  "execution_method": "Reconstructed original fixed test runner, fixed test definitions and Node verifier with exact Git blob identity; original t04/script.js test-relevant source excerpt was verified via GitHub connector and reproduced locally, not the complete file.",
+  "original_git_blob_sha": {
+    "t05/fixed-tests.json": "b041c75b4dbc5594705d15b01666eab8fc72e0de",
+    "t05/run-fixed-tests.mjs": "bee69ec5871305fd63f265e34f637fd875875316",
+    "t04/package-integrity.mjs": "6a1b96d468c29e171f256ba20a35fea2687f01fe",
+    "t04/script.js": "4c33d020998d83a236b3645063456245cdc1c2f9"
+  },
+  "scope_limitations": [
+    "Full git clone could not execute (github.com DNS resolution blocked).",
+    "Browser script only reproduced the exact source fragment required by F10 static reset-order check; whole-file equality for t04/script.js was not established in local runner.",
+    "No live browser/UI or deployed 17-asset integrity check was performed (deployment inaccessible from this environment).",
+    "Existing runner uses metadata checks for F01/F02, synthetic asset data for F03, and a source-order check for the UI portion of F10; therefore 10/10 runner PASS is not proof that every original human-readable expectation passed on the deployed UI."
+  ],
+  "frozen_tests_unchanged": true,
+  "test_count": 10,
+  "pass_count": 10,
+  "fail_count": 0,
+  "exit_code": 0,
+  "tests": [
+    {
+      "id": "T05-F01",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F02",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F03",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F04",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F05",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F06",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F07",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F08",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F09",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F10",
+      "result": "PASS"
+    }
+  ],
+  "f10_evidence": {
+    "synthetic_fail_run": {
+      "pass": 16,
+      "fail": 1
+    },
+    "synthetic_recovered_run": {
+      "pass": 17,
+      "fail": 0
+    },
+    "ui_reset_before_fetch": true
+  },
+  "observed_summary": "SUMMARY 10/10 PASS",
+  "purpose": "재실행 증거를 기록함. 기존 AI A/B 측정값과 고정 검사 정의는 변경하지 않음."
+}
