@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "actor": "AI_A",
+  "source_start_sha": "59cc76327d73c8336444c8643e1d5e02a2cab655",
+  "source_end_sha": "8a5b3526fd27e14e91b8c5b640f20bedbcae739d",
+  "started_at": "2026-10-08T09:18:05+09:00",
+  "ended_at": "2026-10-08T09:21:52+09:00",
+  "elapsed_minutes": 3.78,
+  "requests_or_tool_calls": 10,
+  "common_limits": {
+    "max_elapsed_minutes": 45,
+    "max_requests_or_tool_calls": 20
+  },
+  "execution_command": "node t05/run-fixed-tests.mjs",
+  "fixed_test_count": 10,
+  "pass_count": 9,
+  "fail_count": 1,
+  "error_rounds": 1,
+  "tests": [
+    {
+      "id": "T05-F01",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F02",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F03",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F04",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F05",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F06",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F07",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F08",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F09",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F10",
+      "result": "FAIL",
+      "note": "공개 UI에서 실패 결과 뒤 정본 재실행 시 이전 실패 표시를 완전히 초기화하는 연결이 아직 없음"
+    }
+  ]
+}
