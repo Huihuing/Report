@@ -180,6 +180,25 @@ T06-C09~C20의 코드 경로가 연결되어 있다.
 - `t06/script.js`: HTTP 200
 - `contracts/pds-schema-v2.json`: HTTP 200
 
+## 공개 Edge Function 실제 호출
+
+Vercel의 `/api/t06-probe`가 공개 Supabase Edge Function에 실제 POST 요청을 보내고 결과를 축약해 반환하도록 검사했다.
+
+실제 응답:
+
+- HTTP 200
+- ok = true
+- timezone = Asia/Seoul
+- today = 2026-10-08
+- plans = 2
+- active plan tasks = 6
+- executions = 3
+- revisions = 1
+- reflections = 1
+- summary = plan_count 6 / completed 3 / delayed 0 / blocked 2 / expected 540 / actual 54 / difference -486
+
+따라서 공개 Edge Function → 서버 DB 조회 경로는 실제 배포에서도 동작한다.
+
 ## 실제 브라우저에서 마지막 확인할 항목
 
 아래는 브라우저 JS 실행/다운로드가 필요해 자동 정적 검사만으로 확정하지 않는다.
