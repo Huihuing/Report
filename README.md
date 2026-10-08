@@ -82,3 +82,19 @@ Open-Meteo의 공개 서울 2m 기온을 실제로 조회하고, 합성 fixture�
 - 공개 주소: https://report-huihuing.vercel.app/t06/
 
 T06는 아직 로그인 기능이 없으므로 공개해도 괜찮은 ALEPH 진행 기록만 저장합니다.
+
+## T07 — 플랜두씨 다이어리 2 (인증)
+
+- 첫 화면: https://report-huihuing.vercel.app/t07/
+- T06 소스 고정: `bb0352766c2b3974b074c3ec2db261679b49f7a7`
+- 인증: Supabase Auth `supabase-js@2.95.0`(bcrypt), Edge Function 서버 세션(60분)
+- 데이터: `t07_*` owner_id 기반 PostgreSQL, 직접 Data API 권한 폐쇄
+- T06 공개 자료 API: T07로 이전을 위해 410 Gone; 기존 실제 자료는 1회 이전 보관함에 잠겨 있음
+- 로그인 후 이전 코드로 T06 계획/할 일/실행/돌아보기 자료를 본인 계정으로 가져올 수 있음
+- 5일간 실제 KST 날짜의 사용 기록을 쌓고 2일차 뒤·3일차 전에 계획 규칙 하나만 변경
+- 자료 전체 JSON 내보내기, 비밀번호 변경(세션 전부 종료), 계정 및 연결 자료 삭제
+- 인증 설명서: `docs/T07-AUTH.md`
+- 제출 현황과 부족한 검증: `docs/T07-SUBMISSION.md`
+- 데이터 계약: `contracts/pds-auth-schema-v3.json`
+
+T07 제출에서 **5일차 기록은 실제 날짜에만 작성할 수 있으므로 당일 모두 완료했다고 주장하지 않습니다.**
