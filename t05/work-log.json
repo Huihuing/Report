@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "order": [
+    "AI_A_START",
+    "AI_A_END_HANDOFF",
+    "AI_B_START",
+    "AI_B_END"
+  ],
+  "records": [
+    {
+      "event": "AI_A_START",
+      "at": "2026-10-08T09:18:05+09:00",
+      "source_sha": "59cc76327d73c8336444c8643e1d5e02a2cab655",
+      "source_url": "https://github.com/Huihuing/Report/commit/59cc76327d73c8336444c8643e1d5e02a2cab655",
+      "fixed_tests": "t05/fixed-tests.json",
+      "initial_request": "t05/initial-request.md",
+      "limits": {
+        "max_elapsed_minutes": 45,
+        "max_requests_or_tool_calls": 20
+      }
+    }
+  ]
+}
