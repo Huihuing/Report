@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "task": "T05",
+  "role": "AI_B_FINAL",
+  "actor": "GPT-6 Sol",
+  "model_label_provenance": "사용자 요청에 따라 기록한 모델 표기이며 런타임 세부 버전은 별도로 검증하지 못함",
+  "previous_chat_transcript_used": false,
+  "evidence_scope": "GitHub 저장소 main 및 t05/HANDOFF.md, 해당 저장소의 코드와 고정 검사",
+  "started_at": "2026-10-08T10:39:00+09:00",
+  "ended_at": "2026-10-08T01:42:25.354Z",
+  "elapsed_minutes": 3.42,
+  "measurement": {
+    "user_requests": 1,
+    "top_level_tool_calls": 11,
+    "github_api_calls_completed": 15,
+    "tool_count_policy": "이 작업에서 발생한 최상위 도구 호출을 기준으로 집계; 내부 GitHub API 요청 수 별도 기록",
+    "allowed_max_elapsed_minutes": 45,
+    "allowed_max_requests_or_tool_calls": 20,
+    "within_top_level_call_limit": true
+  },
+  "source_start_sha": "51723acd54106289b6088e8cb4c16083214cb562",
+  "source_end_sha": "9aa7f16d07b1c23b25b0b9409da22d032597eb3b",
+  "source_end_sha_meaning": "코드 수정이 완료된 마지막 커밋 (결과 기록 커밋 직전)",
+  "code_changes": [
+    {
+      "path": "t04/package-integrity.mjs",
+      "commit": "1f7728bdc0f0fab217c25c0595f17f6183c3fed6",
+      "change": "manifest.files에 null/array 등 객체가 아닌 항목이 있어도 TypeError 대신 MANIFEST_ERROR 반환"
+    },
+    {
+      "path": "t04/package-integrity.js",
+      "commit": "9aa7f16d07b1c23b25b0b9409da22d032597eb3b",
+      "change": "브라우저 검증기에 동일 형식 오류 방어 적용"
+    }
+  ],
+  "fixed_test_source": "t05/fixed-tests.json",
+  "fixed_tests_unchanged": true,
+  "original_fixed_tests_sha": "b041c75b4dbc5594705d15b01666eab8fc72e0de",
+  "original_runner_sha": "bee69ec5871305fd63f265e34f637fd875875316",
+  "node_verifier_patched_sha": "00aad4c557cf0bcedfef1fd3504f32c703348cff",
+  "execution_command": "node t05/run-fixed-tests.mjs",
+  "node_version": "v22.16.0",
+  "results": {
+    "fixed_test_count": 10,
+    "pass_count": 10,
+    "fail_count": 0,
+    "exit_code": 0,
+    "tests": [
+      {
+        "id": "T05-F01",
+        "result": "PASS"
+      },
+      {
+        "id": "T05-F02",
+        "result": "PASS"
+      },
+      {
+        "id": "T05-F03",
+        "result": "PASS"
+      },
+      {
+        "id": "T05-F04",
+        "result": "PASS"
+      },
+      {
+        "id": "T05-F05",
+        "result": "PASS"
+      },
+      {
+        "id": "T05-F06",
+        "result": "PASS"
+      },
+      {
+        "id": "T05-F07",
+        "result": "PASS"
+      },
+      {
+        "id": "T05-F08",
+        "result": "PASS"
+      },
+      {
+        "id": "T05-F09",
+        "result": "PASS"
+      },
+      {
+        "id": "T05-F10",
+        "result": "PASS"
+      }
+    ],
+    "f10_evidence": {
+      "failed": {
+        "pass": 16,
+        "fail": 1
+      },
+      "recovered": {
+        "pass": 17,
+        "fail": 0
+      },
+      "ui_reset_before_fetch": true
+    }
+  },
+  "additional_regression_tests": [
+    {
+      "name": "null manifest.files entry",
+      "status": "PASS",
+      "expected": "MANIFEST_ERROR"
+    },
+    {
+      "name": "array manifest.files entry",
+      "status": "PASS",
+      "expected": "MANIFEST_ERROR"
+    }
+  ],
+  "error_rounds": 1,
+  "error_round_note": "GitHub 다중 파일 수정 요청 1회가 도구 보안상태 판단 불가로 거절됨; 이후 파일별 개별 수정으로 성공. 고정 검사 실패는 0회.",
+  "protected_files_unchanged": [
+    "t05/ai-a-results.json",
+    "t05/fixed-tests.json",
+    "t05/HANDOFF.md"
+  ],
+  "reproduction_limitations": [
+    "실행 환경 github.com DNS 제한으로 저장소 전체 clone을 수행하지 못함.",
+    "고정 검사 러너와 frozen fixture, Node verifier는 git blob SHA를 대조해 검증 후 실행함.",
+    "F10에 필요한 t04/script.js 부분은 GitHub에서 확인한 원본 코드와 동일한 구간만 로컬로 복원함. 따라서 이 결과는 전체 브라우저 스크립트의 직접 실행 증거가 아님.",
+    "F01/F02는 기존 러너에서 메타데이터 기반, F03은 합성 17개 입력 기반이며, 공개 배포 17개 파일의 실측 검증과 구분해야 함."
+  ],
+  "conclusion": "기존 고정 러너 10/10 PASS + 잘못된 manifest 엔트리 방어 강화 2건 반영. 실제 배포 브라우저 동작은 별도 검증 필요."
+}
