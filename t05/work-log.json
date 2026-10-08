@@ -21,16 +21,17 @@
     },
     {
       "event": "AI_A_END_HANDOFF",
-      "at": "2026-10-08T09:21:52+09:00",
+      "at": "2026-10-08T09:24:47+09:00",
       "source_start_sha": "59cc76327d73c8336444c8643e1d5e02a2cab655",
       "source_end_sha": "8a5b3526fd27e14e91b8c5b640f20bedbcae739d",
       "test_result": "9/10 PASS",
       "fail_ids": [
         "T05-F10"
       ],
-      "elapsed_minutes": 3.78,
-      "requests_or_tool_calls": 10,
-      "handoff": "t05/HANDOFF.md"
+      "elapsed_minutes": 6.7,
+      "requests_or_tool_calls": 18,
+      "handoff": "t05/HANDOFF.md",
+      "reproduction": "새 환경 clone은 현재 실행 환경 DNS 제한으로 미검증; AI B가 재현 필요"
     }
   ]
 }
