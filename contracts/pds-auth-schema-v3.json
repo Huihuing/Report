@@ -1,0 +1,573 @@
+{
+  "name": "pds-auth-schema-v3",
+  "schema_version": 3,
+  "T06_frozen_source_commit": "bb0352766c2b3974b074c3ec2db261679b49f7a7",
+  "timezone": "Asia/Seoul",
+  "auth": {
+    "provider": "Supabase Auth",
+    "sdk_version": "@supabase/supabase-js@2.95.0",
+    "password_hash": "bcrypt with per-account salt",
+    "identity": "email",
+    "server_session": "256-bit opaque bearer stored as SHA-256 digest",
+    "expiry_minutes": 60,
+    "logout": "immediate DB session delete",
+    "password_change": "revoke all T07 server sessions",
+    "token_in_url": false
+  },
+  "access": {
+    "T07_RLS": true,
+    "roles_with_direct_access_to_private_tables": [
+      "service_role"
+    ],
+    "owner_relation": "owner_id → auth.users.id",
+    "edge_enforces_owner_on_every_operation": true,
+    "unauth_status": 401,
+    "other_user_status": 404,
+    "T06_legacy_api_status": 410
+  },
+  "T06_migration": {
+    "one_time_claim_code_hash": "SHA-256",
+    "transaction": "copy IDs, relationships and actual records into owner_id rows; erase legacy bundle payload and old T06 rows"
+  },
+  "date_rules": {
+    "day_key": "YYYY-MM-DD Asia/Seoul",
+    "day_limit": 5,
+    "never_pre_fill_future_days": true,
+    "rule_change": "after exactly 2 days, before third day",
+    "metric": "minutes",
+    "missing": "null excluded",
+    "duplicates": "one row per owner and date",
+    "rounding": "1 decimal average",
+    "week_start": "Monday"
+  },
+  "tables": {
+    "t07_plans": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "nullable": "NO"
+        },
+        {
+          "name": "end_date",
+          "type": "date",
+          "nullable": "NO"
+        },
+        {
+          "name": "priority",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "success_criteria",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "expected_minutes",
+          "type": "integer",
+          "nullable": "NO"
+        },
+        {
+          "name": "next_from_reflection",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "constraints": [
+        "CHECK ((end_date >= start_date))",
+        "CHECK ((expected_minutes >= 0))",
+        "UNIQUE (id, owner_id)",
+        "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "PRIMARY KEY (id)",
+        "CHECK ((priority = ANY (ARRAY['high'::text, 'medium'::text, 'low'::text])))",
+        "CHECK (((length(title) >= 1) AND (length(title) <= 160)))"
+      ],
+      "rls_enabled": true
+    },
+    "t07_tasks": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "plan_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "nullable": "NO"
+        },
+        {
+          "name": "priority",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "tags",
+          "type": "ARRAY",
+          "nullable": "NO"
+        },
+        {
+          "name": "expected_minutes",
+          "type": "integer",
+          "nullable": "NO"
+        },
+        {
+          "name": "completed",
+          "type": "boolean",
+          "nullable": "NO"
+        },
+        {
+          "name": "completed_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "completion_cycle",
+          "type": "integer",
+          "nullable": "NO"
+        },
+        {
+          "name": "deleted_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "constraints": [
+        "CHECK ((expected_minutes >= 0))",
+        "UNIQUE (id, owner_id)",
+        "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "PRIMARY KEY (id)",
+        "FOREIGN KEY (plan_id, owner_id) REFERENCES t07_plans(id, owner_id) ON DELETE CASCADE",
+        "CHECK ((priority = ANY (ARRAY['high'::text, 'medium'::text, 'low'::text])))",
+        "CHECK (((length(title) >= 1) AND (length(title) <= 240)))"
+      ],
+      "rls_enabled": true
+    },
+    "t07_sessions": {
+      "columns": [
+        {
+          "name": "token_hash",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "user_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "constraints": [
+        "PRIMARY KEY (token_hash)",
+        "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+      ],
+      "rls_enabled": true
+    },
+    "t07_day_entries": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "day_date",
+          "type": "date",
+          "nullable": "NO"
+        },
+        {
+          "name": "metric_minutes",
+          "type": "integer",
+          "nullable": "YES"
+        },
+        {
+          "name": "note",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "rule_version",
+          "type": "integer",
+          "nullable": "NO"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "constraints": [
+        "CHECK ((metric_minutes >= 0))",
+        "UNIQUE (owner_id, day_date)",
+        "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "PRIMARY KEY (id)",
+        "CHECK ((rule_version = ANY (ARRAY[1, 2])))"
+      ],
+      "rls_enabled": true
+    },
+    "t07_reflections": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "plan_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "improvement_note",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "next_plan_id",
+          "type": "uuid",
+          "nullable": "YES"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "constraints": [
+        "FOREIGN KEY (next_plan_id, owner_id) REFERENCES t07_plans(id, owner_id)",
+        "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "PRIMARY KEY (id)",
+        "FOREIGN KEY (plan_id, owner_id) REFERENCES t07_plans(id, owner_id) ON DELETE CASCADE"
+      ],
+      "rls_enabled": true
+    },
+    "t07_legacy_bundle": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "integer",
+          "nullable": "NO"
+        },
+        {
+          "name": "payload",
+          "type": "jsonb",
+          "nullable": "NO"
+        },
+        {
+          "name": "claim_hash",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "claimed_by",
+          "type": "uuid",
+          "nullable": "YES"
+        },
+        {
+          "name": "claimed_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        }
+      ],
+      "constraints": [
+        "FOREIGN KEY (claimed_by) REFERENCES auth.users(id) ON DELETE SET NULL",
+        "CHECK ((id = 1))",
+        "PRIMARY KEY (id)"
+      ],
+      "rls_enabled": true
+    },
+    "t07_rule_settings": {
+      "columns": [
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "question",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "metric_name",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "unit",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "computation_rule",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "missing_rule",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "duplicate_rule",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "outlier_rule",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "rounding_rule",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "week_starts_on",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "initial_rule",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "changed_rule",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "changed_at",
+          "type": "timestamp with time zone",
+          "nullable": "YES"
+        },
+        {
+          "name": "changed_reason",
+          "type": "text",
+          "nullable": "YES"
+        },
+        {
+          "name": "day1_date",
+          "type": "date",
+          "nullable": "YES"
+        },
+        {
+          "name": "day2_date",
+          "type": "date",
+          "nullable": "YES"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "constraints": [
+        "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "PRIMARY KEY (owner_id)"
+      ],
+      "rls_enabled": true
+    },
+    "t07_execution_logs": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "task_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "started_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "ended_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        },
+        {
+          "name": "actual_minutes",
+          "type": "integer",
+          "nullable": "NO"
+        },
+        {
+          "name": "blocker_reason",
+          "type": "text",
+          "nullable": "NO"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "constraints": [
+        "CHECK ((actual_minutes >= 0))",
+        "CHECK ((ended_at >= started_at))",
+        "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "PRIMARY KEY (id)",
+        "FOREIGN KEY (task_id, owner_id) REFERENCES t07_tasks(id, owner_id) ON DELETE CASCADE"
+      ],
+      "rls_enabled": true
+    },
+    "t07_plan_revisions": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": "NO"
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "plan_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "revision_no",
+          "type": "integer",
+          "nullable": "NO"
+        },
+        {
+          "name": "snapshot",
+          "type": "jsonb",
+          "nullable": "NO"
+        },
+        {
+          "name": "changed_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "constraints": [
+        "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "PRIMARY KEY (id)",
+        "FOREIGN KEY (plan_id, owner_id) REFERENCES t07_plans(id, owner_id) ON DELETE CASCADE",
+        "UNIQUE (plan_id, revision_no)"
+      ],
+      "rls_enabled": true
+    },
+    "t07_completion_events": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "owner_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "task_id",
+          "type": "uuid",
+          "nullable": "NO"
+        },
+        {
+          "name": "cycle_no",
+          "type": "integer",
+          "nullable": "NO"
+        },
+        {
+          "name": "completed_at",
+          "type": "timestamp with time zone",
+          "nullable": "NO"
+        }
+      ],
+      "constraints": [
+        "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "PRIMARY KEY (id)",
+        "UNIQUE (task_id, cycle_no)",
+        "FOREIGN KEY (task_id, owner_id) REFERENCES t07_tasks(id, owner_id) ON DELETE CASCADE"
+      ],
+      "rls_enabled": true
+    }
+  }
+}
