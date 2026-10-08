@@ -82,12 +82,28 @@ async function authAction(action,b){
  const password=typeof b.password==="string"?b.password:"";
  if(!email.includes("@")||!email.includes(".")||password.length<10||password.length>128)throw Error("INVALID_CREDENTIAL_FORMAT");
  if(action==="signup"){
-  const {error}=await publicAuth().auth.signUp({email,password});
-  if(error&&/rate limit/i.test(error.message))throw Error("TRY_AGAIN_LATER");
-  return {ok:true,message:"가입 요청을 접수했습니다. 이메일 확인이 필요한 경우 메일을 확인한 뒤 로그인하세요."};
+  const {error}=await publicAuth().auth.signUp({
+   email,password,options:{emailRedirectTo:"https://report-huihuing.vercel.app/t07/"}
+  });
+  if(error){
+   // Return only safe, general-purpose errors; never disclose whether an email already exists.
+   const authCode=String(error.code||"").toLowerCase();
+   if(authCode==="over_email_send_rate_limit"||authCode==="over_request_rate_limit"||/rate.limit|too.many.requests/i.test(error.message))throw Error("TRY_AGAIN_LATER");
+   if(["email_address_invalid","invalid_email"].includes(authCode))throw Error("INVALID_EMAIL");
+   if(authCode==="weak_password")throw Error("PASSWORD_TOO_WEAK");
+   if(["user_already_exists","email_exists"].includes(authCode))
+    return {ok:true,message:"이미 계정이 있으면 로그인해 주세요. 신규 가입이라면 받은 편지함의 인증 메일을 확인하세요."};
+   console.error("T07 signup service error code:",authCode||"unknown");
+   throw Error("SIGNUP_SERVICE_ERROR");
+  }
+  return {ok:true,message:"가입 요청을 처리했습니다. 기존 계정이면 로그인하고, 신규 계정이면 이메일 인증을 완료한 뒤 로그인하세요."};
  }
  const {data,error}=await publicAuth().auth.signInWithPassword({email,password});
- if(error||!data?.user)throw Error("INVALID_CREDENTIALS");
+ if(error){
+  if(String(error.code||"").toLowerCase()==="email_not_confirmed")throw Error("EMAIL_NOT_CONFIRMED");
+  throw Error("INVALID_CREDENTIALS");
+ }
+ if(!data?.user)throw Error("INVALID_CREDENTIALS");
  const session=await createSession(data.user.id);
  return {ok:true,...session};
 }
@@ -249,6 +265,8 @@ Deno.serve(async(req)=>{
  }catch(e){
   const msg=e instanceof Error?e.message:"REQUEST_FAILED";
   const status=msg==="UNAUTHORIZED"?401:msg==="NOT_FOUND"?404:msg==="INVALID_CREDENTIALS"?401:
+     msg==="EMAIL_NOT_CONFIRMED"?403:msg==="TRY_AGAIN_LATER"?429:
+     msg==="SIGNUP_SERVICE_ERROR"?503:msg==="INVALID_EMAIL"||msg==="PASSWORD_TOO_WEAK"?422:
      msg==="UNKNOWN_ACTION"?400:msg==="INVALID_OR_USED_MIGRATION_CODE"?403:msg==="MIGRATION_SERVER_ERROR"?500:400;
   const visible=/^(UNAUTHORIZED|NOT_FOUND|INVALID_CREDENTIALS|UNKNOWN_ACTION|INVALID_OR_USED_MIGRATION_CODE|[A-Z_]{5,50})$/.test(msg)?msg:"REQUEST_FAILED";
   return response({ok:false,error:visible},status);
