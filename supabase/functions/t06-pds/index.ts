@@ -93,6 +93,9 @@ async function getState(requestedPlanId?: string | null) {
     : { data: [], error: null };
   if (reflections.error) throw reflections.error;
 
+  const safety = await db.from("t06_security_checks").select("check_key,stored_text,created_at").order("created_at");
+  if (safety.error) throw safety.error;
+
   const today = kstToday();
   const summary = {
     plan_count: tasks.length,
@@ -115,6 +118,7 @@ async function getState(requestedPlanId?: string | null) {
     executions,
     completions,
     reflections: reflections.data ?? [],
+    security_checks: safety.data ?? [],
     summary,
     sort_rule: "마감일 오름차순 → 우선순위 high/medium/low → 생성시각 오름차순"
   };
