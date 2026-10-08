@@ -1,0 +1,1479 @@
+{
+  "schema_version": 1,
+  "purpose": "T07 supplementary five-distinct-date retrospective of public Git commit activity",
+  "created_at_utc": "2026-10-08T07:07:07.898Z",
+  "source": "GitHub REST commits endpoint, snapshot timestamps converted to Asia/Seoul (+09:00)",
+  "date_basis": "commit.committer.date (NOT proof of T07 app use; NOT personal work duration)",
+  "included_repository_list": [
+    "Huihuing/PowerPointLite",
+    "Huihuing/T.A.R.D.I.S.",
+    "Huihuing/Report"
+  ],
+  "dates": [
+    "2026-09-28",
+    "2026-09-29",
+    "2026-10-06",
+    "2026-10-07",
+    "2026-10-08"
+  ],
+  "commits": [
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "5cae12119118e91a9467c79990a2e7e7f8832480",
+      "utc": "2026-09-28T07:40:58Z",
+      "author_utc": "2026-09-28T07:40:58Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "99a4c7c9e8ee70958cd93c8878389c235b249c47",
+      "utc": "2026-09-28T06:44:53Z",
+      "author_utc": "2026-09-28T06:44:53Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "9e8198d59300852890654bdf3f784aa4dd3f6c54",
+      "utc": "2026-09-28T06:42:57Z",
+      "author_utc": "2026-09-28T06:42:57Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "a176a568a5bba0855ca59df634819ab5fc5ae25c",
+      "utc": "2026-09-28T06:40:56Z",
+      "author_utc": "2026-09-28T06:40:56Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "9fe0f8998e56a32e54d19d848e1add4663b80864",
+      "utc": "2026-09-28T06:40:49Z",
+      "author_utc": "2026-09-28T06:40:49Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "e4029601f2d4b15dbbcee6ba6ad4f63215a3931d",
+      "utc": "2026-09-28T06:40:11Z",
+      "author_utc": "2026-09-28T06:40:11Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "95e64a68b9523a41430e8ec36a07cdfa8b0795a4",
+      "utc": "2026-09-28T06:34:22Z",
+      "author_utc": "2026-09-28T06:34:22Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "3142a5909b647f6b1af3c88d792cc806e79d5d4c",
+      "utc": "2026-09-28T06:33:56Z",
+      "author_utc": "2026-09-28T06:33:56Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "49f6bae2baee95740b5b58f5be547e79b7e43ed1",
+      "utc": "2026-09-28T11:29:27Z",
+      "author_utc": "2026-09-28T11:29:27Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "26af21d47fc4b9bb81f4c3a720f0492368895207",
+      "utc": "2026-09-28T08:40:49Z",
+      "author_utc": "2026-09-28T08:40:49Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "4cd76188c746e9b3b649d31f14d7574da1adf8e3",
+      "utc": "2026-09-28T08:26:02Z",
+      "author_utc": "2026-09-28T08:26:02Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "cb89b0de5c0aed8b9d0044892ba5f15717867e34",
+      "utc": "2026-09-28T08:03:26Z",
+      "author_utc": "2026-09-28T08:03:26Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "c9b3c8ac72f316527402c681fb55e147deacb14b",
+      "utc": "2026-09-28T07:07:53Z",
+      "author_utc": "2026-09-28T07:07:53Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "0ff19d382fc9dc6283426826ea34f641a93504d7",
+      "utc": "2026-09-28T06:38:05Z",
+      "author_utc": "2026-09-28T06:38:05Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "0f8d9f35f1347bcef188cd971f4eb52ef15885c2",
+      "utc": "2026-09-28T05:56:42Z",
+      "author_utc": "2026-09-28T05:56:42Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "bafe990fbd60d910ec6f5b69df4377043a82f04b",
+      "utc": "2026-09-28T05:45:05Z",
+      "author_utc": "2026-09-28T05:45:05Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "20e170cfc1404ba3e3429572e578c42c70c00d51",
+      "utc": "2026-09-28T05:40:57Z",
+      "author_utc": "2026-09-28T05:40:57Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "1959175cbeb8f65804b63e0d39e7d05bd04f5c69",
+      "utc": "2026-09-28T05:36:50Z",
+      "author_utc": "2026-09-28T05:36:50Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "d1f55bdf66e366e4c10f1aadde1c569f2754acb5",
+      "utc": "2026-09-28T05:30:01Z",
+      "author_utc": "2026-09-28T05:30:01Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "d33225ca110193af3a1c0a44c58f6662b8492598",
+      "utc": "2026-09-28T05:23:32Z",
+      "author_utc": "2026-09-28T05:23:32Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "bdbdcf068ac6d3e582c1a120abf3ded365573a6d",
+      "utc": "2026-09-28T05:17:29Z",
+      "author_utc": "2026-09-28T05:17:29Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "d45c8911592658c58fd98355b476a23ee34f2130",
+      "utc": "2026-09-28T05:14:40Z",
+      "author_utc": "2026-09-28T05:14:40Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "22a5197961c71f25f87ac96874917c59cb015da4",
+      "utc": "2026-09-28T03:51:21Z",
+      "author_utc": "2026-09-28T03:51:21Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "8d7449ebf0ee477a564ea2c9468b48089fbcc34e",
+      "utc": "2026-09-28T03:45:50Z",
+      "author_utc": "2026-09-28T03:45:50Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "eabda376bc2a9c81e81c9e17e45355efc6a2cbc5",
+      "utc": "2026-09-28T03:39:00Z",
+      "author_utc": "2026-09-28T03:39:00Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "5731e5885fd5e28c87f82cdb57e5541a801319ab",
+      "utc": "2026-09-28T03:02:58Z",
+      "author_utc": "2026-09-28T03:02:58Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "08ae44509e051e720b963bfaf69bc39862781170",
+      "utc": "2026-09-28T02:56:04Z",
+      "author_utc": "2026-09-28T02:56:04Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "e1c8302b4b507931cc3b7c4076032b5466ee965a",
+      "utc": "2026-09-28T02:50:53Z",
+      "author_utc": "2026-09-28T02:50:53Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "60b7c37b736a9455251084aca54c2a2efa7b6134",
+      "utc": "2026-09-28T02:42:55Z",
+      "author_utc": "2026-09-28T02:42:55Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "82bcdac14ae2643c9b4f95648e696115f458d3e5",
+      "utc": "2026-09-28T02:38:00Z",
+      "author_utc": "2026-09-28T02:38:00Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "91c166069d7f8f00ce88df989af9f97b038db402",
+      "utc": "2026-09-28T02:31:11Z",
+      "author_utc": "2026-09-28T02:31:11Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "89b2334942ac235c624c6ca9692da8d38302666d",
+      "utc": "2026-09-28T02:25:32Z",
+      "author_utc": "2026-09-28T02:25:32Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "579502ac812689c24b1ff3ed3f7116e490ec606a",
+      "utc": "2026-09-28T01:46:32Z",
+      "author_utc": "2026-09-28T01:46:32Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "f972a4237a7df0a494dd412cefbcce9c0a903d8b",
+      "utc": "2026-09-28T01:34:12Z",
+      "author_utc": "2026-09-28T01:34:12Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "c4954f11c4cc46c68cace7b258e7121bc730eee9",
+      "utc": "2026-09-28T01:27:13Z",
+      "author_utc": "2026-09-28T01:27:13Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "d1b54b12be646dca3c93f38b2daf0756259bd6cf",
+      "utc": "2026-09-28T01:22:16Z",
+      "author_utc": "2026-09-28T01:22:16Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "d40332a2b5f949946eaecb3b735bb4a4d8175289",
+      "utc": "2026-09-28T01:17:54Z",
+      "author_utc": "2026-09-28T01:17:54Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "03b60a611b8ca2602d1517ef9b2230d4760d6d93",
+      "utc": "2026-09-28T01:12:52Z",
+      "author_utc": "2026-09-28T01:12:52Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "e20e45aca7bc248d647d629f715522a6f1323773",
+      "utc": "2026-09-28T01:05:11Z",
+      "author_utc": "2026-09-28T01:05:11Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "ff7396babf12ee55cff59360c9a95669434fc41e",
+      "utc": "2026-09-28T01:01:29Z",
+      "author_utc": "2026-09-28T01:01:29Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "8010fba7313e5fd43964eab6c59ece2ff28de403",
+      "utc": "2026-09-28T00:55:11Z",
+      "author_utc": "2026-09-28T00:55:11Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "13c5a3843312c0b0e6a85d7558dc399726da9dc7",
+      "utc": "2026-09-28T00:45:07Z",
+      "author_utc": "2026-09-28T00:45:07Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "832726db45cbdb57df183028703298c40b52214f",
+      "utc": "2026-09-28T00:40:41Z",
+      "author_utc": "2026-09-28T00:40:41Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "0dced0eb132c3f5a688d2022f24f99155499fdcc",
+      "utc": "2026-09-28T00:35:00Z",
+      "author_utc": "2026-09-28T00:35:00Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "32610be01d9c2747ebaa49b2e23cde6955bff153",
+      "utc": "2026-09-27T23:20:45Z",
+      "author_utc": "2026-09-27T23:20:45Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "5158e90a4bc048264f306b80baed98c6f38d255e",
+      "utc": "2026-09-27T23:10:14Z",
+      "author_utc": "2026-09-27T23:10:14Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "8b8e5295e70e973bb4c7bd13423017924103f9f0",
+      "utc": "2026-09-27T23:06:25Z",
+      "author_utc": "2026-09-27T23:06:25Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "01ff938119110e5d34966b2a60efcdfe3d3f89ab",
+      "utc": "2026-09-27T22:54:38Z",
+      "author_utc": "2026-09-27T22:54:38Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "c805aa60f2765f4f2fcd2988b70669d000ec0896",
+      "utc": "2026-09-27T22:36:52Z",
+      "author_utc": "2026-09-27T22:36:52Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "af3db89b15fb552ef088e61423e4b1535c13102c",
+      "utc": "2026-09-27T22:32:37Z",
+      "author_utc": "2026-09-27T22:32:37Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "fdacfe4999113368ba7379ee530a028aa8d6459b",
+      "utc": "2026-09-27T22:26:27Z",
+      "author_utc": "2026-09-27T22:26:27Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "c8e5b297d73adc1d7a416ec20ec0528f61b6d27b",
+      "utc": "2026-09-27T16:40:05Z",
+      "author_utc": "2026-09-27T16:40:05Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "d39d1b497f6ae27012c3a7229dcdf5348737e013",
+      "utc": "2026-09-27T16:36:25Z",
+      "author_utc": "2026-09-27T16:36:25Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "2a560621c7d959555dd07aa2c4e0f587da83b5c9",
+      "utc": "2026-09-27T16:31:17Z",
+      "author_utc": "2026-09-27T16:31:17Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "80902f2faabec369c84baaa5ef62cf30e2e0d311",
+      "utc": "2026-09-27T16:27:02Z",
+      "author_utc": "2026-09-27T16:27:02Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "57ab334eb8a74d728658491b60b78c8ecc1981f7",
+      "utc": "2026-09-27T16:23:05Z",
+      "author_utc": "2026-09-27T16:23:05Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "2637720541138eca249b6e391f0df97848f59578",
+      "utc": "2026-09-27T16:02:47Z",
+      "author_utc": "2026-09-27T16:02:47Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "9148df414227871659b84fbfdc8f999ababd3c9b",
+      "utc": "2026-09-27T16:01:13Z",
+      "author_utc": "2026-09-27T16:01:13Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "1806c42303252bcbd1b84d4bd1e62d2d60ed0441",
+      "utc": "2026-09-27T15:57:33Z",
+      "author_utc": "2026-09-27T15:57:33Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "70eee33bc2261397dfb00aee57c58b19a71c6ebf",
+      "utc": "2026-09-27T15:52:38Z",
+      "author_utc": "2026-09-27T15:52:38Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "565649e94fb95467b5db2db145cde7583f213945",
+      "utc": "2026-09-27T15:46:30Z",
+      "author_utc": "2026-09-27T15:46:30Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "4b9e185df9742cc1bcf9149b777ce36469f3aa4f",
+      "utc": "2026-09-27T15:33:39Z",
+      "author_utc": "2026-09-27T15:33:39Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "1a7856450d5dc7de631c8b047c4d9b2637acaa6b",
+      "utc": "2026-09-27T15:29:25Z",
+      "author_utc": "2026-09-27T15:29:25Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "cf2d68fd25887e14a16935ea043bb50f26094b4a",
+      "utc": "2026-09-27T15:25:11Z",
+      "author_utc": "2026-09-27T15:25:11Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "cd2dda8bd03eac429dc020b5c8dbc6754da8dc50",
+      "utc": "2026-09-27T15:17:20Z",
+      "author_utc": "2026-09-27T15:17:20Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "c37a3ffa1262bcb71889713f83142d8c79c16af5",
+      "utc": "2026-09-27T15:10:26Z",
+      "author_utc": "2026-09-27T15:10:26Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "b3636442e86827d4f7f381a5e7100354dc5e088d",
+      "utc": "2026-09-27T15:06:53Z",
+      "author_utc": "2026-09-27T15:06:53Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "123aea3e06baa59ab75a262621f14ce508779011",
+      "utc": "2026-09-29T07:09:17Z",
+      "author_utc": "2026-09-29T07:09:17Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "66e81cbbb8fe0860f0abe05fb01d272777b01f87",
+      "utc": "2026-09-29T02:45:08Z",
+      "author_utc": "2026-09-29T02:45:08Z"
+    },
+    {
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "sha": "3d751bb11cceff3950097f19d21e804d925b0070",
+      "utc": "2026-09-29T02:37:46Z",
+      "author_utc": "2026-09-29T02:37:46Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "f0f3564dca4fb0580633f9d4b7e342a7511969d7",
+      "utc": "2026-10-06T00:46:57Z",
+      "author_utc": "2026-10-06T00:46:57Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "2cacceb33746a2fa625801ecb9e536c236093585",
+      "utc": "2026-10-06T00:45:30Z",
+      "author_utc": "2026-10-06T00:45:30Z"
+    },
+    {
+      "repo": "Huihuing/PowerPointLite",
+      "sha": "39e578a46a416a8b5a850848fc38f38c2f0b3acd",
+      "utc": "2026-10-06T00:36:35Z",
+      "author_utc": "2026-10-06T00:36:35Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "882891917d9db73709e024280e66f3008a06bf03",
+      "utc": "2026-10-07T10:19:42Z",
+      "author_utc": "2026-10-07T10:19:42Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "9b8f80f335f07f90b5cb4e98438288f4557e348f",
+      "utc": "2026-10-07T10:19:39Z",
+      "author_utc": "2026-10-07T10:19:39Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "0651202cf3aa364ea13ce1bd8e41301cd6eabfe6",
+      "utc": "2026-10-07T10:19:35Z",
+      "author_utc": "2026-10-07T10:19:35Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "221bfcfa7a1e1625198878ddd5095e8acfc24246",
+      "utc": "2026-10-07T10:19:33Z",
+      "author_utc": "2026-10-07T10:19:33Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "9548001ea56229ab80ada7d0eb426cd99c43c841",
+      "utc": "2026-10-07T10:19:17Z",
+      "author_utc": "2026-10-07T10:19:17Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "376711c8ef8c5ed00dfee9b527169c231b30c02f",
+      "utc": "2026-10-07T10:19:13Z",
+      "author_utc": "2026-10-07T10:19:13Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "129ee68226a32ca6a01730ec3ba041323ddd5946",
+      "utc": "2026-10-07T10:19:10Z",
+      "author_utc": "2026-10-07T10:19:10Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "04473e56ebea4ed70009ed5bde15d953e6060e84",
+      "utc": "2026-10-07T10:19:07Z",
+      "author_utc": "2026-10-07T10:19:07Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "14b500e10758ba9551468ac3a3bab5e5c4fb6747",
+      "utc": "2026-10-07T10:19:04Z",
+      "author_utc": "2026-10-07T10:19:04Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "94f77f993b6b53567f45da7499f0e0f9ac4596cc",
+      "utc": "2026-10-07T10:16:32Z",
+      "author_utc": "2026-10-07T10:16:32Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "335e06efb284a9f320555415348ada006446d670",
+      "utc": "2026-10-07T10:16:13Z",
+      "author_utc": "2026-10-07T10:16:13Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "0c7d02e75af72b35e77d26da7461ed2c76f80adb",
+      "utc": "2026-10-07T10:15:13Z",
+      "author_utc": "2026-10-07T10:15:13Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "b8633798c7efe3b1e3d623a61fe4e674df70f79c",
+      "utc": "2026-10-07T10:15:10Z",
+      "author_utc": "2026-10-07T10:15:10Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "859a3a2f2375bbfa3075c3e6060cba3300511083",
+      "utc": "2026-10-07T10:14:53Z",
+      "author_utc": "2026-10-07T10:14:53Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "081d8649845f6c12eaa0e93ba0caee6054d786eb",
+      "utc": "2026-10-07T10:14:34Z",
+      "author_utc": "2026-10-07T10:14:34Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "0022b64721d2567d4d2646b496ba970a4e6a5b29",
+      "utc": "2026-10-07T10:14:01Z",
+      "author_utc": "2026-10-07T10:14:01Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "f3782f5d6199022cd8b1a16e8820a78753be546a",
+      "utc": "2026-10-07T10:13:46Z",
+      "author_utc": "2026-10-07T10:13:46Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "43f92cc9fce53a7dc7172743dca83275df18774f",
+      "utc": "2026-10-07T10:12:50Z",
+      "author_utc": "2026-10-07T10:12:50Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "eb26d219cd1fefe08dc6ff055f40a4f4be802949",
+      "utc": "2026-10-07T10:12:46Z",
+      "author_utc": "2026-10-07T10:12:46Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "efecacf025c30ea1e6a9e31b478d8f4e9f7b74c1",
+      "utc": "2026-10-07T10:12:00Z",
+      "author_utc": "2026-10-07T10:12:00Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "7a02af765a1063a4c4024339505f94b088b3b4c4",
+      "utc": "2026-10-07T10:11:58Z",
+      "author_utc": "2026-10-07T10:11:58Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "411b83157cfe5efc36883bed7ebeb03e8a923048",
+      "utc": "2026-10-07T10:11:55Z",
+      "author_utc": "2026-10-07T10:11:55Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "4a5c02db4a39e30eef8274b91e7a732c0aee3c71",
+      "utc": "2026-10-07T10:11:52Z",
+      "author_utc": "2026-10-07T10:11:52Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "734feff0f11f5cecd35a748c34f1dafb43267514",
+      "utc": "2026-10-07T10:11:50Z",
+      "author_utc": "2026-10-07T10:11:50Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "bb04c9563fe29b04a2afd964d9e0fd4dba4afec0",
+      "utc": "2026-10-07T10:11:47Z",
+      "author_utc": "2026-10-07T10:11:47Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "f81322082cff56fd69c7ee9fd05a7ee50be17f9f",
+      "utc": "2026-10-07T10:11:32Z",
+      "author_utc": "2026-10-07T10:11:32Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "d3100d56f89af2d5e732a1b776ee05a1e8ac08c0",
+      "utc": "2026-10-07T10:11:30Z",
+      "author_utc": "2026-10-07T10:11:30Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "06eac9215ceb1bd45b6ec21bed1e486cbdefd7bd",
+      "utc": "2026-10-07T10:11:27Z",
+      "author_utc": "2026-10-07T10:11:27Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "7fc9a2c91f41b586f41ef31881a22af45af75ef7",
+      "utc": "2026-10-07T10:11:25Z",
+      "author_utc": "2026-10-07T10:11:25Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "15a7c9b841fa257daefe915ecd2c2a9b862f9635",
+      "utc": "2026-10-07T10:11:23Z",
+      "author_utc": "2026-10-07T10:11:23Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "ba729df80a432de39ec3026409088ee745eab996",
+      "utc": "2026-10-07T10:11:21Z",
+      "author_utc": "2026-10-07T10:11:21Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "056bd7d2cc10458861efc35140e6186706de3b05",
+      "utc": "2026-10-07T10:10:36Z",
+      "author_utc": "2026-10-07T10:10:36Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "db4f13b5e7e2124bd74f244e6b47a160f7359db3",
+      "utc": "2026-10-07T10:10:11Z",
+      "author_utc": "2026-10-07T10:10:11Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "96b9458f7b9bed1f89ededba8860e6910e6e0ae4",
+      "utc": "2026-10-07T10:09:40Z",
+      "author_utc": "2026-10-07T10:09:40Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "3174101fe5def0b8d62082b14ccd187d138783d5",
+      "utc": "2026-10-07T08:06:10Z",
+      "author_utc": "2026-10-07T08:06:10Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "5b5ef41638f61489445b62b115a8bdf20161c03e",
+      "utc": "2026-10-07T08:05:54Z",
+      "author_utc": "2026-10-07T08:05:54Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "6811d49a5a022dec34a8e335b9213abe2e30cc7d",
+      "utc": "2026-10-07T08:05:28Z",
+      "author_utc": "2026-10-07T08:05:28Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "8dc322ebe36e97811f850b04cdb1f21feffb1a1c",
+      "utc": "2026-10-07T08:04:39Z",
+      "author_utc": "2026-10-07T08:04:39Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "48eaa8e1ce20fc30af08678f3c89555b63c2a25a",
+      "utc": "2026-10-07T08:03:16Z",
+      "author_utc": "2026-10-07T08:03:16Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "426ee1f0122e986938580a5e290cf1c810a0a36b",
+      "utc": "2026-10-07T08:02:52Z",
+      "author_utc": "2026-10-07T08:02:52Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "6566b2f18be6a8cf2b30f9f092e8aaef69879395",
+      "utc": "2026-10-07T08:02:21Z",
+      "author_utc": "2026-10-07T08:02:21Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "a237ce13ce871ff252d1e5e55b1be620e84a865e",
+      "utc": "2026-10-07T07:59:46Z",
+      "author_utc": "2026-10-07T07:59:46Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "ecd8bd29e312f9dacb226f7a4ff1f4f818f07c9a",
+      "utc": "2026-10-07T07:59:36Z",
+      "author_utc": "2026-10-07T07:59:36Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "4fca5faa36b318818530b5721610fb86351eee3c",
+      "utc": "2026-10-07T07:59:15Z",
+      "author_utc": "2026-10-07T07:59:15Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "5ec383980aefa099b11cde3186718574d47ae6e7",
+      "utc": "2026-10-07T07:54:54Z",
+      "author_utc": "2026-10-07T07:54:54Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "b0194534b1ce7a8acfa34e2aa33b3e6dd13a20c6",
+      "utc": "2026-10-07T07:54:38Z",
+      "author_utc": "2026-10-07T07:54:38Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "7af82958f990b1aaa55ae78b6ece3ba04d1fda32",
+      "utc": "2026-10-07T07:54:15Z",
+      "author_utc": "2026-10-07T07:54:15Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "1423f859e165e443ec884af4a50f4d614c8f352d",
+      "utc": "2026-10-07T07:48:17Z",
+      "author_utc": "2026-10-07T07:48:17Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "2cc96b5135200abcb00cc717377c19c4a9ababe1",
+      "utc": "2026-10-07T07:39:21Z",
+      "author_utc": "2026-10-07T07:39:21Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "d9e0101d27ef0be473bf9468651dfb76ad632816",
+      "utc": "2026-10-07T06:05:22Z",
+      "author_utc": "2026-10-07T06:05:22Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "6fd74e1646542d71cee644235bc9aa1d73a602d5",
+      "utc": "2026-10-07T06:05:16Z",
+      "author_utc": "2026-10-07T06:05:16Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "aca19e769d06164df10728a49b9f42c7347cf876",
+      "utc": "2026-10-07T06:05:07Z",
+      "author_utc": "2026-10-07T06:05:07Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "6ba7526e9836162a1d5b5df3285607c4b5f754f2",
+      "utc": "2026-10-07T06:04:57Z",
+      "author_utc": "2026-10-07T06:04:57Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "a6c9b3d60eed3c9e69c8afcf900a57e793d7a509",
+      "utc": "2026-10-07T06:04:42Z",
+      "author_utc": "2026-10-07T06:04:42Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "a0161e167b1945a1bcc7e4a551ee2730d72cac95",
+      "utc": "2026-10-07T06:04:34Z",
+      "author_utc": "2026-10-07T06:04:34Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "99789316631109193763bdcb30eed52863a30957",
+      "utc": "2026-10-07T05:58:24Z",
+      "author_utc": "2026-10-07T05:58:24Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "5c589cb98f9faa448acebea54dcd26cf9b06d3b1",
+      "utc": "2026-10-07T05:58:20Z",
+      "author_utc": "2026-10-07T05:58:20Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "7be32f142f5b859d92e2e0c8a458a1e84234fd87",
+      "utc": "2026-10-07T05:58:18Z",
+      "author_utc": "2026-10-07T05:58:18Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "946e900a584d78f8b25a39d5a627fe38d2c6e4e9",
+      "utc": "2026-10-07T03:33:43Z",
+      "author_utc": "2026-10-07T03:33:43Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "1c271bfadf52ce883fbd9ea504996e4132b929cc",
+      "utc": "2026-10-07T03:33:27Z",
+      "author_utc": "2026-10-07T03:33:27Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "289e69c6152edd7dc360517aaabf36457ca09bdf",
+      "utc": "2026-10-07T03:33:19Z",
+      "author_utc": "2026-10-07T03:33:19Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "f6007182636eff402afcd86c091d06e72f22a406",
+      "utc": "2026-10-08T06:31:30Z",
+      "author_utc": "2026-10-08T06:31:30Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "98181be0452da31a5168140f722a270d5f609b90",
+      "utc": "2026-10-08T06:29:30Z",
+      "author_utc": "2026-10-08T06:29:30Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "c96e785d2e13d29cd1659d25a2f6d26fb1cc64c5",
+      "utc": "2026-10-08T06:27:22Z",
+      "author_utc": "2026-10-08T06:27:22Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "1fa7a9e3da803741954a833e230abcb66bf51cd9",
+      "utc": "2026-10-08T06:27:19Z",
+      "author_utc": "2026-10-08T06:27:19Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "dba9710bfe0ce785bb8d73a0351bdd3cb75c2b99",
+      "utc": "2026-10-08T06:26:42Z",
+      "author_utc": "2026-10-08T06:26:42Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "54cdaf61ce63ecd0e33b31144439b03918cd1d9d",
+      "utc": "2026-10-08T06:26:23Z",
+      "author_utc": "2026-10-08T06:26:23Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "9ab6eaaec3242438302d41375129504d722307db",
+      "utc": "2026-10-08T06:25:27Z",
+      "author_utc": "2026-10-08T06:25:27Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "4da4f7b1e15e7f07c3ae34fb42a19860e156a56c",
+      "utc": "2026-10-08T06:23:41Z",
+      "author_utc": "2026-10-08T06:23:41Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "399132ea553f9c7d1dbe437cae1e500cdd612010",
+      "utc": "2026-10-08T06:23:22Z",
+      "author_utc": "2026-10-08T06:23:22Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "e6abddd0abe1ae2021fbc7b1ecf883984bbf7754",
+      "utc": "2026-10-08T06:22:52Z",
+      "author_utc": "2026-10-08T06:22:52Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "51f858a3d44cdecf3b1947c99265ce353c910169",
+      "utc": "2026-10-08T06:21:53Z",
+      "author_utc": "2026-10-08T06:21:53Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "4e7bdb0761e085a1af1d3e27b23cc3720187773c",
+      "utc": "2026-10-08T06:21:49Z",
+      "author_utc": "2026-10-08T06:21:49Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "e39e31bf439c44ec0e7f75f7b06706e767927fe5",
+      "utc": "2026-10-08T06:20:26Z",
+      "author_utc": "2026-10-08T06:20:26Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "d83443f94989b6e4ef359d784ed44b6342bf9114",
+      "utc": "2026-10-08T06:20:11Z",
+      "author_utc": "2026-10-08T06:20:11Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "d63dd1cc694b16e1e51ad7f5585fa6b4fde27f3c",
+      "utc": "2026-10-08T06:20:06Z",
+      "author_utc": "2026-10-08T06:20:06Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "8854fd237eff58cc977b2fe6248ca879ee2ac692",
+      "utc": "2026-10-08T06:20:03Z",
+      "author_utc": "2026-10-08T06:20:03Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "8f5f8a81af21ef048a381ecb332f5dabd7676ba7",
+      "utc": "2026-10-08T06:18:47Z",
+      "author_utc": "2026-10-08T06:18:47Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "897bb923be00bcae255ca8afe30c1f0e3f210e1e",
+      "utc": "2026-10-08T06:18:44Z",
+      "author_utc": "2026-10-08T06:18:44Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "284d28fba5d4f98911cdf9aa2f74d8d874475864",
+      "utc": "2026-10-08T06:18:30Z",
+      "author_utc": "2026-10-08T06:18:30Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "2c607d695dad84a747924a7469adf22bf601f4b4",
+      "utc": "2026-10-08T06:17:47Z",
+      "author_utc": "2026-10-08T06:17:47Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "bb0352766c2b3974b074c3ec2db261679b49f7a7",
+      "utc": "2026-10-08T05:17:49Z",
+      "author_utc": "2026-10-08T05:17:49Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "5a2601ff95b81fb4f24363d2850c19048f209d6b",
+      "utc": "2026-10-08T05:17:46Z",
+      "author_utc": "2026-10-08T05:17:46Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "ca676b3cf37e4becf8c4faaae0f5469235618cd3",
+      "utc": "2026-10-08T05:17:21Z",
+      "author_utc": "2026-10-08T05:17:21Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "515e096269a79df9f47122b3e23645ca261b9814",
+      "utc": "2026-10-08T05:17:16Z",
+      "author_utc": "2026-10-08T05:17:16Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "3fac6773191f346f72a41213541eaa3af2c4b5cb",
+      "utc": "2026-10-08T05:17:11Z",
+      "author_utc": "2026-10-08T05:17:11Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "c3acc5ffe47dce0be71eafc55a92201dbb8a6425",
+      "utc": "2026-10-08T05:16:48Z",
+      "author_utc": "2026-10-08T05:16:48Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "4854067b7d840fa53c5ee190ab5ebfcfd7da67ae",
+      "utc": "2026-10-08T05:16:41Z",
+      "author_utc": "2026-10-08T05:16:41Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "b11083a01884006be7872de42b10b07fcdf16789",
+      "utc": "2026-10-08T05:12:52Z",
+      "author_utc": "2026-10-08T05:12:52Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "4421b33be8e1f6abe6c4d2bc7548a5033d99dcc4",
+      "utc": "2026-10-08T05:12:42Z",
+      "author_utc": "2026-10-08T05:12:42Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "c9482ec611ba59a28e7d2edc1ddaadb6ee4aea8e",
+      "utc": "2026-10-08T03:54:36Z",
+      "author_utc": "2026-10-08T03:54:36Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "eda9724d2e3efb5d6accbb24ed53cc443b02c4ee",
+      "utc": "2026-10-08T03:54:34Z",
+      "author_utc": "2026-10-08T03:54:34Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "d141cbfce67b4eda45e2d239bffafa9dbaa54e29",
+      "utc": "2026-10-08T03:52:22Z",
+      "author_utc": "2026-10-08T03:52:22Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "739e0f967a67b3ef97565dcc3cb5b9fdb9b095bd",
+      "utc": "2026-10-08T03:51:38Z",
+      "author_utc": "2026-10-08T03:51:38Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "75436c71d549df8ad7fea006473e80128b257600",
+      "utc": "2026-10-08T03:51:31Z",
+      "author_utc": "2026-10-08T03:51:31Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "6d9680ea2a7379d0bcb41772dbe8bab68ca16aee",
+      "utc": "2026-10-08T03:50:22Z",
+      "author_utc": "2026-10-08T03:50:22Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "468e2b67bd407e9779e2a96dc6c0fe4500bda5ac",
+      "utc": "2026-10-08T03:50:19Z",
+      "author_utc": "2026-10-08T03:50:19Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "7ad6b4cde9fbda47104db6b8564f7059208ee154",
+      "utc": "2026-10-08T03:38:46Z",
+      "author_utc": "2026-10-08T03:38:46Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "d67bfc3e204ef1280c5b59539aa8525070abcefa",
+      "utc": "2026-10-08T03:37:56Z",
+      "author_utc": "2026-10-08T03:37:56Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "6c73b04b565d0dc2a64f771919078ca20e9a9d1b",
+      "utc": "2026-10-08T03:36:58Z",
+      "author_utc": "2026-10-08T03:36:58Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "148dd584dc663c9b4a01176e6f5e95d25d18f18b",
+      "utc": "2026-10-08T03:36:56Z",
+      "author_utc": "2026-10-08T03:36:56Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "8abf7fd76bab6cb620702ec3d723bb6e1ca97028",
+      "utc": "2026-10-08T03:31:54Z",
+      "author_utc": "2026-10-08T03:31:54Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "19857c9b8e528f99c60e8c3fcfb8c9e9f94e4e10",
+      "utc": "2026-10-08T03:31:50Z",
+      "author_utc": "2026-10-08T03:31:50Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "7557895dfacb01051fe6b26b7d0ea3710732d608",
+      "utc": "2026-10-08T03:31:26Z",
+      "author_utc": "2026-10-08T03:31:26Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "48d8b9dd385c567b5d35e3274086bc3e66e5a5a8",
+      "utc": "2026-10-08T03:31:23Z",
+      "author_utc": "2026-10-08T03:31:23Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "854d86058c38ec8a5c77d45687df4def11c0ab48",
+      "utc": "2026-10-08T03:31:20Z",
+      "author_utc": "2026-10-08T03:31:20Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "2bc07fdb853c5c2916150501a1c1ff6d08ea5859",
+      "utc": "2026-10-08T03:29:05Z",
+      "author_utc": "2026-10-08T03:29:05Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "31e50d7ae1869b62d78ed813385d2c6dcfd1cc6a",
+      "utc": "2026-10-08T03:29:02Z",
+      "author_utc": "2026-10-08T03:29:02Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "779059a933acfd606d36d5d37eb63d3fc37cfb53",
+      "utc": "2026-10-08T03:27:49Z",
+      "author_utc": "2026-10-08T03:27:49Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "41aefb5c6b33a9b61214d4abe6df699a5e277e45",
+      "utc": "2026-10-08T03:26:04Z",
+      "author_utc": "2026-10-08T03:26:04Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "d6fec09d1049e427418baed76c23f770581186b0",
+      "utc": "2026-10-08T03:26:02Z",
+      "author_utc": "2026-10-08T03:26:02Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "c4664199cba361a782f6bc33a172a959370851dc",
+      "utc": "2026-10-08T03:24:23Z",
+      "author_utc": "2026-10-08T03:24:23Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "99c2fd751dc3b56d3c01f8f6d7d83cd047375534",
+      "utc": "2026-10-08T01:47:53Z",
+      "author_utc": "2026-10-08T01:47:53Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "e259bd2e30ae5b4e5ec28670e71feb98b3f173e7",
+      "utc": "2026-10-08T01:47:23Z",
+      "author_utc": "2026-10-08T01:47:23Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "d59401361e648ba9abfb6ed1b1f52cc6fd05cd22",
+      "utc": "2026-10-08T01:47:20Z",
+      "author_utc": "2026-10-08T01:47:20Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "c540f5e69150b639f9b9d22200f9ec4f7df50252",
+      "utc": "2026-10-08T01:46:24Z",
+      "author_utc": "2026-10-08T01:46:24Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "e1667ea007b6b7133bc3d8f903a970f2395c05e8",
+      "utc": "2026-10-08T01:42:27Z",
+      "author_utc": "2026-10-08T01:42:27Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "9aa7f16d07b1c23b25b0b9409da22d032597eb3b",
+      "utc": "2026-10-08T01:41:18Z",
+      "author_utc": "2026-10-08T01:41:18Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "1f7728bdc0f0fab217c25c0595f17f6183c3fed6",
+      "utc": "2026-10-08T01:41:08Z",
+      "author_utc": "2026-10-08T01:41:08Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "51723acd54106289b6088e8cb4c16083214cb562",
+      "utc": "2026-10-08T01:33:54Z",
+      "author_utc": "2026-10-08T01:33:54Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "c411542c949bb1cdab9b5b8400c99858d3d968c7",
+      "utc": "2026-10-08T01:27:22Z",
+      "author_utc": "2026-10-08T01:27:22Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "bc78c7d60ec1889b4a0dcd6b22d0911c571a194d",
+      "utc": "2026-10-08T01:27:19Z",
+      "author_utc": "2026-10-08T01:27:19Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "3e71e3652f09058f0207863afbd2a0ba33a2287f",
+      "utc": "2026-10-08T01:26:37Z",
+      "author_utc": "2026-10-08T01:26:37Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "203916d43f2cc7bbd738a4432317e1b3aa32f932",
+      "utc": "2026-10-08T01:26:06Z",
+      "author_utc": "2026-10-08T01:26:06Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "f58b3eb514bc1ea7dcdde0d6f32a45d8714cae47",
+      "utc": "2026-10-08T01:22:09Z",
+      "author_utc": "2026-10-08T01:22:09Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "f83e165eb2d6bb1c38c5ed056ec0780a2b3f3c23",
+      "utc": "2026-10-08T01:22:05Z",
+      "author_utc": "2026-10-08T01:22:05Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "ea347ac6c539f9ac6e38e5f677aa8440817b2fe6",
+      "utc": "2026-10-08T01:21:35Z",
+      "author_utc": "2026-10-08T01:21:35Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "f18889b91d5babfe0b9abf77e4359338736989d7",
+      "utc": "2026-10-08T01:21:31Z",
+      "author_utc": "2026-10-08T01:21:31Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "12847668c576be03244f76da3e3f3a9c8364d2d5",
+      "utc": "2026-10-08T01:16:32Z",
+      "author_utc": "2026-10-08T01:16:32Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "287a5e83b6159d82e63017652ce2a7bc25cc26e2",
+      "utc": "2026-10-08T01:16:30Z",
+      "author_utc": "2026-10-08T01:16:30Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "04b14ccf5b93ee2bc44d60709d5f8f4fcebd57fb",
+      "utc": "2026-10-08T01:12:53Z",
+      "author_utc": "2026-10-08T01:12:53Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "a12e6ff3a8de1dc5158de2a20b8248197899ac85",
+      "utc": "2026-10-08T01:06:53Z",
+      "author_utc": "2026-10-08T01:06:53Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "414ab17615a181eb5db0d2bf750222e13332d688",
+      "utc": "2026-10-08T00:57:49Z",
+      "author_utc": "2026-10-08T00:57:49Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "f3771fb2f3fe2916e3636445ecb533e1a57e6a7d",
+      "utc": "2026-10-08T00:57:46Z",
+      "author_utc": "2026-10-08T00:57:46Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "9ba17d679518d8c48544b3f830da5ff8eee71042",
+      "utc": "2026-10-08T00:57:44Z",
+      "author_utc": "2026-10-08T00:57:44Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "97c04ba273ff1f5507ef72e431e38a7a53eb2d0e",
+      "utc": "2026-10-08T00:54:04Z",
+      "author_utc": "2026-10-08T00:54:04Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "67086ea7aa51041d2b3391f289dfe4e03a185deb",
+      "utc": "2026-10-08T00:54:01Z",
+      "author_utc": "2026-10-08T00:54:01Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "6b7561520ca03cf74c15f562479c925f350234d9",
+      "utc": "2026-10-08T00:53:59Z",
+      "author_utc": "2026-10-08T00:53:59Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "862c182eaa96a3e5983cee1e37c28467c039ed60",
+      "utc": "2026-10-08T00:25:42Z",
+      "author_utc": "2026-10-08T00:25:42Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "02bc2f962d05676791b375cf01464d69ea3259f0",
+      "utc": "2026-10-08T00:25:39Z",
+      "author_utc": "2026-10-08T00:25:39Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "39a6590415b10a2231d73466f4c715bfcc5e8eeb",
+      "utc": "2026-10-08T00:25:36Z",
+      "author_utc": "2026-10-08T00:25:36Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "56363e47ae04acb88246d0865f3fb17f478f13ce",
+      "utc": "2026-10-08T00:23:25Z",
+      "author_utc": "2026-10-08T00:23:25Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "9dd489f741f025de9946920574d5f657e633c3a7",
+      "utc": "2026-10-08T00:23:22Z",
+      "author_utc": "2026-10-08T00:23:22Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "23dac0b741458299f149c578cb98ab3f119d747c",
+      "utc": "2026-10-08T00:23:19Z",
+      "author_utc": "2026-10-08T00:23:19Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "59720c12dcac0ec12a469a474d636eb476fa3466",
+      "utc": "2026-10-08T00:23:17Z",
+      "author_utc": "2026-10-08T00:23:17Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "8a5b3526fd27e14e91b8c5b640f20bedbcae739d",
+      "utc": "2026-10-08T00:20:27Z",
+      "author_utc": "2026-10-08T00:20:27Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "7c872e54417a27fc8a6350b2fabe861eb0d4abe7",
+      "utc": "2026-10-08T00:20:25Z",
+      "author_utc": "2026-10-08T00:20:25Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "638e154625b09e289cc6f0daf5b6d5d3fe067c53",
+      "utc": "2026-10-08T00:20:13Z",
+      "author_utc": "2026-10-08T00:20:13Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "26702e4cbac0176f96977c6b79c5a62b7d1538fc",
+      "utc": "2026-10-08T00:19:54Z",
+      "author_utc": "2026-10-08T00:19:54Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "3f2fae8238e6bd59133f369a6a30139678111cf9",
+      "utc": "2026-10-08T00:19:44Z",
+      "author_utc": "2026-10-08T00:19:44Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "dd9e04509ad5b1b1e26ccb046116810f035e8c82",
+      "utc": "2026-10-08T00:18:24Z",
+      "author_utc": "2026-10-08T00:18:24Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "ecba0eab142e555a085eeb2e593ef03879fa2ea8",
+      "utc": "2026-10-08T00:18:16Z",
+      "author_utc": "2026-10-08T00:18:16Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "6c6bf3f340aaf0a0c1843adb5d0526989e2fd173",
+      "utc": "2026-10-08T00:17:42Z",
+      "author_utc": "2026-10-08T00:17:42Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "400b36f45142ac648fb7f463ef0b4148cb4c1b0a",
+      "utc": "2026-10-08T00:17:21Z",
+      "author_utc": "2026-10-08T00:17:21Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "59cc76327d73c8336444c8643e1d5e02a2cab655",
+      "utc": "2026-10-07T23:17:38Z",
+      "author_utc": "2026-10-07T23:17:38Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "815826bba29888a98e7a871b5a9e660cd841d42f",
+      "utc": "2026-10-07T23:17:33Z",
+      "author_utc": "2026-10-07T23:17:33Z"
+    },
+    {
+      "repo": "Huihuing/Report",
+      "sha": "349195c9e143406fec345faaa871cf5ae9d6dca7",
+      "utc": "2026-10-07T23:16:51Z",
+      "author_utc": "2026-10-07T23:16:51Z"
+    }
+  ],
+  "counts_by_repo_day": [
+    {
+      "day": "2026-09-28",
+      "repo": "Huihuing/PowerPointLite",
+      "commits": 8
+    },
+    {
+      "day": "2026-09-28",
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "commits": 59
+    },
+    {
+      "day": "2026-09-28",
+      "repo": "Huihuing/Report",
+      "commits": 0
+    },
+    {
+      "day": "2026-09-29",
+      "repo": "Huihuing/PowerPointLite",
+      "commits": 0
+    },
+    {
+      "day": "2026-09-29",
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "commits": 3
+    },
+    {
+      "day": "2026-09-29",
+      "repo": "Huihuing/Report",
+      "commits": 0
+    },
+    {
+      "day": "2026-10-06",
+      "repo": "Huihuing/PowerPointLite",
+      "commits": 3
+    },
+    {
+      "day": "2026-10-06",
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "commits": 0
+    },
+    {
+      "day": "2026-10-06",
+      "repo": "Huihuing/Report",
+      "commits": 0
+    },
+    {
+      "day": "2026-10-07",
+      "repo": "Huihuing/PowerPointLite",
+      "commits": 0
+    },
+    {
+      "day": "2026-10-07",
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "commits": 0
+    },
+    {
+      "day": "2026-10-07",
+      "repo": "Huihuing/Report",
+      "commits": 61
+    },
+    {
+      "day": "2026-10-08",
+      "repo": "Huihuing/PowerPointLite",
+      "commits": 0
+    },
+    {
+      "day": "2026-10-08",
+      "repo": "Huihuing/T.A.R.D.I.S.",
+      "commits": 0
+    },
+    {
+      "day": "2026-10-08",
+      "repo": "Huihuing/Report",
+      "commits": 96
+    }
+  ],
+  "strict_qualification": "Retrospective developer activity evidence; not 5-day authenticated T07 application use; no historic rule change is claimed."
+}
