@@ -69,6 +69,21 @@ Response:
 {"ok":false,"error":"UNAUTHORIZED"}
 ```
 
+### 기록 C — 없는 계정 로그인 거절
+
+POST `https://sckjbblzivbcoofabhqd.supabase.co/functions/v1/t07-pds`
+
+임의의 존재하지 않는 `example.invalid` 시험 이메일과 실행 시 생성한 무작위 시험 비밀번호를 사용했다. **어떤 시험 비밀번호도 제출 문서나 Git에 기록하지 않았다.**
+
+실제 HTTP **401**
+
+Response:
+```json
+{"ok":false,"error":"INVALID_CREDENTIALS"}
+```
+
+이 검사는 Supabase Auth 비밀번호 확인 경로가 실제 동작함을 확인한 것이며, *기존 아이디의 틀린 비밀번호와 존재하지 않는 아이디 안내가 동일한지*의 쌍방 검증은 계정 생성 후 수행해야 한다.
+
 ### 기록 B — 이전 공개 T06 경로로 우회 시도
 
 POST `https://sckjbblzivbcoofabhqd.supabase.co/functions/v1/t06-pds`
@@ -107,6 +122,7 @@ Response error:
 
 ## ⑥ 아직 못 막은 것
 
+- **Supabase Auth Advisor 경고:** Leaked Password Protection 기능이 비활성화되어 있다. 이미 유출된 비밀번호의 재사용을 사전에 걸러내지 못할 수 있으므로 보완해야 한다.
 - 아직 T07 전용 세부 IP·계정별 로그인 시도 throttling을 별도로 추가하지 않았다. Supabase Auth 기본 rate limit에 의존하며, 계정 공격이 집중될 경우 별도 rate limiter와 모니터링이 필요하다.
 - T07은 두 번째 인증수단(MFA), 비밀번호 재설정 사용자 흐름을 제공하지 않는다.
 - 브라우저 sessionStorage에 세션 토큰을 저장한다. 저장된 문자열을 textContent로 출력하지만 향후 스크립트 삽입 취약점이 생기면 세션 탈취 위험이 있으므로 CSP 강화와 HttpOnly cookie 방식으로 이행할 필요가 있다.
@@ -138,3 +154,11 @@ Response error:
 - 예시 토큰 표기는 `[가림]`으로 대체
 - Git/GitHub 소스에는 환경변수 이름만 사용, 실제 private key 입력 안 함
 - API 로그에 비밀번호·토큰 요청 본문을 직접 console.log 하지 않음
+
+## Git 소스 비밀값 사후 점검
+
+최근 **24개 Git commit diff**에서 GitHub 토큰, Supabase 비밀키, OpenAI 키, AWS 키, Google API 키, PEM private key, 인라인 비밀값 할당의 대표 패턴을 검사한 결과 **탐지 0건**이었다. 패턴 검사는 모든 비밀값 노출 가능성을 완전히 증명하지는 않는다.
+
+T07 데이터 계약: `contracts/pds-auth-schema-v3.json`  
+DB 재현 스키마: `t07/schema.sql`  
+서버 함수: `supabase/functions/t07-pds/index.ts`
