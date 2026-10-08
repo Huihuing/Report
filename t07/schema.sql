@@ -178,7 +178,7 @@ begin
   'T06에서 실제 Git 커밋으로 확인한 과제 4·5·6 구간 합계 106분. 개인 집중시간 전체가 아닌 커밋 근거 구간의 근사값.',
   1)
   on conflict(owner_id,day_date) do nothing;
-  delete from public.t06_plans;
+  delete from public.t06_plans where id in (select oldplan.id from jsonb_to_recordset(b.payload->'plans') as oldplan(id uuid));
      update public.t07_legacy_bundle
      set claimed_by=p_owner,claimed_at=now(),payload='{}'::jsonb,claim_hash='claimed'
      where id=1;
