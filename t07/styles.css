@@ -1,0 +1,27 @@
+/* Same visual language as T01–T04: charcoal surfaces, teal accents */
+[hidden]{display:none!important}
+.auth-panel{padding:42px 0 70px;max-width:980px}
+.auth-panel h1{margin:0;font-size:clamp(42px,7vw,78px);line-height:1;letter-spacing:-.055em}
+.auth-panel>.muted{max-width:690px;margin:18px 0;color:var(--muted)}
+.auth-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:28px}
+.auth-card{padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--panel);display:grid;gap:14px;align-content:start}
+.auth-card h2{margin:0 0 6px;font-size:24px}
+.auth-card label{display:grid;gap:6px;font-size:13px;font-weight:800;color:var(--muted)}
+.auth-card input{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);color:var(--text)}
+.auth-card .button{justify-self:start}
+.auth-card .muted{font-size:12px;margin:0}
+#authMessage{display:block;margin-top:18px;color:var(--accent);min-height:22px}
+#privateApp{width:100%}
+#privateApp .intro{max-width:950px}
+#privateApp .intro h1 span{color:var(--accent)}
+#migrationPanel{border-color:var(--accent)}
+#migrationPanel .section-heading h2{font-size:22px}
+#dayForm{margin-top:18px}
+#dayRows{margin-top:18px}
+#studyRule .stack-item{background:var(--panel-2)}
+#comparisonResults{margin-top:16px}
+#comparisonResults .review-card{cursor:default}
+#comparisonResults .review-card strong{font-size:24px}
+#account form{margin-top:14px}
+#deleteAccountForm{border-color:rgba(255,115,133,.5)}
+@media(max-width:750px){.auth-grid{grid-template-columns:1fr}.auth-panel{padding-top:28px}}
