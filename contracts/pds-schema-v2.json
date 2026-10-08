@@ -91,6 +91,16 @@
         "plan_id -> t06_plans.id",
         "next_plan_id -> t06_plans.id"
       ]
+    },
+    "t06_security_checks": {
+      "primary_key": "id uuid",
+      "fields": [
+        "check_key (unique)",
+        "stored_text",
+        "created_at"
+      ],
+      "notes": "XSS 모양 문자열을 공개 다이어리 실제 기록과 분리하여 저장하고 textContent로만 화면 표시",
+      "relationship": "none"
     }
   },
   "date_rules": {
