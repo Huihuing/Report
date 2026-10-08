@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="회원가입 후 내 기록만 볼 수 있는 비공개 Plan Do See 다이어리">
+  <title>T07 · 잠긴 플랜두씨 다이어리</title>
+  <link rel="stylesheet" href="../t06/styles.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <nav class="task-nav" aria-label="ALEPH 과제 이동">
+      <a href="../">← T01 · 과제 홈으로</a>
+      <span>T07 · PRIVATE PLAN → DO → SEE</span>
+    </nav>
+
+    <section id="authPanel" class="auth-panel">
+      <p class="eyebrow">T07 · PRIVATE DIARY</p>
+      <h1>내 계획은<br>내 계정에서만.</h1>
+      <p class="muted">이메일·비밀번호로 가입하거나 로그인하세요. 인증 전에는 계획과 실행 기록이 표시되지 않습니다.</p>
+      <div class="auth-grid">
+        <form id="loginForm" class="auth-card">
+          <h2>로그인</h2>
+          <label>이메일<input type="email" name="email" autocomplete="email" required></label>
+          <label>비밀번호<input type="password" name="password" autocomplete="current-password" minlength="10" required></label>
+          <button type="submit" class="button primary">로그인</button>
+        </form>
+        <form id="signupForm" class="auth-card">
+          <h2>회원가입</h2>
+          <label>이메일<input type="email" name="email" autocomplete="email" required></label>
+          <label>비밀번호(10자 이상)<input type="password" name="password" autocomplete="new-password" minlength="10" required></label>
+          <button type="submit" class="button secondary">새 계정 만들기</button>
+          <p class="muted">이메일 인증이 요구되면 확인 메일을 승인한 뒤 로그인하세요.</p>
+        </form>
+      </div>
+      <p id="authMessage" class="form-state" role="status" aria-live="polite"></p>
+      <p class="muted">비밀번호는 제출·채팅·Git에 적지 마세요. 로그인 세션은 서버에서 60분 뒤 만료되며 로그아웃 시 즉시 끊깁니다.</p>
+    </section>
+
+    <div id="privateApp" hidden>
+    <header class="intro">
+      <p class="eyebrow">T07 · PRIVATE PLAN DO SEE DIARY</p>
+      <h1>오늘 계획을 세우고,<br><span>실제로 한 일</span>까지 남깁니다.</h1>
+      <p>인증된 나의 계획·실행·돌아보기를 서버 데이터베이스에 저장합니다. 다른 사람의 기록은 읽거나 바꿀 수 없습니다.</p>
+      <div class="intro-actions">
+        <button id="exportButton" class="button primary" type="button">전체 자료 JSON 내보내기</button>
+        <a class="button ghost" href="#see">돌아보기 보기</a>
+        <button id="logoutButton" class="button secondary" type="button">로그아웃</button>
+      </div>
+    </header>
+    <section class="public-warning" aria-label="접근 제한 안내">
+      <strong>비공개 상태</strong>
+      <p>현재 계정의 기록만 보입니다. 브라우저를 새로 열거나 서버 세션이 만료되면 다시 로그인해야 합니다.</p>
+    </section>
+    <section class="panel" id="migrationPanel">
+      <div class="section-heading"><div><p class="eyebrow">MIGRATION</p><h2>T06 기존 기록 가져오기</h2></div></div>
+      <p class="muted">T06에서 보존한 계획 2건·할 일 10건·실행 3건을 이 계정 소유로 한 번만 이전합니다. 개인 이전 코드를 입력하세요.</p>
+      <form id="migrationForm" class="form-grid"><label class="wide">이전 코드<input id="migrationCode" type="password" autocomplete="off" maxlength="48" required></label>
+      <div class="wide form-actions"><button class="button primary" type="submit">기존 기록 내 계정으로 가져오기</button><span id="migrationState" class="form-state"></span></div></form>
+    </section>
+
+    <section class="hero-panel">
+      <div>
+        <p class="eyebrow">SERVER DATABASE</p>
+        <h2>계획을 세우고, 실제를 기록하고, 다음 계획으로 넘깁니다.</h2>
+        <p class="muted">모든 값은 브라우저 임시 저장소가 아니라 서버 PostgreSQL 데이터베이스에 저장됩니다. 기준 시간대는 Asia/Seoul입니다.</p>
+      </div>
+      <div id="connectionState" class="status-pill">DB 불러오는 중…</div>
+    </section>
+
+    <nav class="section-nav" aria-label="다이어리 단계">
+      <a href="#plan">1. Plan</a>
+      <a href="#tasks">2. Tasks</a>
+      <a href="#do">3. Do</a>
+      <a href="#see">4. See</a>
+    </nav>
+
+    <section id="plan" class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">PLAN</p><h2>계획과 수정 이력</h2></div>
+        <div class="inline-actions">
+          <label>계획 보기
+            <select id="planSelect"></select>
+          </label>
+          <button id="newPlanButton" class="button secondary" type="button">새 계획 작성</button>
+        </div>
+      </div>
+
+      <div id="planSummary" class="plan-summary"></div>
+
+      <details class="editor-box">
+        <summary>계획 만들기 / 고치기</summary>
+        <form id="planForm" class="form-grid">
+          <input id="planId" type="hidden">
+          <label class="wide">계획 이름<input id="planTitle" maxlength="160" required></label>
+          <label>시작일<input id="planStart" type="date" required></label>
+          <label>종료일<input id="planEnd" type="date" required></label>
+          <label>우선순위
+            <select id="planPriority"><option value="high">높음</option><option value="medium">보통</option><option value="low">낮음</option></select>
+          </label>
+          <label>예상 시간(분)<input id="planExpected" type="number" min="0" required></label>
+          <label class="wide">성공 기준<textarea id="planCriteria" maxlength="1000" required></textarea></label>
+          <label class="wide">이전 돌아보기에서 넘어온 한 줄<textarea id="planNextNote" maxlength="1000"></textarea></label>
+          <div class="wide form-actions"><button class="button" type="submit">계획 저장</button><span id="planFormState" class="form-state"></span></div>
+        </form>
+      </details>
+
+      <div class="subsection">
+        <h3>수정 전 계획 보존 이력</h3>
+        <div id="revisionList" class="stack-list"></div>
+      </div>
+    </section>
+
+    <section id="tasks" class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">TASKS</p><h2>할 일 만들기·고치기·찾기</h2></div>
+        <button id="doubleCompleteButton" class="button secondary" type="button">완료 2회 중복 방지 검사</button>
+      </div>
+
+      <p class="rule-note"><strong>정렬 기준:</strong> 마감일 오름차순 → 우선순위 높음/보통/낮음 → 생성 시각 오름차순</p>
+      <div id="doubleCompleteState" class="test-result" hidden></div>
+
+      <div class="task-tools">
+        <label>검색<input id="taskSearch" type="search" placeholder="제목 또는 태그"></label>
+        <label>상태
+          <select id="taskFilter">
+            <option value="all">전체</option>
+            <option value="todo">진행 중</option>
+            <option value="done">완료</option>
+            <option value="overdue">지연</option>
+            <option value="blocked">막힘 있음</option>
+          </select>
+        </label>
+        <button id="clearReviewFilter" class="button ghost" type="button">집계 필터 해제</button>
+      </div>
+
+      <details class="editor-box" open>
+        <summary>할 일 추가 / 수정</summary>
+        <form id="taskForm" class="form-grid">
+          <input id="taskId" type="hidden">
+          <label class="wide">내용<input id="taskTitle" maxlength="240" required></label>
+          <label>마감일<input id="taskDue" type="date" required></label>
+          <label>우선순위
+            <select id="taskPriority"><option value="high">높음</option><option value="medium">보통</option><option value="low">낮음</option></select>
+          </label>
+          <label>예상 시간(분)<input id="taskExpected" type="number" min="0" required></label>
+          <label>태그(쉼표 구분)<input id="taskTags" placeholder="ALEPH, T06"></label>
+          <div class="wide form-actions">
+            <button class="button" type="submit">할 일 저장</button>
+            <button id="resetTaskForm" class="button ghost" type="button">새 할 일 모드</button>
+            <span id="taskFormState" class="form-state"></span>
+          </div>
+        </form>
+      </details>
+
+      <div id="taskList" class="task-list"></div>
+    </section>
+
+    <section id="do" class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">DO</p><h2>실제로 한 일</h2></div>
+        <span id="executionCount" class="count-chip">0건</span>
+      </div>
+
+      <form id="executionForm" class="form-grid editor-box">
+        <label class="wide">연결할 할 일<select id="executionTask"></select></label>
+        <label>시작 시각<input id="executionStart" type="datetime-local" required></label>
+        <label>끝난 시각<input id="executionEnd" type="datetime-local" required></label>
+        <label>실제 시간(분)<input id="executionMinutes" type="number" min="0" required></label>
+        <label class="wide">막혔던 이유<textarea id="executionBlocker" maxlength="1000" placeholder="없으면 비워 둡니다"></textarea></label>
+        <div class="wide form-actions"><button class="button" type="submit">실행 기록 저장</button><span id="executionFormState" class="form-state"></span></div>
+      </form>
+
+      <div id="executionList" class="stack-list"></div>
+    </section>
+
+    <section id="see" class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">SEE</p><h2>돌아보기와 근거 기록</h2></div>
+        <span id="reviewDate" class="count-chip">KST</span>
+      </div>
+
+      <div id="reviewCards" class="review-grid"></div>
+      <p class="muted">숫자를 누르면 그 집계에 포함된 할 일 또는 실행 기록으로 이동합니다.</p>
+
+      <div class="subsection">
+        <h3>돌아보기에서 다음 계획으로 넘긴 한 줄</h3>
+        <div id="reflectionList" class="stack-list"></div>
+      </div>
+
+      <details class="editor-box">
+        <summary>새 고칠 점을 다음 계획으로 넘기기</summary>
+        <form id="reflectionForm" class="form-grid">
+          <label class="wide">고칠 점 한 줄<textarea id="reflectionNote" maxlength="1000" required></textarea></label>
+          <label class="wide">다음 계획 이름<input id="nextPlanTitle" maxlength="160" required></label>
+          <label>다음 시작일<input id="nextPlanStart" type="date" required></label>
+          <label>다음 종료일<input id="nextPlanEnd" type="date" required></label>
+          <label>다음 예상 시간(분)<input id="nextPlanExpected" type="number" min="0" value="300" required></label>
+          <label class="wide">다음 성공 기준<textarea id="nextPlanCriteria" maxlength="1000" required></textarea></label>
+          <div class="wide form-actions"><button class="button" type="submit">다음 계획으로 넘기기</button><span id="reflectionFormState" class="form-state"></span></div>
+        </form>
+      </details>
+    </section>
+
+    
+
+  <section id="days" class="panel">
+      <div class="section-heading"><div><p class="eyebrow">FIVE REAL DAYS</p><h2>5일 사용 기록과 규칙 한 번 변경</h2></div><span id="dayCount" class="count-chip">0 / 5일</span></div>
+      <p class="muted">서로 다른 실제 날짜 5일만 기록합니다. 미래 날짜는 미리 만들 수 없고, 규칙은 2일차 기록 뒤·3일차 전에 단 한 번 바꿉니다.</p>
+      <div id="studyRule" class="stack-list"></div>
+      <details id="studySetupBox" class="editor-box">
+        <summary>1일차 질문·지표·계획 규칙 처음 고정하기</summary>
+        <form id="studySetupForm" class="form-grid">
+          <label class="wide">답하려는 질문<input name="question" required maxlength="500" placeholder="하루 과제에 얼마나 시간을 썼는가?"></label>
+          <label>관찰 지표<input name="metric_name" required maxlength="120" value="과제 실제 진행 시간"></label>
+          <label>단위<input name="unit" required maxlength="20" value="분"></label>
+          <label class="wide">계산 규칙<input name="computation_rule" required maxlength="500" value="날짜별 확인 가능한 과제 작업 분을 합산"></label>
+          <label class="wide">최초 계획 규칙<input name="initial_rule" required maxlength="500" value="시작 전에 통과 기준부터 확인"></label>
+          <div class="wide"><button class="button primary" type="submit">질문·지표·규칙 고정</button></div>
+        </form>
+      </details>
+      <form id="dayForm" class="editor-box form-grid">
+        <label>기록 날짜(서울 기준 오늘만)<input id="dayDate" type="date" required readonly></label>
+        <label>오늘의 실제 시간(분)<input id="dayMinutes" type="number" min="0" placeholder="기록 없음은 비워 둠"></label>
+        <label class="wide">오늘 있었던 실제 일 / 근거<textarea id="dayNote" maxlength="1000" required placeholder="실제로 한 일과 증거를 직접 남깁니다."></textarea></label>
+        <div class="wide form-actions"><button class="button primary" type="submit">오늘 기록 저장</button><span id="dayStatus" class="form-state"></span></div>
+      </form>
+      <div id="dayRows" class="stack-list"></div>
+      <details class="editor-box" id="changeRuleBox">
+        <summary>2일차 뒤 계획 규칙 한 가지만 변경</summary>
+        <form id="ruleChangeForm" class="form-grid">
+          <label class="wide">변경할 계획 규칙<input name="changed_rule" maxlength="500" required></label>
+          <label class="wide">변경하는 이유<textarea name="reason" maxlength="500" required></textarea></label>
+          <div class="wide"><button class="button primary" type="submit">규칙 변경 확정</button><span id="ruleStatus" class="form-state"></span></div>
+        </form>
+      </details>
+      <div id="comparisonResults" class="review-grid"></div>
+    </section>
+<section id="account" class="panel">
+       <p class="eyebrow">ACCOUNT SECURITY</p><h2>비밀번호 변경 · 계정 삭제</h2>
+       <p class="muted">변경·삭제 작업은 현재 비밀번호를 다시 확인합니다. 변경 시 기존 모든 T07 서버 세션을 즉시 끊습니다.</p>
+       <form id="passwordForm" class="form-grid editor-box">
+         <label>현재 비밀번호<input name="current_password" type="password" autocomplete="current-password" required></label>
+         <label>새 비밀번호<input name="new_password" type="password" autocomplete="new-password" minlength="10" required></label>
+         <div class="wide form-actions"><button class="button secondary" type="submit">비밀번호 변경하고 모든 세션 종료</button><span id="passwordStatus" class="form-state"></span></div>
+       </form>
+       <form id="deleteAccountForm" class="form-grid editor-box">
+         <label class="wide">계정 삭제 전 현재 비밀번호 다시 입력<input name="current_password" type="password" autocomplete="current-password" required></label>
+         <div class="wide form-actions"><button class="button danger" type="submit">내 계정과 모든 자료 영구 삭제</button><span id="deleteStatus" class="form-state"></span></div>
+       </form>
+     </section>
+     <footer class="page-footer">
+      <span>Plan → Do → See · Asia/Seoul · 서버 DB 저장</span>
+      <a href="../">ALEPH 과제 홈 →</a>
+    </footer>
+    </div>
+  </main>
+  <script src="./script.js" defer></script>
+</body>
+</html>
