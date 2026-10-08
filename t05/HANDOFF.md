@@ -17,8 +17,9 @@ T04 공개 fixture package의 `asset-manifest.json`에 등록된 **17개 파일 
 - 코어 verifier는 manifest hash 형식, self_excluded, 17개 전체 검사, MISSING, FETCH_ERROR, bytes, SHA 불일치를 구분합니다.
 - 고정 검사 첫 실행: **9/10 PASS**
 - 실패 회차 수: **1회**
-- AI A 실제 작업시간: **3.78분 / 상한 45분**
-- AI A 요청·도구 호출: **10회 / 상한 20회**
+- AI A 실제 작업시간: **6.70분 / 상한 45분**
+- AI A 요청·도구 호출: **18회 / 상한 20회**
+- 새 폴더 재현 시도: 현재 실행 환경에서 GitHub DNS가 차단되어 `git clone`이 실패했습니다. 프로젝트 코드 실패가 아니라 실행 환경 네트워크 제약이며, AI B가 새 환경에서 아래 명령을 실제 재현해야 합니다.
 - 기존 T04 실제 날짜 기록·합성 replay 기능은 변경하지 않았습니다.
 
 ## 3. 실행 명령
@@ -57,15 +58,15 @@ https://report-huihuing.vercel.app/t04/
 
 **T05-F10만 FAIL**입니다.
 
-현재 T04 공개 화면의 기존 `verifyPackageHashes()`는 3개 하드코딩 hash만 검사하며 새 `package-integrity.mjs`의 17개 전체 verifier를 아직 사용하지 않습니다. 또한 실패 결과 뒤 정본 재실행 시 결과 영역을 새 run 기준으로 확실히 초기화하고 17 PASS / 0 FAIL을 표시하는 UI 연결이 필요합니다.
+현재 T04 공개 화면은 manifest를 읽어 17개 항목을 검사하도록 연결되어 있습니다. 다만 브라우저용 `t04/package-integrity.js`와 Node 검사용 `t04/package-integrity.mjs`가 중복되어 있고, 브라우저 쪽은 MISSING / FETCH_ERROR / BYTES_MISMATCH 상태 구분이 Node 코어와 아직 일치하지 않습니다. 고정 러너의 T05-F10도 현재 의도적으로 FAIL로 남아 있어, 실패 결과 뒤 정본 재실행을 실제 검증하는 경로가 필요합니다.
 
 ## 6. 다음 행동
 
-1. `t04/script.js`의 기존 3-file `PACKAGE_HASHES` / `verifyPackageHashes()` 경로를 새 `t04/package-integrity.mjs` verifier와 연결합니다.
-2. 공개 버튼 한 번으로 `assets/asset-manifest.json`을 읽고 manifest-listed 17개를 모두 검사합니다.
-3. 각 결과에 PASS, MISSING, FETCH_ERROR, BYTES_MISMATCH, SHA_MISMATCH를 표시하고 manifest 오류도 별도 표시합니다.
-4. 매 검사 시작 시 이전 결과 DOM과 집계 상태를 초기화합니다.
-5. 실패 합성 입력 → 정본 재실행 흐름을 확인해 T05-F10을 PASS로 만듭니다.
+1. 브라우저용 `t04/package-integrity.js`와 Node용 `t04/package-integrity.mjs`를 한 동작 기준으로 맞춥니다. 가능하면 중복 로직을 줄입니다.
+2. 공개 17개 검사에서 PASS / MISSING / FETCH_ERROR / BYTES_MISMATCH / SHA_MISMATCH와 manifest 오류가 Node 코어와 동일하게 보이게 합니다.
+3. 실패 상태를 재현한 뒤 정본 package를 다시 검사하는 결정론 경로를 추가하고, 새 run 시작 시 이전 결과 DOM·집계를 초기화합니다.
+4. `t05/run-fixed-tests.mjs`의 T05-F10 하드코딩 FAIL을 실제 실패→정본 재실행 assertion으로 교체합니다. 기대값은 바꾸지 않습니다.
+5. 새 작업 폴더에서 `node t05/run-fixed-tests.mjs`를 실행해 재현성을 확인합니다.
 6. **같은 `t05/fixed-tests.json` 10개를 그대로 실행**하고 결과를 `t05/ai-b-results.json`에 저장합니다.
 7. 완료 후 공개 비교 보고서 `/t05/`와 작업 로그를 완성합니다.
 
