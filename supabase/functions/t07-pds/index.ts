@@ -121,7 +121,11 @@ async function handle(action,b,req){
   const code=clean(b.code,100);
   if(!/^[a-f0-9]{48}$/.test(code))throw Error("INVALID_OR_USED_MIGRATION_CODE");
   const q=await admin.rpc("t07_claim_legacy",{p_code:code,p_owner:uid});
-  if(q.error)throw Error("INVALID_OR_USED_MIGRATION_CODE");
+  if(q.error){
+   const rejected=q.error.code==="P0001"&&String(q.error.message||"").includes("INVALID_OR_USED_MIGRATION_CODE");
+   if(!rejected)console.error("T07 migration SQL failure code:",q.error.code||"unknown");
+   throw Error(rejected?"INVALID_OR_USED_MIGRATION_CODE":"MIGRATION_SERVER_ERROR");
+  }
   return {ok:true,counts:q.data};
  }
  if(action==="create_plan"){
@@ -245,7 +249,7 @@ Deno.serve(async(req)=>{
  }catch(e){
   const msg=e instanceof Error?e.message:"REQUEST_FAILED";
   const status=msg==="UNAUTHORIZED"?401:msg==="NOT_FOUND"?404:msg==="INVALID_CREDENTIALS"?401:
-     msg==="UNKNOWN_ACTION"?400:msg==="INVALID_OR_USED_MIGRATION_CODE"?403:400;
+     msg==="UNKNOWN_ACTION"?400:msg==="INVALID_OR_USED_MIGRATION_CODE"?403:msg==="MIGRATION_SERVER_ERROR"?500:400;
   const visible=/^(UNAUTHORIZED|NOT_FOUND|INVALID_CREDENTIALS|UNKNOWN_ACTION|INVALID_OR_USED_MIGRATION_CODE|[A-Z_]{5,50})$/.test(msg)?msg:"REQUEST_FAILED";
   return response({ok:false,error:visible},status);
  }
