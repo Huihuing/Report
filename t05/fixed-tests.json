@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "task": "T05",
+  "improvement": "T04 공개 fixture package의 manifest-listed 17개 파일 전체 무결성 검사",
+  "frozen_before_ai_a": true,
+  "source_start_sha": "59cc76327d73c8336444c8643e1d5e02a2cab655",
+  "common_limits": {
+    "max_elapsed_minutes_per_ai": 45,
+    "max_requests_or_tool_calls_per_ai": 20
+  },
+  "tests": [
+    {
+      "id": "T05-F01",
+      "input": "T04 공개 화면에서 package 무결성 검사를 실행한다.",
+      "expected": "package ID가 표시되고 검사가 시작된다."
+    },
+    {
+      "id": "T05-F02",
+      "input": "정본 asset-manifest.json을 입력으로 전체 검사를 실행한다.",
+      "expected": "manifest-listed 파일 수가 정확히 17개로 집계된다."
+    },
+    {
+      "id": "T05-F03",
+      "input": "배포된 정본 package 17개 파일 전체를 검사한다.",
+      "expected": "17 PASS, 0 FAIL이며 전체 상태가 PASS다."
+    },
+    {
+      "id": "T05-F04",
+      "input": "README.md 내용 1바이트가 바뀐 합성 입력을 검사한다.",
+      "expected": "README.md가 SHA-256 불일치로 FAIL 처리된다."
+    },
+    {
+      "id": "T05-F05",
+      "input": "manifest-listed 파일 1개가 없는 합성 입력을 검사한다.",
+      "expected": "해당 파일이 MISSING으로 표시되고 전체 상태가 FAIL이다."
+    },
+    {
+      "id": "T05-F06",
+      "input": "실제 바이트 수와 manifest bytes가 다른 합성 입력을 검사한다.",
+      "expected": "BYTES 불일치가 표시되고 전체 상태가 FAIL이다."
+    },
+    {
+      "id": "T05-F07",
+      "input": "asset-manifest.json 자체 포함 여부를 검사한다.",
+      "expected": "self_excluded 규칙에 따라 17개 검사 대상에 포함되지 않는다."
+    },
+    {
+      "id": "T05-F08",
+      "input": "sha256이 64자리 소문자 hex가 아닌 manifest 항목을 검사한다.",
+      "expected": "manifest 형식 오류로 거부된다."
+    },
+    {
+      "id": "T05-F09",
+      "input": "파일 하나의 fetch가 실패하는 합성 입력을 검사한다.",
+      "expected": "그 파일은 FETCH_ERROR로 표시되고 이미 계산한 다른 파일 결과는 유지된다."
+    },
+    {
+      "id": "T05-F10",
+      "input": "실패 검사 직후 정본 package로 다시 실행한다.",
+      "expected": "이전 실패 표시가 남지 않고 17 PASS, 0 FAIL로 복구된다."
+    }
+  ]
+}
