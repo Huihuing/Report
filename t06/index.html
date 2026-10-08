@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Plan → Do → See를 서버 데이터베이스로 이어가는 공개 다이어리">
+  <title>T06 · 플랜두씨 다이어리</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="home-link" href="../">← 과제 홈</a>
+    <div>
+      <span class="kicker">T06 · PLAN → DO → SEE</span>
+      <h1>플랜두씨 다이어리</h1>
+    </div>
+    <button id="exportButton" class="button secondary" type="button">전체 자료 JSON 내보내기</button>
+  </header>
+
+  <main class="shell">
+    <section class="public-warning" aria-label="공개 안내">
+      <strong>공개 상태</strong>
+      <p>지금은 로그인이 없어 링크를 아는 사람은 누구나 볼 수 있습니다. 남이 봐도 괜찮은 내용만 넣으세요</p>
+    </section>
+
+    <section class="hero-panel">
+      <div>
+        <p class="eyebrow">SERVER DATABASE</p>
+        <h2>계획을 세우고, 실제를 기록하고, 다음 계획으로 넘깁니다.</h2>
+        <p class="muted">모든 값은 브라우저 임시 저장소가 아니라 서버 PostgreSQL 데이터베이스에 저장됩니다. 기준 시간대는 Asia/Seoul입니다.</p>
+      </div>
+      <div id="connectionState" class="status-pill">DB 불러오는 중…</div>
+    </section>
+
+    <nav class="section-nav" aria-label="다이어리 단계">
+      <a href="#plan">1. Plan</a>
+      <a href="#tasks">2. Tasks</a>
+      <a href="#do">3. Do</a>
+      <a href="#see">4. See</a>
+    </nav>
+
+    <section id="plan" class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">PLAN</p><h2>계획과 수정 이력</h2></div>
+        <div class="inline-actions">
+          <label>계획 보기
+            <select id="planSelect"></select>
+          </label>
+          <button id="newPlanButton" class="button secondary" type="button">새 계획 작성</button>
+        </div>
+      </div>
+
+      <div id="planSummary" class="plan-summary"></div>
+
+      <details class="editor-box">
+        <summary>계획 만들기 / 고치기</summary>
+        <form id="planForm" class="form-grid">
+          <input id="planId" type="hidden">
+          <label class="wide">계획 이름<input id="planTitle" maxlength="160" required></label>
+          <label>시작일<input id="planStart" type="date" required></label>
+          <label>종료일<input id="planEnd" type="date" required></label>
+          <label>우선순위
+            <select id="planPriority"><option value="high">높음</option><option value="medium">보통</option><option value="low">낮음</option></select>
+          </label>
+          <label>예상 시간(분)<input id="planExpected" type="number" min="0" required></label>
+          <label class="wide">성공 기준<textarea id="planCriteria" maxlength="1000" required></textarea></label>
+          <label class="wide">이전 돌아보기에서 넘어온 한 줄<textarea id="planNextNote" maxlength="1000"></textarea></label>
+          <div class="wide form-actions"><button class="button" type="submit">계획 저장</button><span id="planFormState" class="form-state"></span></div>
+        </form>
+      </details>
+
+      <div class="subsection">
+        <h3>수정 전 계획 보존 이력</h3>
+        <div id="revisionList" class="stack-list"></div>
+      </div>
+    </section>
+
+    <section id="tasks" class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">TASKS</p><h2>할 일 만들기·고치기·찾기</h2></div>
+        <button id="doubleCompleteButton" class="button secondary" type="button">완료 2회 중복 방지 검사</button>
+      </div>
+
+      <p class="rule-note"><strong>정렬 기준:</strong> 마감일 오름차순 → 우선순위 높음/보통/낮음 → 생성 시각 오름차순</p>
+      <div id="doubleCompleteState" class="test-result" hidden></div>
+
+      <div class="task-tools">
+        <label>검색<input id="taskSearch" type="search" placeholder="제목 또는 태그"></label>
+        <label>상태
+          <select id="taskFilter">
+            <option value="all">전체</option>
+            <option value="todo">진행 중</option>
+            <option value="done">완료</option>
+            <option value="overdue">지연</option>
+            <option value="blocked">막힘 있음</option>
+          </select>
+        </label>
+        <button id="clearReviewFilter" class="button ghost" type="button">집계 필터 해제</button>
+      </div>
+
+      <details class="editor-box" open>
+        <summary>할 일 추가 / 수정</summary>
+        <form id="taskForm" class="form-grid">
+          <input id="taskId" type="hidden">
+          <label class="wide">내용<input id="taskTitle" maxlength="240" required></label>
+          <label>마감일<input id="taskDue" type="date" required></label>
+          <label>우선순위
+            <select id="taskPriority"><option value="high">높음</option><option value="medium">보통</option><option value="low">낮음</option></select>
+          </label>
+          <label>예상 시간(분)<input id="taskExpected" type="number" min="0" required></label>
+          <label>태그(쉼표 구분)<input id="taskTags" placeholder="ALEPH, T06"></label>
+          <div class="wide form-actions">
+            <button class="button" type="submit">할 일 저장</button>
+            <button id="resetTaskForm" class="button ghost" type="button">새 할 일 모드</button>
+            <span id="taskFormState" class="form-state"></span>
+          </div>
+        </form>
+      </details>
+
+      <div id="taskList" class="task-list"></div>
+    </section>
+
+    <section id="do" class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">DO</p><h2>실제로 한 일</h2></div>
+        <span id="executionCount" class="count-chip">0건</span>
+      </div>
+
+      <form id="executionForm" class="form-grid editor-box">
+        <label class="wide">연결할 할 일<select id="executionTask"></select></label>
+        <label>시작 시각<input id="executionStart" type="datetime-local" required></label>
+        <label>끝난 시각<input id="executionEnd" type="datetime-local" required></label>
+        <label>실제 시간(분)<input id="executionMinutes" type="number" min="0" required></label>
+        <label class="wide">막혔던 이유<textarea id="executionBlocker" maxlength="1000" placeholder="없으면 비워 둡니다"></textarea></label>
+        <div class="wide form-actions"><button class="button" type="submit">실행 기록 저장</button><span id="executionFormState" class="form-state"></span></div>
+      </form>
+
+      <div id="executionList" class="stack-list"></div>
+    </section>
+
+    <section id="see" class="panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">SEE</p><h2>돌아보기와 근거 기록</h2></div>
+        <span id="reviewDate" class="count-chip">KST</span>
+      </div>
+
+      <div id="reviewCards" class="review-grid"></div>
+      <p class="muted">숫자를 누르면 그 집계에 포함된 할 일 또는 실행 기록으로 이동합니다.</p>
+
+      <div class="subsection">
+        <h3>돌아보기에서 다음 계획으로 넘긴 한 줄</h3>
+        <div id="reflectionList" class="stack-list"></div>
+      </div>
+
+      <details class="editor-box">
+        <summary>새 고칠 점을 다음 계획으로 넘기기</summary>
+        <form id="reflectionForm" class="form-grid">
+          <label class="wide">고칠 점 한 줄<textarea id="reflectionNote" maxlength="1000" required></textarea></label>
+          <label class="wide">다음 계획 이름<input id="nextPlanTitle" maxlength="160" required></label>
+          <label>다음 시작일<input id="nextPlanStart" type="date" required></label>
+          <label>다음 종료일<input id="nextPlanEnd" type="date" required></label>
+          <label>다음 예상 시간(분)<input id="nextPlanExpected" type="number" min="0" value="300" required></label>
+          <label class="wide">다음 성공 기준<textarea id="nextPlanCriteria" maxlength="1000" required></textarea></label>
+          <div class="wide form-actions"><button class="button" type="submit">다음 계획으로 넘기기</button><span id="reflectionFormState" class="form-state"></span></div>
+        </form>
+      </details>
+    </section>
+
+    <section class="panel">
+      <p class="eyebrow">SAFETY CHECK</p>
+      <h2>공개·스크립트·비밀값 기준</h2>
+      <ul class="check-list">
+        <li>브라우저에는 데이터베이스 secret/service-role 원문을 넣지 않습니다.</li>
+        <li>저장한 문자열은 HTML로 해석하지 않고 글자 그대로 표시합니다.</li>
+        <li>실제 테스트 문자열 <code>&lt;script&gt;alert("T06")&lt;/script&gt;</code>도 할 일 제목에서 실행되지 않고 그대로 보여야 합니다.</li>
+        <li>전체 자료는 위의 “전체 자료 JSON 내보내기” 버튼으로 파일 하나에 담을 수 있습니다.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>Plan → Do → See · Asia/Seoul · 서버 DB 저장</footer>
+  <script src="./script.js" defer></script>
+</body>
+</html>
