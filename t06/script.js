@@ -85,7 +85,15 @@ function renderAll() {
   renderExecutions();
   renderReview();
   renderReflections();
+  renderSecurityCheck();
   setDateDefaults();
+}
+
+function renderSecurityCheck() {
+  const node = $("#securityCheckLiteral");
+  if (!node) return;
+  const row = (appState.security_checks || []).find((item) => item.check_key === "xss-literal");
+  node.textContent = row ? row.stored_text : "저장된 검사 문자열 없음";
 }
 
 function renderPlanSelector() {
