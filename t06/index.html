@@ -8,16 +8,21 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="home-link" href="../">← 과제 홈</a>
-    <div>
-      <span class="kicker">T06 · PLAN → DO → SEE</span>
-      <h1>플랜두씨 다이어리</h1>
-    </div>
-    <button id="exportButton" class="button secondary" type="button">전체 자료 JSON 내보내기</button>
-  </header>
+  <main class="page-shell">
+    <nav class="task-nav" aria-label="ALEPH 과제 이동">
+      <a href="../">← T01 · 과제 홈으로</a>
+      <span>T06 · PLAN → DO → SEE</span>
+    </nav>
 
-  <main class="shell">
+    <header class="intro">
+      <p class="eyebrow">T06 · PLAN DO SEE DIARY</p>
+      <h1>오늘 계획을 세우고,<br><span>실제로 한 일</span>까지 남깁니다.</h1>
+      <p>오늘의 ALEPH 과제 4→13 도전처럼 실제 계획을 서버 데이터베이스에 저장하고, 실행 기록과 돌아보기를 다음 계획으로 이어갑니다.</p>
+      <div class="intro-actions">
+        <button id="exportButton" class="button primary" type="button">전체 자료 JSON 내보내기</button>
+        <a class="button ghost" href="#see">오늘 돌아보기 보기</a>
+      </div>
+    </header>
     <section class="public-warning" aria-label="공개 안내">
       <strong>공개 상태</strong>
       <p>지금은 로그인이 없어 링크를 아는 사람은 누구나 볼 수 있습니다. 남이 봐도 괜찮은 내용만 넣으세요</p>
@@ -178,7 +183,11 @@
     </section>
   </main>
 
-  <footer>Plan → Do → See · Asia/Seoul · 서버 DB 저장</footer>
+  <footer class="page-footer">
+      <span>Plan → Do → See · Asia/Seoul · 서버 DB 저장</span>
+      <a href="../">ALEPH 과제 홈 →</a>
+    </footer>
+  </main>
   <script src="./script.js" defer></script>
 </body>
 </html>
