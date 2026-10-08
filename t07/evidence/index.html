@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="실제 공개 Git 커밋 5개 날짜를 근거로 한 소급 개발 기록과 집계 검증">
+<title>T07 · 검증 가능한 5일 회고 아카이브</title>
+<link rel="stylesheet" href="../../t06/styles.css">
+<style>
+.evidence-wrap{max-width:1140px;margin:0 auto;padding:36px 22px 90px}
+.evidence-header{margin-bottom:26px}
+.evidence-header h1{max-width:900px;margin:8px 0 14px;font-size:clamp(33px,5vw,62px);letter-spacing:-.05em;line-height:1.1}
+.evidence-header p{max-width:800px;color:var(--muted)}
+.nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);margin-bottom:30px;font-weight:750}
+.nav a{color:var(--accent)}
+.notice{border:1px solid var(--warning);background:rgba(255,209,102,.055);border-radius:16px;padding:18px;margin:24px 0}
+.notice strong{color:var(--warning)}
+.notice p{margin:7px 0;color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:25px 0}
+.metric-box{padding:19px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.metric-box .number{font-size:clamp(26px,4vw,42px);font-weight:900;line-height:1.1;color:var(--accent);margin-top:6px}
+.metric-box label{color:var(--muted);font-size:13px}
+.dashboard-section{margin:20px 0;padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:18px}
+.dashboard-section h2{margin:4px 0 16px;font-size:24px}
+.provenance-day{border-top:1px solid var(--line);padding:20px 0}
+.provenance-day h3{margin:0 0 7px;font-size:19px}
+.day-bar{height:10px;max-width:100%;border-radius:99px;background:var(--panel-2);overflow:hidden;margin:12px 0}
+.day-bar span{display:block;height:100%;background:var(--accent);border-radius:99px}
+.muted{color:var(--muted)}
+.day-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.day-links a,.evidence-link{color:var(--accent);text-decoration:underline;text-underline-offset:3px;font-size:13px}
+.formula{padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2);color:var(--text);overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}
+.warning-footer{color:var(--warning)}
+@media(max-width:750px){.metrics{grid-template-columns:repeat(2,1fr)}.evidence-wrap{padding-left:15px;padding-right:15px}}
+</style>
+</head>
+<body>
+<main class="evidence-wrap">
+<nav class="nav" aria-label="이동"><a href="../../">← ALEPH 과제 홈</a><a href="../">T07 비공개 다이어리로 이동 →</a></nav>
+<header class="evidence-header">
+<p class="eyebrow">T07 · PUBLIC EVIDENCE / VERIFIED RETROSPECTIVE</p>
+<h1>기억을 꾸미지 않고,<br>기록으로 설명하는 5일.</h1>
+<p>개발 저장소에 실제로 남아 있는 커밋 SHA와 UTC 시각을 KST 날짜로 변환해 검증합니다. 실사용 시간이나 근거 없는 일기 문장은 만들어 내지 않습니다.</p>
+</header>
+<section class="notice" role="note">
+<strong>과제 채점상 중요한 구분</strong>
+<p>이 페이지는 <b>과거 서로 다른 날짜 5일의 실제 공개 Git 활동을 오늘 소급 정리한 회고</b>입니다. T07 인증 앱을 그 과거 5일 동안 사용했다는 증거가 아니며, 2일차 뒤 3일차 전 당시에 계획 규칙을 변경했다는 증거도 아닙니다. 해당 두 항목은 별도 미충족으로 명시합니다.</p>
+</section>
+<div class="metrics" aria-label="집계">
+<div class="metric-box"><label>근거 있는 날짜</label><div class="number" id="daysCount">—</div></div>
+<div class="metric-box"><label>공개 커밋 SHA 수</label><div class="number" id="commitTotal">—</div></div>
+<div class="metric-box"><label>선택 날짜 평균(커밋/일)</label><div class="number" id="dailyMean">—</div></div>
+<div class="metric-box"><label>서로 다른 공개 저장소</label><div class="number" id="repoTotal">—</div></div>
+</div>
+<section class="dashboard-section">
+<p class="eyebrow">FIVE ACTUAL COMMIT DATES</p><h2>날짜별 근거 링크</h2>
+<p class="muted">커밋 수는 선택한 공개 저장소 3개의 해당 날짜 커밋 수를 더한 것입니다. <b>커밋 수 = 실제 근무 시간</b>이 아닙니다.</p>
+<div id="timeline" role="list"><p class="muted">GitHub 원본으로부터 저장한 근거 데이터를 불러오는 중…</p></div>
+</section>
+<section class="dashboard-section">
+<p class="eyebrow">REPRODUCIBLE CALCULATION</p><h2>같은 계산 공식으로 검산</h2>
+<pre class="formula">날짜(c) = Asia/Seoul 기준 date(commit.committer.date)
+일별 커밋 수(d) = COUNT(DISTINCT (repository, SHA)) WHERE 날짜(c) = d
+총합 = Σ(일별 커밋 수)
+5일 평균 = ROUND(총합 / 5, 소수 첫째 자리)
+앞의 2일 평균 = ROUND((1일차 + 2일차) / 2, 소수 첫째 자리)
+뒤의 3일 평균 = ROUND((3일차 + 4일차 + 5일차) / 3, 소수 첫째 자리)</pre>
+<p id="mathReport" class="muted"></p>
+<p class="muted">비교값은 기술 통계일 뿐, 특정 계획 규칙 변경의 효과로 해석하지 않습니다. 서로 떨어진 날짜를 사후 선택했다는 한계도 공개합니다.</p>
+</section>
+<section class="dashboard-section">
+<p class="eyebrow">SOURCE / REPRODUCE</p><h2>원본과 재검증 코드</h2>
+<p><a class="evidence-link" href="./source-commits.json">공개 Git 커밋 230건 원본(JSON)</a> · <a class="evidence-link" href="./verify.mjs">Node.js 검증 코드</a> · <a class="evidence-link" href="../../docs/T07-RETROSPECTIVE.md">방법론·한계 문서</a></p>
+<pre class="formula">node t07/evidence/verify.mjs</pre>
+<p class="muted">실제 기록 출처를 검증하려면 커밋 링크를 열어 SHA·커미터 시각을 대조합니다. 공개 Git 기록 이외의 개인정보·채팅 전문·로그인 비밀번호·토큰은 포함하지 않았습니다.</p>
+</section>
+<footer class="muted">T01~T04 다크/청록 디자인 통일 · 소급 회고와 잠긴 앱의 실제 5일 사용은 서로 다른 증거</footer>
+</main>
+<script type="module">
+const text=(t,s)=>{const e=document.createElement(t);e.textContent=s;return e};
+const kst=(utc)=>new Date(Date.parse(utc)+9*3600000).toISOString().slice(0,10);
+const urlFor=(c)=>"https://github.com/"+c.repo+"/commit/"+c.sha;
+const mean=(arr)=>Math.round(arr.reduce((a,b)=>a+b,0)*10/arr.length)/10;
+try{
+ const response=await fetch("./source-commits.json",{cache:"no-store"});
+ if(!response.ok)throw Error("원본 JSON을 읽지 못했습니다 ("+response.status+")");
+ const data=await response.json(),seen=new Set();
+ const byDay=new Map(data.dates.map(d=>[d,[]]));
+ for(const c of data.commits){
+  if(!/^[a-f0-9]{40}$/.test(c.sha)||!data.included_repository_list.includes(c.repo))throw Error("원본 SHA 또는 저장소 형식 오류");
+  const key=c.repo+"@"+c.sha;
+  if(seen.has(key))throw Error("중복 SHA "+key);
+  seen.add(key);
+  const d=kst(c.utc);
+  if(!byDay.has(d))throw Error("5일 밖의 시각 발견");
+  byDay.get(d).push(c);
+ }
+ const totals=data.dates.map(day=>({day,commits:byDay.get(day)}));
+ const counts=totals.map(x=>x.commits.length),total=counts.reduce((a,b)=>a+b,0);
+ document.getElementById("daysCount").textContent=String(data.dates.length)+"일";
+ document.getElementById("commitTotal").textContent=String(total)+"건";
+ document.getElementById("dailyMean").textContent=String(mean(counts));
+ document.getElementById("repoTotal").textContent=String(data.included_repository_list.length);
+ const max=Math.max(...counts,1),host=document.getElementById("timeline");host.replaceChildren();
+ totals.forEach((row,i)=>{
+  const item=text("article","");item.className="provenance-day";item.setAttribute("role","listitem");
+  item.append(text("h3",(i+1)+"일차 · "+row.day+" · "+row.commits.length+"건"));
+  const names=[...new Set(row.commits.map(c=>c.repo))];
+  item.append(text("p",names.join(" · ")));item.lastElementChild.className="muted";
+  const bar=text("div","");bar.className="day-bar";const fill=text("span","");fill.style.width=(100*row.commits.length/max)+"%";bar.append(fill);item.append(bar);
+  const links=text("div","");links.className="day-links";
+  const limit=2;
+  row.commits.slice(0,limit).forEach((c,j)=>{
+   const a=text("a","커밋 원본 "+(j+1)+" · "+c.sha.slice(0,9));a.href=urlFor(c);a.target="_blank";a.rel="noopener noreferrer";links.append(a);
+  });
+  item.append(links);host.append(item);
+ });
+ document.getElementById("mathReport").textContent=
+  "총 "+total+"건 / 5일 = "+mean(counts)+"건/일 · 처음 두 날짜 평균 "+mean(counts.slice(0,2))+
+  "건/일 · 나중 세 날짜 평균 "+mean(counts.slice(2))+"건/일 (시간·계획 변경 효과를 의미하지 않음)";
+}catch(error){
+ const box=document.getElementById("timeline");box.replaceChildren(text("p","검증 실패: "+error.message));
+}
+</script>
+</body></html>
