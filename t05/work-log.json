@@ -32,6 +32,24 @@
       "requests_or_tool_calls": 18,
       "handoff": "t05/HANDOFF.md",
       "reproduction": "새 환경 clone은 현재 실행 환경 DNS 제한으로 미검증; AI B가 재현 필요"
+    },
+    {
+      "event": "AI_B_START",
+      "at": "2026-10-08T09:25:00+09:00",
+      "source_start_sha": "862c182eaa96a3e5983cee1e37c28467c039ed60",
+      "handoff": "t05/HANDOFF.md",
+      "previous_chat_used": false
+    },
+    {
+      "event": "AI_B_END",
+      "at": "2026-10-08T00:57:42.533Z",
+      "source_end_sha": "97c04ba273ff1f5507ef72e431e38a7a53eb2d0e",
+      "test_result": "10/10 PASS",
+      "fail_ids": [],
+      "elapsed_minutes": 32.71,
+      "requests_or_tool_calls": 19,
+      "result_file": "t05/ai-b-results.json",
+      "public_report": "/t05/"
     }
   ]
 }
