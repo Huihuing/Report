@@ -162,3 +162,29 @@ Response error:
 T07 데이터 계약: `contracts/pds-auth-schema-v3.json`  
 DB 재현 스키마: `t07/schema.sql`  
 서버 함수: `supabase/functions/t07-pds/index.ts`
+
+
+## 2026-10-08 T06→T07 기록 이전 오류 수정
+
+사용자 실제 신고: 이전 UI에서 `INVALID_OR_USED_MIGRATION_CODE` 오류가 발생했다.
+
+원인 분석:
+
+- DB 이전 함수 `public.t07_claim_legacy`는 `SECURITY DEFINER SET search_path=public,pg_temp`를 사용한다.
+- Supabase PostgreSQL에서 `digest()`는 `extensions` 스키마에 설치되어 있었다.
+- 기존 `digest(p_code,'sha256')` 비한정 호출은 PostgreSQL 오류 `42883 function digest(text, unknown) does not exist`로 실패했다.
+- Edge Function이 모든 DB 오류를 `INVALID_OR_USED_MIGRATION_CODE`로 바꿔 실제 원인을 가렸다.
+
+수정:
+
+- `t07/schema.sql` 및 실제 DB의 `t07_claim_legacy`에서 `extensions.digest(p_code,'sha256')`로 명시.
+- `supabase/functions/t07-pds/index.ts`에서 코드 미사용/일치 검증 오류는 403, 다른 SQL 오류는 `MIGRATION_SERVER_ERROR` 500으로 구분. 세부 내부 SQL은 응답에 노출하지 않음.
+
+실제 DB에서 시험한 방법:
+
+1. 트랜잭션에서 임시 진단용 해시를 지정하고, 이미 존재하는 계정에 T06 보관본 2개 계획·10개 할 일·3개 실행 기록의 이전 함수를 호출했다.
+2. 실행 완료 즉시 예외를 발생시켜 **하위 트랜잭션 전체를 롤백**했다.
+3. 수정 전 SQLSTATE **42883** 재현, 수정 후 기대한 진단 롤백 표식 **`DIAGNOSTIC_ROLLBACK_SUCCESS`** 확인.
+4. 시험 후 `t07_plans=0`, `t07_tasks=0`, `t07_execution_logs=0`, `claimed_at IS NULL`, 원본 할 일 10건 확인. 테스트는 실제 이전 코드를 사용하지 않았고 보관본을 소비하지 않았다.
+
+이 시험은 함수 전 구간 실행 가능 여부를 확인한 것으로, 실제 사용자의 브라우저에서 이전 버튼을 성공적으로 실행했다는 뜻은 아니다. 실사용 이전은 사용자가 로그인 후 같은 개인 코드를 다시 제출해 최종 확인한다.
