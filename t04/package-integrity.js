@@ -13,11 +13,15 @@
     if (!Array.isArray(manifest.files)) {
       return ["manifest.files 배열이 없습니다."];
     }
-    if (manifest.self_excluded && manifest.files.some((item) => item.path === manifest.self_excluded)) {
+    if (manifest.self_excluded && manifest.files.some((item) => item && typeof item === "object" && item.path === manifest.self_excluded)) {
       errors.push("self_excluded 파일이 files 목록에 포함되어 있습니다.");
     }
 
     manifest.files.forEach((item, index) => {
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      errors.push((index + 1) + "번째 파일 항목이 객체가 아닙니다.");
+      return;
+    }
       if (!item || typeof item.path !== "string" || !item.path) {
         errors.push((index + 1) + "번째 path가 잘못되었습니다.");
       }
