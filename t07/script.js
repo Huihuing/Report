@@ -601,7 +601,16 @@ $("#signupForm").addEventListener("submit", async (event)=>{
     const result=await api("signup",{email:data.get("email"),password:data.get("password")});
     setMessage("#authMessage",result.message);
     form.reset();
-  } catch(error) {setMessage("#authMessage","가입 처리 실패: "+error.message);}
+  } catch(error) {
+    const messages={
+      INVALID_EMAIL:"입력한 이메일 주소가 거절되었습니다. 이메일 주소와 Supabase 인증메일 발송 정책을 확인하세요.",
+      INVALID_CREDENTIAL_FORMAT:"이메일 주소와 10~128자의 비밀번호를 확인하세요.",
+      PASSWORD_TOO_WEAK:"비밀번호 안전성 기준을 충족하지 못했습니다. 다른 비밀번호를 사용하세요.",
+      TRY_AGAIN_LATER:"인증 요청 제한이 적용 중입니다. 반복해서 누르지 말고 제한이 해제된 뒤 다시 시도하세요.",
+      SIGNUP_SERVICE_ERROR:"가입 서비스 오류입니다. Supabase 인증메일 설정과 서버 로그를 확인하세요."
+    };
+    setMessage("#authMessage",messages[error.message]||"가입 실패: "+error.message);
+  }
 });
 $("#loginForm").addEventListener("submit", async(event)=>{
   event.preventDefault();
@@ -615,7 +624,12 @@ $("#loginForm").addEventListener("submit", async(event)=>{
     form.reset();
     setMessage("#authMessage","");
     await loadState(null);
-  }catch(error){setMessage("#authMessage",error.message==="INVALID_CREDENTIALS"?"이메일 또는 비밀번호가 올바르지 않습니다.":"로그인 실패: "+error.message);}
+  }catch(error){
+    const msg=error.message==="INVALID_CREDENTIALS"?"이메일 또는 비밀번호가 올바르지 않습니다.":
+      error.message==="EMAIL_NOT_CONFIRMED"?"이메일 인증이 완료되지 않았습니다. 받은 편지함을 확인하세요.":
+      "로그인 실패: "+error.message;
+    setMessage("#authMessage",msg);
+  }
 });
 $("#logoutButton").addEventListener("click",async()=>{
   try{await api("logout");}
