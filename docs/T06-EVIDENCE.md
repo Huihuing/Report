@@ -199,24 +199,21 @@ Vercel `/api/t06-probe`에서 실제 공개 Edge Function에 POST 요청했다.
 - ok = true
 - timezone = Asia/Seoul
 - today = 2026-10-08
-- plans = 3
+- plans = 2
 - active plan tasks = 10
 - executions = 3
 - revisions = 1
 - reflections = 1
-- summary = plan_count 10 / completed 2 / delayed 0 / blocked 2 / expected 900 / actual 106 / difference -794
+- summary = plan_count 10 / completed 2 / delayed 0 / blocked 2 / expected 0 / actual 106 / difference 106
 
 ## 디자인 통합
 
-T05와 T06은 임시 검증 페이지 스타일을 제거하고 루트/T04와 같은 디자인 언어로 다시 맞췄다.
+T05와 T06은 루트 과제 홈의 베이지/주황 디자인이 아니라 **T02·T03·T04의 과제 결과물 다크/청록 디자인**으로 통일했다.
 
-- background: warm beige
-- surface: off-white
-- accent: orange
-- rounded cards
-- 큰 제목 계층
-- pill button / status
-- 동일한 과제 홈 navigation
+- background: dark navy `#0e1115`
+- surface: charcoal panels `#161b22` / `#1d242d`
+- accent: teal `#77d7e5`
+- T02~T04처럼 간결한 헤더, 어두운 카드, 상태 pill, 과제 홈 돌아가기 링크
 - 모바일 반응형
 
 기능/DB/T05 고정 검사는 변경하지 않았다.
@@ -226,6 +223,15 @@ T05와 T06은 임시 검증 페이지 스타일을 제거하고 루트/T04와 �
 1. T06 첫 화면에서 `서버 DB 연결됨` 표시
 2. 메인 계획 `오늘 ALEPH 과제 4부터 13까지 완료 도전`과 과제 4~13 10개 표시
 3. Ctrl+R 후 ID·날짜·값·단위 동일 복원
-4. `T06 안전성 검사` 계획에서 `<script>alert("T06")</script>`가 실행되지 않고 글자 그대로 표시
+4. 화면의 **안전성 검사** 구역에서 서버 DB의 `<script>alert("T06")</script>`가 실행되지 않고 글자 그대로 표시
 5. 전체 자료 JSON 내보내기 파일 다운로드
 6. DevTools Console 빨간 오류/비밀값 원문 0건
+
+## 추가 정리 사항 (2026-10-08)
+
+- 초기 임시 테스트용 `T06 안전성 검사` 계획/할 일은 실제 다이어리에서 제거함
+- 보안용 문자열은 `t06_security_checks` 전용 테이블로 분리, 공개 Edge Function `state.security_checks`에서 조회해 `textContent`로 렌더링
+- 메인 계획은 2026-10-08 실제 목표 '과제 4~13 완료 도전', 과제 4·5 완료, 과제 6 진행 중, 나머지 7~13 예정
+- 임의로 넣었던 예상 90분×10은 제거. 현재 과제별 예상시간 0분은 **미정 상태**이며 사용자 실제 예상값을 입력하는 것이 바람직함
+- 과제 4·5·6 Do 3건의 분 수는 Git 커밋으로 확인되는 구간의 분 단위 반올림이며, 개인이 실제로 집중한 순수 소요시간으로 주장하지 않음
+- 브라우저 새로고침·내보내기·DB 보안 문자열 렌더링 실제 수동 검증은 사용자 확인 전까지 미확정
