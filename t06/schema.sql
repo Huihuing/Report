@@ -196,3 +196,14 @@ revoke all on function public.t06_update_plan(uuid,text,date,date,text,text,inte
 revoke all on function public.t06_set_task_completed(uuid,boolean) from public, anon, authenticated;
 grant execute on function public.t06_update_plan(uuid,text,date,date,text,text,integer,text) to service_role;
 grant execute on function public.t06_set_task_completed(uuid,boolean) to service_role;
+
+-- Separate public-safe XSS regression input from real user diary entries.
+create table if not exists public.t06_security_checks (
+  id uuid primary key default gen_random_uuid(),
+  check_key text not null unique,
+  stored_text text not null,
+  created_at timestamptz not null default now()
+);
+alter table public.t06_security_checks enable row level security;
+revoke all on table public.t06_security_checks from anon, authenticated;
+grant select, insert, update, delete on table public.t06_security_checks to service_role;
