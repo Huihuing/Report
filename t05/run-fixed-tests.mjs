@@ -17,7 +17,6 @@ const bytes = {
   "public-contract.json": new TextEncoder().encode("xyz")
 };
 const hashBytes = async (input) => createHash("sha256").update(input).digest("hex");
-const fetchGood = async (path) => bytes[path];
 
 const results = [];
 function result(id, pass, note) { results.push({ id, pass, note }); }
@@ -77,8 +76,26 @@ result("T05-F09",
   JSON.stringify(fetchError)
 );
 
-// A 단계에서는 공개 UI의 이전 결과 제거/재실행 연결을 아직 구현하지 않는다.
-result("T05-F10", false, "AI B가 공개 UI 재실행 시 이전 실패 결과 초기화까지 완성해야 함");
+const failed17 = await verifyManifestPackage(manifest17, {
+  fetchFile: async (path) => path === "f0" ? new TextEncoder().encode("Z") : fetch17(path),
+  hashBytes
+});
+const recovered17 = await verifyManifestPackage(manifest17, { fetchFile: fetch17, hashBytes });
+const browserScript = await readFile(new URL("../t04/script.js", import.meta.url), "utf8");
+const resetIndex = browserScript.indexOf("hashList.replaceChildren();");
+const verificationIndex = browserScript.indexOf("const manifestResponse = await fetch", resetIndex);
+result("T05-F10",
+  failed17.status === "FAIL" &&
+  failed17.results.some(x => x.status !== "PASS") &&
+  recovered17.total === 17 &&
+  recovered17.pass === 17 &&
+  recovered17.fail === 0 &&
+  recovered17.status === "PASS" &&
+  recovered17.results.every(x => x.status === "PASS") &&
+  resetIndex >= 0 &&
+  verificationIndex > resetIndex,
+  JSON.stringify({ failed: { pass: failed17.pass, fail: failed17.fail }, recovered: { pass: recovered17.pass, fail: recovered17.fail }, ui_reset_before_fetch: resetIndex >= 0 && verificationIndex > resetIndex })
+);
 
 for (const item of results) {
   console.log((item.pass ? "PASS" : "FAIL") + " " + item.id + " - " + item.note);
