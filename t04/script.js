@@ -231,7 +231,9 @@ async function sha256Bytes(bytes) {
 async function loadIntegrityAsset(path) {
   const response = await fetch(ASSET_BASE + path, { cache: "no-store" });
   if (!response.ok) {
-    throw new Error("ASSET_HTTP_" + response.status);
+    const error = new Error("ASSET_HTTP_" + response.status);
+    error.code = response.status === 404 ? "MISSING" : "FETCH_ERROR";
+    throw error;
   }
   return { bytes: await response.arrayBuffer() };
 }
@@ -251,6 +253,15 @@ async function verifyPackageHashes() {
       loadIntegrityAsset,
       sha256Bytes
     );
+
+    if (report.manifest_errors && report.manifest_errors.length) {
+      report.manifest_errors.forEach((message) => {
+        const row = document.createElement("div");
+        row.className = "hash-item";
+        row.textContent = "MANIFEST_ERROR · " + message;
+        hashList.appendChild(row);
+      });
+    }
 
     report.results.forEach((item) => {
       const row = document.createElement("div");
