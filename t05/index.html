@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="T05 AI 인수인계 재개 비교 보고서">
+<title>T05 · 대화가 끊겨도 이어지는 프로젝트</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f4f7fb}
+*{box-sizing:border-box}body{margin:0}.wrap{max-width:980px;margin:auto;padding:40px 20px 64px}
+a{color:#3157d5}.hero,.card{background:white;border:1px solid #dfe6f1;border-radius:18px;box-shadow:0 8px 30px rgba(20,35,70,.06)}
+.hero{padding:32px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:#52627b}.hero h1{margin:8px 0 10px;font-size:clamp(28px,5vw,48px)}
+.badge{display:inline-flex;padding:7px 11px;border-radius:999px;font-weight:800;background:#e9f8ee;color:#18733b}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}.card{padding:22px}
+.metric{font-size:34px;font-weight:850;margin:8px 0}.muted{color:#647087}.pass{color:#18733b}.fail{color:#b32727}
+table{width:100%;border-collapse:collapse;margin-top:12px}th,td{text-align:left;padding:10px;border-bottom:1px solid #e8edf5;font-size:14px}th{color:#53617a}
+code{background:#f2f5fa;padding:2px 5px;border-radius:6px;word-break:break-all}
+.steps p,.judgment p{margin:8px 0}.full{margin-top:16px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.hero{padding:24px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero">
+<p class="eyebrow">T05 · HANDOFF CONTINUATION REPORT</p>
+<h1>대화가 끊겨도 이어지는 프로젝트</h1>
+<p>AI B는 이전 대화 전문 없이 저장소와 <code>t05/HANDOFF.md</code>만 읽고 남은 기능을 완성했습니다. 고정 검사 10개는 삭제·완화·기대값 변경 없이 유지했습니다.</p>
+<span class="badge">최종 10 / 10 PASS</span>
+</section>
+
+<div class="grid">
+<section class="card"><p class="eyebrow">AI A</p><div class="metric">9 / 10</div><p class="fail">T05-F10 실패</p><p class="muted">브라우저/Node 상태 구분 불일치와 실패 후 정본 재실행 검증이 남은 상태로 인수인계했습니다.</p></section>
+<section class="card"><p class="eyebrow">AI B</p><div class="metric pass">10 / 10</div><p class="pass">모든 고정 검사 통과</p><p class="muted">브라우저 상태를 Node 기준에 맞추고 F10을 실제 실패→복구 assertion으로 교체했습니다.</p></section>
+</div>
+
+<section class="card full">
+<p class="eyebrow">FIXED TESTS</p>
+<h2>고정 검사 결과</h2>
+<table><thead><tr><th>ID</th><th>결과</th><th>검사 핵심</th></tr></thead><tbody>
+<tr><td>T05-F01</td><td class="pass">PASS</td><td>공개 package 검사 경로</td></tr>
+<tr><td>T05-F02</td><td class="pass">PASS</td><td>17개 대상 집계</td></tr>
+<tr><td>T05-F03</td><td class="pass">PASS</td><td>17 PASS / 0 FAIL</td></tr>
+<tr><td>T05-F04</td><td class="pass">PASS</td><td>SHA_MISMATCH</td></tr>
+<tr><td>T05-F05</td><td class="pass">PASS</td><td>MISSING</td></tr>
+<tr><td>T05-F06</td><td class="pass">PASS</td><td>BYTES_MISMATCH</td></tr>
+<tr><td>T05-F07</td><td class="pass">PASS</td><td>self_excluded</td></tr>
+<tr><td>T05-F08</td><td class="pass">PASS</td><td>manifest hash 형식 오류</td></tr>
+<tr><td>T05-F09</td><td class="pass">PASS</td><td>FETCH_ERROR + 기존 결과 유지</td></tr>
+<tr><td>T05-F10</td><td class="pass">PASS</td><td>16 PASS / 1 FAIL → 17 PASS / 0 FAIL 복구, 이전 UI 결과 초기화</td></tr>
+</tbody></table>
+</section>
+
+<div class="grid">
+<section class="card steps">
+<p class="eyebrow">4-LINE CHECK</p><h2>짧은 확인 방법</h2>
+<p><strong>위치</strong> · <a href="../t04/">/t04/ 공개 화면</a></p>
+<p><strong>행동</strong> · “manifest 등록 17개 파일 전체 검사” 버튼 클릭</p>
+<p><strong>통과 모습</strong> · 17개 · 17 PASS · 0 FAIL</p>
+<p><strong>안 될 때</strong> · MISSING / FETCH_ERROR / BYTES_MISMATCH / SHA_MISMATCH 또는 manifest 오류가 항목별 표시</p>
+</section>
+<section class="card judgment">
+<p class="eyebrow">AI + HUMAN JUDGMENT</p><h2>AI와 나의 판단 3줄</h2>
+<p><strong>AI에게 맡긴 일</strong> · 저장소 상태 해석, 브라우저/Node 검사 동작 통일, 고정 검사 실행과 보고서 작성.</p>
+<p><strong>직접 판단한 일</strong> · 최초 고정 검사 10개와 공통 상한을 유지하고 이전 대화를 제공하지 않는 조건.</p>
+<p><strong>AI 제안을 따르지 않은 일</strong> · 별도 작업 모드로 넘기지 않고 현재 대화에서 저장소와 인수인계만으로 계속 진행.</p>
+</section>
+</div>
+
+<section class="card full">
+<p class="eyebrow">EVIDENCE</p>
+<h2>결과 근거</h2>
+<p>AI B 구현 코드 기준 SHA: <code>97c04ba273ff1f5507ef72e431e38a7a53eb2d0e</code></p>
+<p>F10 실측: 실패 회차 <strong>16 PASS / 1 FAIL</strong> → 정본 재실행 <strong>17 PASS / 0 FAIL</strong>, UI 초기화 순서 확인.</p>
+<p><a href="https://github.com/Huihuing/Report/blob/main/t05/fixed-tests.json">고정 검사 원본</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/ai-b-results.json">AI B 결과 JSON</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/HANDOFF.md">인수인계 문서</a></p>
+</section>
+</main>
+</body>
+</html>
