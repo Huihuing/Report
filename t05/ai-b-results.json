@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "actor": "AI_B",
+  "source_start_sha": "862c182eaa96a3e5983cee1e37c28467c039ed60",
+  "source_end_sha": "97c04ba273ff1f5507ef72e431e38a7a53eb2d0e",
+  "started_at": "2026-10-08T09:25:00+09:00",
+  "ended_at": "2026-10-08T00:57:42.533Z",
+  "elapsed_minutes": 32.71,
+  "requests_or_tool_calls": 19,
+  "common_limits": {
+    "max_elapsed_minutes": 45,
+    "max_requests_or_tool_calls": 20
+  },
+  "execution_command": "node t05/run-fixed-tests.mjs",
+  "fixed_test_count": 10,
+  "pass_count": 10,
+  "fail_count": 0,
+  "error_rounds": 0,
+  "tests": [
+    {
+      "id": "T05-F01",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F02",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F03",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F04",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F05",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F06",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F07",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F08",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F09",
+      "result": "PASS"
+    },
+    {
+      "id": "T05-F10",
+      "result": "PASS"
+    }
+  ],
+  "f10_evidence": {
+    "failed_run": {
+      "pass": 16,
+      "fail": 1
+    },
+    "recovered_run": {
+      "pass": 17,
+      "fail": 0
+    },
+    "ui_reset_before_fetch": true
+  },
+  "changes": [
+    "브라우저 package-integrity.js의 MISSING/FETCH_ERROR/BYTES_MISMATCH/SHA_MISMATCH/MANIFEST_ERROR 구분을 Node 코어와 맞춤",
+    "공개 UI asset fetch의 404를 MISSING으로, 그 외 fetch 실패를 FETCH_ERROR로 구분",
+    "manifest 오류 메시지를 공개 검사 목록에 표시",
+    "T05-F10 하드코딩 FAIL을 실패→정본 17개 재실행 assertion으로 교체"
+  ],
+  "reproduction": {
+    "result": "PASS",
+    "note": "현재 채팅 실행 환경에서 raw GitHub 직접 다운로드/clone은 제한되었으나, GitHub connector로 읽은 현재 소스와 고정 검사 원본을 격리된 Node 실행 디렉터리에 재현해 10/10 PASS를 확인함"
+  }
+}
