@@ -1,3 +1,13 @@
+## 배포 상태 주의 (2026-10-08)
+
+- T07 인증 앱과 공개 API는 기존 운영 배포에서 계속 정상 동작한다.
+- GitHub에는 새로운 실제 HTTP 보안 증거 `docs/T07-HTTP-EVIDENCE.md`, `t07/tests/http-security-proof/results-2026-10-08.json`가 추가되어 바로 열 수 있다.
+- 신규 로그인 화면의 **'HTTP 보안 증거 보기' 링크**는 Git 소스에는 포함됐지만, 아직 운영 HTML에 반영되지 않았다.
+- Vercel 새 production 배포 요청이 HTTP **402 `api-deployments-free-per-day`**(무료 일일 100건 초과, 재시도 안내 86400초)로 거절되었다. 빌드/코드 실패가 아니라 프로젝트 배포 한도 때문이다.
+- 배포가 재개될 때 GitHub main 최신 커밋으로 다시 배포해야 하며, **지금 배포 완료라고 주장하면 안 된다.**
+- 계정 삭제 **화면 안내·실제 FK cascade 설계**는 검증했으나, 앱의 계정 삭제 HTTP 성공 요청은 아직 실측하지 못했다. 기존 사용자의 실제 계정은 삭제해서 검사하지 않는다.
+
+
 ## 2026-10-08 추가 실제 HTTP 검증 — 검증 결과 우선
 
 - **실행된 31개 인증/소유자 격리 HTTP 검사 = 31 PASS.** 저장된 실제 HTTP 상태는 `t07/tests/http-security-proof/results-2026-10-08.json` 참고.
