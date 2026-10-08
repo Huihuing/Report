@@ -41,11 +41,7 @@ const recoverButton = document.querySelector("#recoverButton");
 const successSequenceButton = document.querySelector("#successSequenceButton");
 const resetReplayButton = document.querySelector("#resetReplayButton");
 
-const PACKAGE_HASHES = {
-  "README.md": "b9d0d4c076f8c1e1d9faf1a42d5bea42b0c47e5018e8f46af31f3798adc8d80c",
-  "public-contract.json": "647d2ea2ce97005aebcbe9ccd62f380bc6efb10967729464bb1df67b3588edeb",
-  "asset-manifest.json": "8adc0f6caea09e45c8fcdd42e239653e942227e306f688c780a18d441a6b7b41"
-};
+const MANIFEST_URL = ASSET_BASE + "asset-manifest.json";
 
 const FIXTURE_PATHS = {
   "normal-d1-a": "fixtures/normal-d1-a.json",
@@ -225,45 +221,69 @@ function renderMatch() {
   }
 }
 
-async function sha256Text(text) {
-  const bytes = new TextEncoder().encode(text);
+async function sha256Bytes(bytes) {
   const digest = await crypto.subtle.digest("SHA-256", bytes);
   return Array.from(new Uint8Array(digest))
     .map((byte) => byte.toString(16).padStart(2, "0"))
     .join("");
 }
 
+async function loadIntegrityAsset(path) {
+  const response = await fetch(ASSET_BASE + path, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error("ASSET_HTTP_" + response.status);
+  }
+  return { bytes: await response.arrayBuffer() };
+}
+
 async function verifyPackageHashes() {
   verifyHashesButton.disabled = true;
   hashList.replaceChildren();
-  let allPass = true;
+  setPill(hashState, "검사 중", "");
 
-  for (const [path, expected] of Object.entries(PACKAGE_HASHES)) {
-    try {
-      const response = await fetch(ASSET_BASE + path, { cache: "no-store" });
-      const text = await response.text();
-      const actual = await sha256Text(text);
-      const pass = actual === expected;
-      allPass = allPass && pass;
+  try {
+    const manifestResponse = await fetch(MANIFEST_URL, { cache: "no-store" });
+    if (!manifestResponse.ok) throw new Error("MANIFEST_HTTP_" + manifestResponse.status);
+    const manifest = await manifestResponse.json();
 
-      const item = document.createElement("div");
-      item.className = "hash-item";
+    const report = await PackageIntegrity.verifyPackage(
+      manifest,
+      loadIntegrityAsset,
+      sha256Bytes
+    );
+
+    report.results.forEach((item) => {
+      const row = document.createElement("div");
+      row.className = "hash-item";
+
       const name = document.createElement("span");
-      name.textContent = path;
-      const code = document.createElement("code");
-      code.textContent = actual;
-      const result = document.createElement("strong");
-      result.textContent = pass ? "PASS" : "FAIL";
-      if (!pass) result.style.color = "var(--danger)";
-      item.append(name, code, result);
-      hashList.appendChild(item);
-    } catch (error) {
-      allPass = false;
-    }
-  }
+      name.textContent = item.path;
 
-  setPill(hashState, allPass ? "SHA-256 PASS" : "SHA-256 FAIL", allPass ? "success" : "error");
-  verifyHashesButton.disabled = false;
+      const code = document.createElement("code");
+      code.textContent = item.actual_sha256 || item.status;
+
+      const result = document.createElement("strong");
+      result.textContent = item.status;
+      if (item.status !== "PASS") result.style.color = "var(--danger)";
+
+      row.append(name, code, result);
+      hashList.appendChild(row);
+    });
+
+    setPill(
+      hashState,
+      report.total + "개 · " + report.pass_count + " PASS · " + report.fail_count + " FAIL",
+      report.overall === "PASS" ? "success" : "error"
+    );
+  } catch (error) {
+    setPill(hashState, "manifest 검사 실패", "error");
+    const row = document.createElement("div");
+    row.className = "hash-item";
+    row.textContent = String(error.message || error);
+    hashList.appendChild(row);
+  } finally {
+    verifyHashesButton.disabled = false;
+  }
 }
 
 function resetReplayState() {
