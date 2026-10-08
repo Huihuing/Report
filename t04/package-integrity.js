@@ -6,57 +6,82 @@
   }
 
   function validateManifest(manifest) {
-    if (!manifest || manifest.schema_version !== 1) {
-      throw new Error("MANIFEST_SCHEMA");
+    const errors = [];
+    if (!manifest || typeof manifest !== "object") {
+      return ["manifest가 객체가 아닙니다."];
     }
-    if (!Array.isArray(manifest.files) || manifest.files.length !== 17) {
-      throw new Error("MANIFEST_FILE_COUNT");
+    if (!Array.isArray(manifest.files)) {
+      return ["manifest.files 배열이 없습니다."];
     }
-    if (manifest.self_excluded !== "asset-manifest.json") {
-      throw new Error("MANIFEST_SELF_EXCLUDED");
-    }
-    if (manifest.files.some((entry) => entry.path === manifest.self_excluded)) {
-      throw new Error("MANIFEST_SELF_LISTED");
+    if (manifest.self_excluded && manifest.files.some((item) => item.path === manifest.self_excluded)) {
+      errors.push("self_excluded 파일이 files 목록에 포함되어 있습니다.");
     }
 
-    manifest.files.forEach((entry) => {
-      if (!entry || typeof entry.path !== "string" || !entry.path) {
-        throw new Error("MANIFEST_PATH");
+    manifest.files.forEach((item, index) => {
+      if (!item || typeof item.path !== "string" || !item.path) {
+        errors.push((index + 1) + "번째 path가 잘못되었습니다.");
       }
-      if (!Number.isInteger(entry.bytes) || entry.bytes < 0) {
-        throw new Error("MANIFEST_BYTES");
+      if (!Number.isInteger(item.bytes) || item.bytes < 0) {
+        errors.push((index + 1) + "번째 bytes가 잘못되었습니다.");
       }
-      if (!isLowerHexSha256(entry.sha256)) {
-        throw new Error("MANIFEST_SHA256");
+      if (typeof item.sha256 !== "string" || !isLowerHexSha256(item.sha256)) {
+        errors.push((index + 1) + "번째 sha256이 64자리 소문자 hex가 아닙니다.");
       }
     });
-
-    return manifest.files;
+    return errors;
   }
 
   async function verifyPackage(manifest, loadAsset, digestSha256) {
-    const entries = validateManifest(manifest);
+    const manifestErrors = validateManifest(manifest);
+    if (manifestErrors.length) {
+      return {
+        status: "MANIFEST_ERROR",
+        overall: "MANIFEST_ERROR",
+        total: Array.isArray(manifest && manifest.files) ? manifest.files.length : 0,
+        pass: 0,
+        fail: manifestErrors.length,
+        pass_count: 0,
+        fail_count: manifestErrors.length,
+        manifest_errors: manifestErrors,
+        results: []
+      };
+    }
+
+    const entries = manifest.files;
     const results = [];
 
     for (const entry of entries) {
       try {
         const asset = await loadAsset(entry.path);
-        const actualSha256 = await digestSha256(asset.bytes);
-        const pass = actualSha256 === entry.sha256;
+        const rawBytes = asset && Object.prototype.hasOwnProperty.call(asset, "bytes") ? asset.bytes : asset;
+        const bytes = rawBytes instanceof Uint8Array ? rawBytes : new Uint8Array(rawBytes);
+        const byteLength = bytes.byteLength;
 
+        if (byteLength !== entry.bytes) {
+          results.push({
+            path: entry.path,
+            status: "BYTES_MISMATCH",
+            expected_bytes: entry.bytes,
+            actual_bytes: byteLength,
+            expected_sha256: entry.sha256,
+            actual_sha256: null
+          });
+          continue;
+        }
+
+        const actualSha256 = await digestSha256(bytes);
         results.push({
           path: entry.path,
-          status: pass ? "PASS" : "SHA_MISMATCH",
+          status: actualSha256 === entry.sha256 ? "PASS" : "SHA_MISMATCH",
           expected_bytes: entry.bytes,
-          actual_bytes: asset.bytes.byteLength,
+          actual_bytes: byteLength,
           expected_sha256: entry.sha256,
           actual_sha256: actualSha256
         });
       } catch (error) {
-        // AI B handoff: distinguish MISSING vs FETCH_ERROR and add bytes mismatch status.
         results.push({
           path: entry.path,
-          status: "ERROR",
+          status: error && error.code === "MISSING" ? "MISSING" : "FETCH_ERROR",
           expected_bytes: entry.bytes,
           actual_bytes: null,
           expected_sha256: entry.sha256,
@@ -66,11 +91,16 @@
     }
 
     const passCount = results.filter((item) => item.status === "PASS").length;
+    const failCount = results.length - passCount;
     return {
-      total: entries.length,
+      status: failCount === 0 ? "PASS" : "FAIL",
+      overall: failCount === 0 ? "PASS" : "FAIL",
+      total: results.length,
+      pass: passCount,
+      fail: failCount,
       pass_count: passCount,
-      fail_count: entries.length - passCount,
-      overall: passCount === entries.length ? "PASS" : "FAIL",
+      fail_count: failCount,
+      manifest_errors: [],
       results
     };
   }
