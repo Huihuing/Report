@@ -20,6 +20,11 @@ async function api(action, payload = {}) {
   const data = await response.json().catch(() => ({ok:false,error:"INVALID_JSON"}));
   if (!response.ok || !data.ok) {
     const message = data.error || "REQUEST_FAILED";
+    if (response.status === 401 && action !== "login" && action !== "signup") {
+      sessionStorage.removeItem("t07_token");
+      authToken = "";
+      location.reload();
+    }
     const err = new Error(message);
     err.status = response.status;
     throw err;
