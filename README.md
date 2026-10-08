@@ -10,6 +10,8 @@ Vercel은 `report` 프로젝트 하나만 사용합니다.
 - T02: https://report-huihuing.vercel.app/t02/
 - T03: https://report-huihuing.vercel.app/t03/
 - T04: https://report-huihuing.vercel.app/t04/
+- T05: https://report-huihuing.vercel.app/t05/
+- T06: https://report-huihuing.vercel.app/t06/
 - 이후 과제: `/t03/`, `/t04/`처럼 같은 도메인 아래 추가
 
 세부 운영 규칙은 `AGENTS.md`를 따릅니다.
@@ -65,3 +67,18 @@ Open-Meteo의 공개 서울 2m 기온을 실제로 조회하고, 합성 fixture�
 - `docs/T04-EVIDENCE.md` — package/hash·실패 재생·실제 날짜 기록
 - `docs/T04-SUBMISSION.md` — 제출용 4줄/3줄 및 미완료 날짜 안내
 - 공개 주소: https://report-huihuing.vercel.app/t04/
+
+
+## T06 — 플랜두씨 다이어리 1
+
+실제 ALEPH 진행 계획을 Plan → Do → See로 연결하고 서버 PostgreSQL 데이터베이스에 저장하는 무로그인 공개 다이어리입니다.
+
+- `t06/index.html` — 공개 UI
+- `t06/styles.css`
+- `t06/script.js` — CRUD·검색·필터·정렬·집계·JSON 내보내기
+- `t06/schema.sql` — DB 테이블·제약·중복 완료 방지 함수
+- `contracts/pds-schema-v2.json` — 최종 데이터 계약과 날짜 규칙
+- `supabase/functions/t06-pds/index.ts` — 브라우저와 DB 사이 공개 Edge Function
+- 공개 주소: https://report-huihuing.vercel.app/t06/
+
+T06는 아직 로그인 기능이 없으므로 공개해도 괜찮은 ALEPH 진행 기록만 저장합니다.
