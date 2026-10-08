@@ -1,3 +1,25 @@
+## 최종 업데이트: 실제 HTTP 보안 검증 (2026-10-08)
+
+**현황: 배포된 T07 API를 사용해 실행한 HTTP 요청 검증 31항목/31항목 PASS.** 단, 한 번의 큰 시험 실행 전체 `ok`는 `false`다. 31개 검사가 모두 통과한 직후 Supabase Auth rate limit으로 **계정 삭제 HTTP 흐름을 실행하지 못한 사실**을 그대로 남겼다.
+
+- [실제 성공/거절 요청·응답 상세](https://github.com/Huihuing/Report/blob/main/docs/T07-HTTP-EVIDENCE.md)
+- [실제 검사 결과 JSON](https://github.com/Huihuing/Report/blob/main/t07/tests/http-security-proof/results-2026-10-08.json)
+- [일회성 실 HTTP 시험 소스](https://github.com/Huihuing/Report/blob/main/t07/tests/http-security-proof/index.ts) — 실제 시험 엔드포인트는 실행 후 410 비활성화
+- 로그인 시험 계정 A/B 각각 HTTP **200**.
+- 두 계정으로 **양방향 상대 계획/할 일 읽기·수정·삭제 HTTP 404 NOT_FOUND** 확인.
+- URL·헤더·JSON 본문에 남의 owner ID 입력 → 여전히 자기 계획·할 일만 조회되는 HTTP **200** 확인.
+- 거절 전후 A/B 각각 할 일 1건 및 내용 불변, 상대 데이터 미노출.
+- 같은 URL/메서드/POST body/Authorization Bearer로 로그인 중 **200 → 로그아웃 후 401 UNAUTHORIZED** 확인.
+- 비밀번호 변경 후 이전 Bearer 재사용 **401 UNAUTHORIZED**, 새 비밀번호 로그인 **200**.
+- 없는 계정 이메일과 기존 이메일·틀린 비밀번호 모두 **401 INVALID_CREDENTIALS**.
+- 서로 다른 두 임시 계정에 같은 비밀번호 입력 후 저장된 bcrypt 해시가 서로 다름을 서버 전용 검사로 확인.
+- 시험용 Auth 계정 2개와 관련 계획·할 일은 삭제됨. 운영 DB 확인 결과 기존 계획 **2**, 할 일 **10**, 실행 **3**, 계정 **3**, 임시 계획 **0**.
+- 시험용 계정 삭제 API 테스트는 미수행, 기능 자체는 `t07/index.html`에 안내와 버튼, `t07-pds`에 구현됨.
+- 이 날짜의 모든 사용 계정/비밀번호/세션/이메일 UUID 원문은 공개 기록에 저장하지 않음.
+
+**이 문서 아래에 남은 '아직 실제 실행되지 않은 검증' 목록은 2026-10-08 앞선 시점의 초기 계획 기록이므로, 이미 실 HTTP 검증한 항목은 이 최신 섹션으로 대체한다.** 남은 제한은 실제 계정 삭제 HTTP 성공 응답, 별도 전체 서버 로그 감사, Supabase Leaked Password Protection 경고 등이다.
+
+
 # T07 인증 구현 설명서 / 검증 기록
 
 작성 기준: 2026-10-08 Asia/Seoul
