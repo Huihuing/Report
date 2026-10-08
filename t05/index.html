@@ -5,22 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="T05 AI 인수인계 재개 비교 보고서">
 <title>T05 · 대화가 끊겨도 이어지는 프로젝트</title>
-<style>
-:root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f4f7fb}
-*{box-sizing:border-box}body{margin:0}.wrap{max-width:1040px;margin:auto;padding:40px 20px 64px}
-a{color:#3157d5}.hero,.card{background:#fff;border:1px solid #dfe6f1;border-radius:18px;box-shadow:0 8px 30px rgba(20,35,70,.06)}
-.hero{padding:32px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;color:#52627b}.hero h1{margin:8px 0 10px;font-size:clamp(28px,5vw,48px)}
-.badge{display:inline-flex;padding:7px 11px;border-radius:999px;font-weight:800;background:#e9f8ee;color:#18733b}.warn{background:#fff4d8;color:#835b00}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}.card{padding:22px}
-.metric{font-size:34px;font-weight:850;margin:8px 0}.muted{color:#647087}.pass{color:#18733b}.fail{color:#b32727}
-table{width:100%;border-collapse:collapse;margin-top:12px}th,td{text-align:left;padding:10px;border-bottom:1px solid #e8edf5;font-size:14px}th{color:#53617a}
-code{background:#f2f5fa;padding:2px 5px;border-radius:6px;word-break:break-all}.steps p,.judgment p{margin:8px 0}.full{margin-top:16px}
-.note{padding:12px 14px;border-left:4px solid #d7a014;background:#fff9e8;color:#665018;margin-top:14px}.ok{border-left-color:#2b8a4b;background:#eef9f1;color:#245c34}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.hero{padding:24px}.table-scroll{overflow-x:auto}table{min-width:700px}}
-</style>
+<link rel="stylesheet" href="./styles.css">
 </head>
 <body>
 <main class="wrap">
+<nav class="task-nav" aria-label="ALEPH 과제 이동">
+  <a href="../">← T01 · 과제 홈으로</a>
+  <span>T05 · AI HANDOFF REPORT</span>
+</nav>
 <section class="hero">
 <p class="eyebrow">T05 · HANDOFF CONTINUATION REPORT</p>
 <h1>대화가 끊겨도 이어지는 프로젝트</h1>
@@ -107,6 +99,10 @@ code{background:#f2f5fa;padding:2px 5px;border-radius:6px;word-break:break-all}.
 <p><a href="https://github.com/Huihuing/Report/blob/main/t05/fixed-tests.json">고정 검사 원본</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/ai-a-results.json">AI A 결과</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/ai-b-final-gpt6-sol-2026-10-08.json">최종 AI B 결과</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/HANDOFF.md">인수인계 문서</a></p>
 <p class="note ok"><strong>C39 PASS:</strong> 최종 AI B는 AI A와 다른 모델을 사용했습니다. 공개 비교 구간에서는 모델 이름을 가리고, 모델 표기는 결과 JSON에만 보존했습니다.</p>
 </section>
+<footer class="page-footer">
+  <span>T05 · 대화가 끊겨도 이어지는 프로젝트</span>
+  <a href="../t04/">T04 정보판 보기 →</a>
+</footer>
 </main>
 </body>
 </html>
