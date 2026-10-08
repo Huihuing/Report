@@ -36,14 +36,14 @@ code{background:#f2f5fa;padding:2px 5px;border-radius:6px;word-break:break-all}.
 <thead><tr><th>구분</th><th>작업시간</th><th>요청·호출 수</th><th>오류 회차</th><th>통과 수</th><th>시작 소스</th><th>종료 소스</th></tr></thead>
 <tbody>
 <tr><td>AI A</td><td>6.70분 / 45분</td><td>18 / 20</td><td>1회</td><td>9 / 10</td><td><code>59cc7632…b655</code></td><td><code>8a5b3526…739d</code></td></tr>
-<tr><td>AI B</td><td>32.71분 / 45분</td><td>19 / 20</td><td>0회</td><td>10 / 10</td><td><code>862c182e…ed60</code></td><td><code>97c04ba2…2d0e</code></td></tr>
+<tr><td>AI B</td><td>3.42분 / 45분</td><td>11 / 20</td><td>0회</td><td>10 / 10</td><td><code>51723acd…b562</code></td><td><code>9aa7f16d…eb3b</code></td></tr>
 </tbody></table></div>
 <p class="note ok"><strong>오류 회차 정의:</strong> 고정 검사 10개를 실행한 한 회차에서 하나 이상 FAIL이 있으면 오류 회차 1회로 계산했습니다.</p>
 </section>
 
 <div class="grid">
 <section class="card"><p class="eyebrow">AI A</p><div class="metric">9 / 10</div><p class="fail">T05-F10 실패</p><p class="muted">17개 검사 코어와 상태 구분까지 구현하고, 실패 후 정본 재실행 검증을 남긴 상태로 인수인계했습니다.</p></section>
-<section class="card"><p class="eyebrow">AI B</p><div class="metric pass">10 / 10</div><p class="pass">모든 고정 검사 통과</p><p class="muted">브라우저 상태를 Node 기준에 맞추고 F10을 실제 실패→정본 재실행 assertion으로 교체했습니다.</p></section>
+<section class="card"><p class="eyebrow">AI B</p><div class="metric pass">10 / 10</div><p class="pass">다른 모델 · 모든 고정 검사 통과</p><p class="muted">저장소와 인수인계만 받아 manifest 형식 오류 방어를 실제 코드에 보강하고 같은 고정 검사 10개를 그대로 재실행했습니다.</p></section>
 </div>
 
 <section class="card full">
@@ -102,10 +102,10 @@ code{background:#f2f5fa;padding:2px 5px;border-radius:6px;word-break:break-all}.
 <section class="card full">
 <p class="eyebrow">EVIDENCE</p>
 <h2>결과 근거</h2>
-<p>AI A 구현 SHA: <code>8a5b3526fd27e14e91b8c5b640f20bedbcae739d</code> · AI B 시작 SHA: <code>862c182eaa96a3e5983cee1e37c28467c039ed60</code> · AI B 구현 종료 SHA: <code>97c04ba273ff1f5507ef72e431e38a7a53eb2d0e</code></p>
+<p>AI A 구현 SHA: <code>8a5b3526fd27e14e91b8c5b640f20bedbcae739d</code> · 최종 AI B 시작 SHA: <code>51723acd54106289b6088e8cb4c16083214cb562</code> · 최종 AI B 구현 종료 SHA: <code>9aa7f16d07b1c23b25b0b9409da22d032597eb3b</code></p>
 <p>F10 실측: 실패 회차 <strong>16 PASS / 1 FAIL</strong> → 정본 재실행 <strong>17 PASS / 0 FAIL</strong>, UI 초기화 순서 확인.</p>
-<p><a href="https://github.com/Huihuing/Report/blob/main/t05/fixed-tests.json">고정 검사 원본</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/ai-a-results.json">AI A 결과</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/ai-b-results.json">AI B 결과</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/HANDOFF.md">인수인계 문서</a></p>
-<p class="note"><strong>C39 상태:</strong> AI B가 다른 채팅에서 작업한 사실은 기록되어 있지만, 사용한 모델 또는 서비스명이 저장소와 과거 대화에 명시되지 않아 “AI A와 다른 모델/서비스” 여부는 현재 증거만으로 판정하지 않습니다.</p>
+<p><a href="https://github.com/Huihuing/Report/blob/main/t05/fixed-tests.json">고정 검사 원본</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/ai-a-results.json">AI A 결과</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/ai-b-final-gpt6-sol-2026-10-08.json">최종 AI B 결과</a> · <a href="https://github.com/Huihuing/Report/blob/main/t05/HANDOFF.md">인수인계 문서</a></p>
+<p class="note ok"><strong>C39 PASS:</strong> 최종 AI B는 AI A와 다른 모델을 사용했습니다. 공개 비교 구간에서는 모델 이름을 가리고, 모델 표기는 결과 JSON에만 보존했습니다.</p>
 </section>
 </main>
 </body>
