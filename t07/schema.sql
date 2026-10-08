@@ -134,7 +134,7 @@ AS $function$
 declare b public.t07_legacy_bundle; nplans integer; ntasks integer; nexecutions integer;
 begin
   select * into b from public.t07_legacy_bundle where id=1 for update;
-  if b.id is null or b.claimed_at is not null or b.claim_hash <> encode(digest(p_code,'sha256'),'hex') then
+  if b.id is null or b.claimed_at is not null or b.claim_hash <> encode(extensions.digest(p_code,'sha256'),'hex') then
     raise exception 'INVALID_OR_USED_MIGRATION_CODE';
   end if;
   if not exists(select 1 from auth.users where id=p_owner) then raise exception 'USER_NOT_FOUND'; end if;
