@@ -72,6 +72,8 @@ create index if not exists t06_tasks_plan_due_idx on public.t06_tasks(plan_id, d
 create index if not exists t06_tasks_plan_status_idx on public.t06_tasks(plan_id, completed, deleted_at);
 create index if not exists t06_execution_task_idx on public.t06_execution_logs(task_id, started_at);
 create index if not exists t06_revision_plan_idx on public.t06_plan_revisions(plan_id, revision_no);
+create index if not exists t06_reflections_plan_idx on public.t06_reflections(plan_id);
+create index if not exists t06_reflections_next_plan_idx on public.t06_reflections(next_plan_id);
 
 alter table public.t06_plans enable row level security;
 alter table public.t06_plan_revisions enable row level security;
