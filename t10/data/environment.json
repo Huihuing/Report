@@ -1,0 +1,45 @@
+{
+  "captured_at_utc": "2026-10-09T11:11:56Z",
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "implementation": "CPython",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "machine": "x86_64",
+  "cpu_count_reported": 5,
+  "repetitions": 30,
+  "sizes": [
+    100,
+    1000,
+    10000
+  ],
+  "positions": [
+    "absent",
+    "first",
+    "last"
+  ],
+  "seed": 20261009,
+  "target_batch_seconds": 0.005,
+  "pilot_and_warmups_excluded": true,
+  "cases": 18,
+  "rows": 540,
+  "method": "timeit.Timer(stmt, globals).timeit(number=calibrated_loops) / calibrated_loops; 30 rounds, randomized order",
+  "calibrated_loops": {
+    "100_absent_list": 9643,
+    "100_absent_set": 180897,
+    "100_first_list": 214224,
+    "100_first_set": 174520,
+    "100_last_list": 10504,
+    "100_last_set": 201288,
+    "1000_absent_list": 852,
+    "1000_absent_set": 203004,
+    "1000_first_list": 216169,
+    "1000_first_set": 193498,
+    "1000_last_list": 811,
+    "1000_last_set": 153139,
+    "10000_absent_list": 81,
+    "10000_absent_set": 200561,
+    "10000_first_list": 222915,
+    "10000_first_set": 207210,
+    "10000_last_list": 74,
+    "10000_last_set": 148148
+  }
+}
