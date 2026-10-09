@@ -124,3 +124,12 @@ T07 제출에서 **5일차 기록은 실제 날짜에만 작성할 수 있으므
 - 재현 스크립트: `t10/reproduce/run_benchmark.py`, `analyze.py`, `verify_package.py`
 - 결과: 세 크기의 부재 조회에서 set이 빨랐으며, 첫 위치 조회는 거의 같은 속도
 - 완성된 납품본 ZIP은 별도로 업로드하며 공개 연구 소스에는 비밀값·개인정보를 넣지 않음
+
+
+## BR-A — 나를 소개하는 사이트와 재생성 장치
+
+- 공개 결과물: https://report-huihuing.vercel.app/bra/
+- 공개 소스: `bra/index.html`, `bra/script.js`, `bra/styles.css`, `bra/data/published.json`
+- 이력서·자기소개서·경력기술서: `bra/docs/`
+- 숫자 및 승인된 글만 내보내는 장치: `bra/tools/update.py` (비공개 리추얼 입력은 제출 ZIP에만 보관)
+- 11번 비공개 소설 원문은 공개 저장소에 업로드하지 않음

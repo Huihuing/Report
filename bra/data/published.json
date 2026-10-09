@@ -1,0 +1,23 @@
+{
+  "approval_rule": "reviewer-selected candidate IDs only; unpublished candidates never appear on public page",
+  "approved_stories": [],
+  "assignment_count": 11,
+  "metrics": {
+    "assignment_list_count": 11,
+    "assignment_note": "제출·승인 건수가 아닌 사용자 산출물 목록 수",
+    "attendance_days": null,
+    "attendance_source": "실제 출석 원본을 제공받지 않음",
+    "count_rule": "날짜별 1회 집계. 미기록은 미실천에 합산하지 않음.",
+    "evening_missing": 3,
+    "evening_records": 36,
+    "full_actions": 11,
+    "missed_actions": 4,
+    "morning_records": 39,
+    "partial_actions": 21,
+    "period_end": "2026-10-08",
+    "period_start": "2026-08-11",
+    "record_source": "본인이 제공한 2026-10-08 기준 리추얼 JSON (일별 자기평가)",
+    "ritual_days": 39
+  },
+  "schema_version": 1
+}
