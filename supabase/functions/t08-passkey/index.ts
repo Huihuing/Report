@@ -7,10 +7,10 @@ import {
 
 const ORIGIN="https://report-huihuing.vercel.app";
 const RP="report-huihuing.vercel.app";
-const URL=Deno.env.get("SUPABASE_URL")||"";
+const SUPABASE_URL=Deno.env.get("SUPABASE_URL")||"";
 const SECRET=JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS")||"{}");
 const ADMIN_KEY=SECRET.default||Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")||"";
-const db=createClient(URL,ADMIN_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
+const db=createClient(SUPABASE_URL,ADMIN_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
 const HEAD={"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store","X-Content-Type-Options":"nosniff","Access-Control-Allow-Origin":ORIGIN,"Access-Control-Allow-Headers":"authorization,content-type","Access-Control-Allow-Methods":"POST,GET,OPTIONS","Access-Control-Max-Age":"3600","Vary":"Origin"};
 const reply=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:HEAD});
 const safe=(s,max=60)=>typeof s==="string"?s.trim().slice(0,max):"";
