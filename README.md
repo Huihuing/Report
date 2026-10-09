@@ -98,3 +98,19 @@ T06는 아직 로그인 기능이 없으므로 공개해도 괜찮은 ALEPH 진�
 - 데이터 계약: `contracts/pds-auth-schema-v3.json`
 
 T07 제출에서 **5일차 기록은 실제 날짜에만 작성할 수 있으므로 당일 모두 완료했다고 주장하지 않습니다.**
+
+
+## T08 — 패스키로 잠긴 비공개 공간
+
+- **공개 T01 첫 화면:** https://report-huihuing.vercel.app/
+- **T08 잠금 입구:** https://report-huihuing.vercel.app/t08/
+- 인증: WebAuthn / FIDO2, SimpleWebAuthn `@simplewebauthn/server@13.2.2`. **사이트 비밀번호 입력 없음.**
+- 공개 영역: 기존 T01 소개 그대로 유지; 비공개 공간만 별도 패스키 로그인 필요.
+- `t08/index.html`, `t08/styles.css`, `t08/script.js`: 공개/비공개 경계, 기기 패스키 생성·서명, 등록/로그인/로그아웃, 두 키 관리.
+- `supabase/functions/t08-passkey/index.ts`: 서버 새 challenge, WebAuthn 공개키/서명 검증, challenge 1회 소비, 해시 세션, owner_id별 자료.
+- `t08/schema.sql`: 공개키·등록 날짜·이름, 5분 challenge, 60분 세션, 가상 비공개 메모 3건, RLS/권한 회수.
+- `docs/T08-AUTH.md`: 인증 설명 6항목, 실제 HTTP 요청과 응답, 남은 실기기 검증.
+- `docs/T08-SUBMISSION.md`: 제출용 URL, 재현/통과 확인 4가지, AI와 본인 판단 3줄.
+- `t08/evidence/http-2026-10-09.json`: 실 서버 테스트 HTTP 200/401/400/409, 등록/로그인 질문 고유성, RLS 점검.
+
+**중요:** 자동으로 검증된 항목과 실제 패스키 기기 등록/두 키 복구 시험은 별개입니다. 실제 기기 등록을 확인하기 전 2/2 패스키 성공으로 제출하지 않습니다.
