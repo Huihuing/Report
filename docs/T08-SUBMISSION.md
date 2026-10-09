@@ -11,18 +11,18 @@ https://report-huihuing.vercel.app/
 
 ## 소스 저장소 URL (필수)
 
-**제출 직전 최신 full commit SHA로 아래 주소를 교체한다.**
+**검증 당시 소스 전체가 고정된 40자리 full commit URL**
 
-https://github.com/Huihuing/Report/tree/REPLACE_WITH_LATEST_40_CHARACTER_SHA
+https://github.com/Huihuing/Report/tree/943c27ae66c35a635d754e1a8586035644f5619b
 
 **인증 구현 설명서 여섯 항목:** https://github.com/Huihuing/Report/blob/main/docs/T08-AUTH.md  
-**서버 실측 200·401·400·409 증거:** https://github.com/Huihuing/Report/blob/main/t08/evidence/http-2026-10-09.json
+**서버 실측 200·401·403·400·409 증거:** https://github.com/Huihuing/Report/blob/main/t08/evidence/http-2026-10-09.json
 
 ## 재현·통과 확인 4가지 (권장)
 
 **1. 어디로 가나요?** 공개 소개 `https://report-huihuing.vercel.app/`에 접속한 뒤 T08 패스키 비공개 공간 링크를 누릅니다. 비로그인 심사자는 공개 소개까지만 확인하면 됩니다.
 
-**2. 세 단계 안에 무엇을 하나요?** ① T01 공개/비공개 경계를 확인하고 ② T08 서버의 등록·로그인 질문 및 WebAuthn 응답 흐름을 따라가며 ③ 비로그인 401·잘못된 서명 400·일회용 질문 재사용 409 실제 응답과 DB 권한 차단 결과를 증거 문서에서 확인합니다.
+**2. 세 단계 안에 무엇을 하나요?** ① T01 공개/비공개 경계를 확인하고 ② T08 서버의 등록·로그인 질문 및 WebAuthn 응답 흐름을 따라가며 ③ 비로그인·위조 세션 401, 허용되지 않은 Origin 403, 잘못된 서명 400, 일회용 질문 재사용 409 실제 응답과 DB 권한 차단 결과를 증거 문서에서 확인합니다.
 
 **3. 무엇이 보이면 통과인가요?** 공개 T01과 T08 입구는 HTTP 200으로 열리고 비로그인 비공개 자료 요청은 401입니다. 서버가 등록·로그인마다 새 challenge를 주며, 이미 쓴 질문에 대한 두 번째 요청은 HTTP 409를 반환합니다. 실제 기기에서 패스키 두 개를 등록하고 하나를 지운 후 남은 것으로 로그인되는 과정도 추가 확인해야 합니다.
 
