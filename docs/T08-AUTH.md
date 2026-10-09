@@ -103,6 +103,23 @@ HTTP/1.1 400 Bad Request
 
 **증거 원본:** https://github.com/Huihuing/Report/blob/main/t08/evidence/http-2026-10-09.json
 
+### G. 위조된 세션과 다른 사이트의 요청
+
+```http
+POST /functions/v1/t08-passkey
+Authorization: Bearer [존재하지 않는 시험 문자열]
+Content-Type: application/json
+
+{"action":"private","owner_id":"[임의의 타 계정 ID]"}
+
+HTTP/1.1 401 Unauthorized
+{"ok":false,"error":"UNAUTHORIZED"}
+```
+
+허용되지 않은 Origin(`https://untrusted.example`)에서 `POST {"action":"health"}` 요청 결과 **HTTP 403 ORIGIN_NOT_ALLOWED**.
+
+**기록된 실제 HTTP·정적·DB 검증 총 16항목 PASS.** 단, 정상 WebAuthn 패스키 서명을 통한 성공 로그인과 두 계정 양방향 소유자 검사 성공 사례는 실제 장치로 검증하기 전이므로 16개에 포함되지 않는다.
+
 ## ⑤ AI와 나
 
 - **AI에게 맡긴 일:** WebAuthn 서버 질문 생성·검증, 공개키 저장, 서버 세션/서명 확인, 공개/비공개 분리, 복수 패스키 관리 UI, 가상 자료 생성, 자동 HTTP 차단 검증과 문서화를 맡겼다.
