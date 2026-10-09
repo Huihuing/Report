@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Python list와 set 중 어떤 자료구조가 적절할지 T10 실측 연구를 바탕으로 탐색하는 대화형 가이드">
+  <title>Lookup Lab — Python list vs set 실험실 | limheejae</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./data/research.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#experiment">실험 시작하기</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="../bra/" class="brand"><span class="brand-icon">L<span class="brand-dot">.</span></span><span>LOOKUP LAB <small>by limheejae</small></span></a>
+      <nav aria-label="관련 페이지">
+        <a href="#experiment">체험하기</a>
+        <a href="#method">연구 근거</a>
+        <a href="../t10/">T10 논문 <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero container" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> RESEARCH → APPLICATION / BR-B</p>
+        <h1 id="title">빠른 코드를 위한<br><em>선택의 근거.</em></h1>
+        <p class="subtitle">Python에서 <code>list</code>와 <code>set</code>을 고민하는 개발자가, 데이터 크기와 조회 위치에 따른 실제 측정값을 비교하고 자료구조를 선택하도록 돕습니다.</p>
+        <div class="research-card">
+          <div><span class="micro-label">적용 논문 · T10</span><strong>정수 원소의 존재 여부 검사에서 컨테이너 종류·크기·조회 위치가 실행 시간에 미치는 영향</strong></div>
+          <a href="../t10/" aria-label="T10 논문 원문 열기">원문 보기 <span aria-hidden="true">↗</span></a>
+        </div>
+        <a class="hero-cta" href="#experiment">내 조회 조건으로 비교하기 <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-aside" aria-label="연구 결과 요약">
+        <p class="aside-top">WHAT THE DATA SAYS <span class="small-star" aria-hidden="true">✳</span></p>
+        <div class="hero-numbers"><strong>3,581<span>×</span></strong><p>정수 10,000개에서 없는 값을 찾는 경우, 연구에서 측정한 list와 set 조회 시간의 비율</p></div>
+        <div class="hero-divider"></div>
+        <div class="asides"><div><span>540</span><small>측정 블록</small></div><div><span>9</span><small>비교 조건</small></div><div><span>30</span><small>조건별 반복</small></div></div>
+        <p class="aside-foot">특정 실험 환경의 수치입니다. 모든 Python 코드에 적용되는 속도 보증이 아닙니다.</p>
+      </div>
+    </section>
+    <section class="lab-section" id="experiment" aria-labelledby="experiment-title">
+      <div class="container">
+        <div class="section-title"><span class="section-index">01 / EXPLORE</span><div><h2 id="experiment-title">조회 조건을 바꿔 보세요.</h2><p>세 가지 단계만 따라 하면 논문 수치와 실제 코드 선택 기준을 살펴볼 수 있습니다.</p></div></div>
+        <div class="lab-grid">
+          <div class="form-pane">
+            <form id="experiment-form" novalidate>
+              <p class="step"><span>STEP 01</span> 연구 조건 선택</p>
+              <label for="size-select">저장된 정수의 개수</label>
+              <select id="size-select" name="size">
+                <option value="100">100개 · 소규모</option>
+                <option value="1000">1,000개 · 중간 규모</option>
+                <option value="10000" selected>10,000개 · 대규모</option>
+              </select>
+              <label for="position-select">찾으려는 값의 위치</label>
+              <select id="position-select" name="position">
+                <option value="absent" selected>없음 · -1 조회</option>
+                <option value="first">첫 번째 · 0 조회</option>
+                <option value="last">마지막 · n-1 조회</option>
+              </select>
+              <label class="check" for="order-check"><input type="checkbox" id="order-check" name="order"><span>원래 원소의 순서를 보존해야 합니다.</span></label>
+              <button class="primary-button" type="submit">STEP 02 · 측정값 비교하기 <span aria-hidden="true">→</span></button>
+              <p class="form-hint">선택할 수 있는 수치는 T10에서 실제로 측정한 3 × 3 조건으로 제한됩니다.</p>
+            </form>
+          </div>
+          <div class="result-pane" id="result-pane" aria-live="polite">
+            <div class="pane-heading"><div><p class="step"><span>RESEARCH RESULT</span> 연구 데이터 조회</p><h3 id="case-heading">10,000개 · 없는 값</h3></div><span class="data-chip">실측 중앙값</span></div>
+            <div class="score-grid">
+              <div class="score"><small>PYTHON LIST</small><div><strong id="list-value">64,935.154</strong> <span>ns</span></div><p>조회 1회당 중앙값</p></div>
+              <div class="score set"><small>PYTHON SET</small><div><strong id="set-value">18.132</strong> <span>ns</span></div><p>조회 1회당 중앙값</p></div>
+            </div>
+            <div class="comparison"><div class="comparison-top"><span>조회 시간 비교</span><strong id="ratio-value">3,581.19×</strong></div>
+              <div class="bar-pair"><div class="bar-label">list</div><div class="track"><div id="list-bar" class="bar list-bar" style="width:100%"></div></div></div>
+              <div class="bar-pair"><div class="bar-label">set</div><div class="track"><div id="set-bar" class="bar set-bar" style="width:2%"></div></div></div>
+              <p class="chart-note">막대는 같은 조건의 측정시간에 비례합니다. 매우 작은 값은 화면에서 보이도록 최소 2% 길이로 표시합니다.</p>
+            </div>
+            <div class="recommendation"><span class="micro-label">DECISION GUIDE / 조건부 추천</span><h4 id="recommendation-title">반복 조회라면 set을 고려하세요</h4><p id="recommendation-body">정수의 부재 조회를 반복하며 원소의 순서가 중요하지 않을 때, 이 연구에서는 set의 조회 시간이 더 짧았습니다.</p></div>
+            <p class="evidence-note" id="evidence-note">T10 · CPython 3.13.5, Linux · 조건별 30블록 · ns/조회 중앙값</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="try-section container" aria-labelledby="try-title">
+      <div class="section-title"><span class="section-index">02 / TRY IT</span><div><h2 id="try-title">이 값은 목록에 있을까요?</h2><p>예시 데이터는 <code>0</code>부터 <code>n-1</code>까지의 정수입니다. 직접 값을 넣어 존재 여부를 확인해 보세요.</p></div></div>
+      <div class="try-grid">
+        <form id="value-form" class="try-form" novalidate><p class="step"><span>STEP 03</span> 값 직접 시험</p><label for="value-input">조회할 정수 입력</label><div class="try-input-wrap"><input id="value-input" name="value" type="text" inputmode="numeric" autocomplete="off" value="-1" placeholder="예: -1, 0, 9999" aria-describedby="value-help"><button type="submit">존재 여부 확인 <span aria-hidden="true">→</span></button></div><p id="value-help" class="form-hint">최대 12자리의 정수만 입력할 수 있습니다. 개인정보를 입력하지 마세요.</p></form>
+        <div class="try-result" id="try-result" role="status" aria-live="polite"><span class="micro-label">SAMPLE DATA / 예시 실행</span><strong id="lookup-status">값 -1은 존재하지 않습니다.</strong><p id="lookup-detail">list와 set 모두 존재 여부 판정은 같습니다. 이 단계는 JavaScript 예시이며 Python의 실행시간 측정이 아닙니다.</p></div>
+      </div>
+    </section>
+    <section class="method-section" id="method"><div class="container method-grid">
+      <div><span class="section-index">03 / METHODOLOGY</span><h2>무조건 빠르다고<br>말하지 않는 이유.</h2></div>
+      <div class="method-items">
+        <article><span>01</span><div><h3>없는 값에서는 명확한 차이</h3><p>정수 100·1,000·10,000개의 부재 조회에서 세 경우 모두 set의 중앙값이 더 작았습니다.</p></div></article>
+        <article><span>02</span><div><h3>첫 위치에서는 차이가 거의 없음</h3><p>첫 원소 조회에서는 1.00~1.04배 수준이었습니다. 언제나 set이 더 빠르다고 단정하지 않습니다.</p></div></article>
+        <article><span>03</span><div><h3>실측 범위를 넘는 추정은 하지 않음</h3><p>문자열, 중간 위치, 메모리 사용량, 컨테이너 생성시간은 이번 실험 대상이 아닙니다. 응용 프로그램에는 직접 측정이 필요합니다.</p></div></article>
+        <a href="../t10/" class="paper-link">논문과 원자료 전체 보기 <span aria-hidden="true">↗</span></a>
+      </div>
+    </div></section>
+  </main>
+  <footer class="container footer"><span>© 2026 limheejae · BR-B / Lookup Lab</span><div><a href="../bra/">포트폴리오로 돌아가기</a><a href="../t10/">연구 원문</a></div></footer>
+  <noscript><p class="no-script">이 애플리케이션의 비교 기능은 JavaScript가 필요합니다. 논문은 위의 T10 링크에서 읽을 수 있습니다.</p></noscript>
+</body>
+</html>
