@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="T01 소개 페이지에서 이어지는 비밀번호 없는 WebAuthn 패스키 비공개 공간">
+  <title>T08 | 패스키로 잠긴 내 공간</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="back" href="../">← 공개 T01 소개로 돌아가기</a>
+    <span class="top-label"><span class="dot"></span> T08 · PRIVATE BY PASSKEY</span>
+  </header>
+  <main>
+    <div class="masthead">
+      <div class="intro">
+        <span class="eyebrow">T01 EXTENSION / PASSWORDLESS</span>
+        <h1>공개 소개는 그대로.<br><span>나만의 메모는 패스키로.</span></h1>
+        <p>이 페이지는 과제 1의 공개 소개에서 이어지는 별도 비공개 공간입니다. 공개 소개에는 인증이 필요 없습니다. 여기서는 비밀번호를 입력하거나 저장하지 않고 기기가 생성한 패스키로만 입장합니다.</p>
+        <div class="public-note"><strong>공개 / Public</strong><span>개발 관심사 · 프로젝트 소개 · 공개 근거는 <a href="../">T01 첫 화면</a>에 누구나 접근할 수 있습니다.</span></div>
+      </div>
+      <div class="boundary" aria-hidden="true">
+        <div class="boundary-top"><span>PUBLIC</span><span>PRIVATE</span></div>
+        <div class="lock-art"><span class="lock-shackle"></span><span class="lock-body">●</span></div>
+        <span class="boundary-caption">패스키 검증 전에는 비공개 자료를 내려받지 않습니다</span>
+      </div>
+    </div>
+    <section class="panel" id="authentication" aria-labelledby="authentication-title">
+      <div class="panel-header"><div><span class="eyebrow">01 · IDENTITY</span><h2 id="authentication-title">비밀번호 없는 입장</h2></div><span class="state" id="gateLabel">잠금 상태</span></div>
+      <div id="signedOut">
+        <p class="muted">기기 내 Windows Hello · Touch ID · Google 비밀번호 관리자 · 보안 키 등이 패스키 저장을 지원합니다. 인증용 기기 PIN·생체정보는 이 서버로 전달되지 않습니다.</p>
+        <div class="actions">
+          <button id="loginBtn" class="btn primary" type="button">등록한 패스키로 로그인 <span aria-hidden="true">↗</span></button>
+          <button id="createBtn" class="btn secondary" type="button">새 비공개 공간 + 패스키 만들기</button>
+        </div>
+        <p class="micro">처음 사용하는 경우 새 공간을 만드세요. 별도 이메일·비밀번호 계정은 필요 없습니다. 두 번째 계정 검사는 다른 브라우저 프로필에서 새 공간을 만들어 진행할 수 있습니다.</p>
+      </div>
+      <div id="signedIn" hidden>
+        <p class="muted">기기의 패스키 서명을 서버가 확인했습니다. 아래 세 가지 **과제용 가상 메모**는 로그인 성공 뒤에만 서버에서 받아 표시합니다.</p>
+        <div class="actions"><button id="logoutBtn" class="btn secondary" type="button">로그아웃 · 세션 즉시 폐기</button></div>
+      </div>
+      <p class="message" id="authMessage" role="status" aria-live="polite"></p>
+    </section>
+    <section class="panel private-panel" id="vaultPanel" aria-labelledby="vault-title">
+      <div class="panel-header"><div><span class="eyebrow">02 · PROTECTED RESOURCE</span><h2 id="vault-title">비공개 자료</h2></div><span class="state dark-state" id="vaultState">인증 필요</span></div>
+      <div id="lockedPanel" class="locked">
+        <div class="locked-icon" aria-hidden="true">◇</div>
+        <h3>자료가 잠겨 있습니다.</h3>
+        <p>비로그인 상태에서는 내용을 표시하지 않으며, 실제 서버 요청도 HTTP 401로 거절됩니다. 이 페이지의 HTML·JavaScript에도 비공개 메모 원문이 포함되지 않습니다.</p>
+      </div>
+      <div id="unlockedPanel" hidden>
+        <p class="muted">아래 내용은 모두 만들어 넣은 예시이며, 실제 개인정보·연락처·신분증 정보가 아닙니다.</p>
+        <div id="notes" class="note-grid" aria-live="polite"></div>
+      </div>
+    </section>
+    <section class="panel" id="passkeysPanel" hidden aria-labelledby="passkeys-title">
+      <div class="panel-header"><div><span class="eyebrow">03 · ACCOUNT RECOVERY</span><h2 id="passkeys-title">내 패스키 관리</h2></div><span class="state">복수 등록 권장</span></div>
+      <p class="muted">두 번째 패스키를 다른 기기나 다른 비밀번호 관리자에 저장해 분실에 대비하세요. 패스키가 하나만 남으면 마지막 패스키 삭제를 차단합니다. 완전히 잃어버리면 비밀번호 복구 기능이 없어 기존 공간에 접근할 수 없습니다.</p>
+      <label class="field">새 패스키 이름 <input id="passkeyLabel" type="text" maxlength="60" placeholder="예: 집 PC · Windows Hello" autocomplete="off"></label>
+      <button id="addPasskeyBtn" class="btn secondary" type="button">두 번째 패스키 등록하기</button>
+      <div id="passkeyList" class="passkey-list" aria-live="polite"></div>
+      <details class="details">
+        <summary>서버가 보관한 공개키란?</summary>
+        <p>서버에는 COSE 형식의 공개키와 서명 횟수 카운터 등이 저장됩니다. 아래 목록에서 공개키 앞부분을 확인할 수 있습니다. 개인키는 저장되지 않습니다.</p>
+        <p>보안 검증 결과는 <a href="https://github.com/Huihuing/Report/blob/main/docs/T08-AUTH.md">인증 구현 설명서</a>에서 확인합니다.</p>
+      </details>
+    </section>
+    <section class="proof">
+      <div><span class="eyebrow">04 · VERIFIABLE SECURITY</span><h2>숨겨 놓은 화면이 아니라<br>서버에서 거절합니다.</h2></div>
+      <div class="proof-items">
+        <p><strong>401</strong> 비로그인 자료 요청</p>
+        <p><strong>409</strong> 이미 사용한 challenge 재요청</p>
+        <p><strong>404</strong> 다른 계정의 패스키 삭제 요청</p>
+      </div>
+    </section>
+    <footer>전체 콘텐츠는 연습용으로 작성했습니다. 패스키 개인키·비밀번호·실제 개인정보는 저장소에 올리지 않습니다.</footer>
+  </main>
+</body>
+</html>
