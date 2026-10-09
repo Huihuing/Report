@@ -99,6 +99,20 @@
       "id": "T08-table-RLS",
       "action": "SQL check all five T08 tables RLS on and anon/authenticated cannot SELECT",
       "pass": true
+    },
+    {
+      "id": "T08-forged-bearer-and-owner",
+      "action": "POST private with fabricated 64-character Bearer token and owner_id in request JSON",
+      "status": 401,
+      "error": "UNAUTHORIZED",
+      "pass": true
+    },
+    {
+      "id": "T08-untrusted-origin",
+      "action": "POST health with Origin https://untrusted.example",
+      "status": 403,
+      "error": "ORIGIN_NOT_ALLOWED",
+      "pass": true
     }
   ],
   "not_yet_proven": [
