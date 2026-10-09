@@ -133,3 +133,13 @@ T07 제출에서 **5일차 기록은 실제 날짜에만 작성할 수 있으므
 - 이력서·자기소개서·경력기술서: `bra/docs/`
 - 숫자 및 승인된 글만 내보내는 장치: `bra/tools/update.py` (비공개 리추얼 입력은 제출 ZIP에만 보관)
 - 11번 비공개 소설 원문은 공개 저장소에 업로드하지 않음
+
+
+## BR-B — Lookup Lab · 논문 결과를 쓰는 애플리케이션
+
+- 앱 URL: https://report-huihuing.vercel.app/brb/
+- 논문 출처: T10의 CPython list/set 정수 조회 실험 9조건 · 540측정 블록
+- `brb/index.html`, `brb/styles.css`, `brb/app.js`, `brb/data/research.js` — 브라우저만으로 실행되는 정적 앱
+- `brb/tests/verify.py` — 보관된 T10 분석값과 BR-B 데이터 및 포트폴리오 링크 대조
+- `docs/BRB-SUBMISSION.md` — 재현 방법과 승인·사용자 테스트가 필요한 사항
+- BR-A의 SELECTED WORK에 논문과 앱을 나란히 연결
