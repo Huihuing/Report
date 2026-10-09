@@ -1,0 +1,120 @@
+{
+  "task": "T08 Passwordless WebAuthn",
+  "tested_at": "2026-10-09",
+  "api": "https://sckjbblzivbcoofabhqd.supabase.co/functions/v1/t08-passkey",
+  "site": "https://report-huihuing.vercel.app/t08/",
+  "claim": "Only tests actually performed are marked PASS; credentials on real device not yet registered",
+  "cases": [
+    {
+      "id": "T08-GET-public",
+      "action": "GET /functions/v1/t08-passkey",
+      "status": 200,
+      "expected": 200,
+      "pass": true
+    },
+    {
+      "id": "T08-private-unauthorized",
+      "action": "POST {\"action\":\"private\"} without Bearer",
+      "status": 401,
+      "error": "UNAUTHORIZED",
+      "expected": 401,
+      "pass": true
+    },
+    {
+      "id": "T08-registration-begin-a",
+      "action": "POST {\"action\":\"register_begin\"}",
+      "status": 200,
+      "challenge_present": true,
+      "pass": true
+    },
+    {
+      "id": "T08-registration-begin-b",
+      "action": "POST {\"action\":\"register_begin\"}",
+      "status": 200,
+      "challenge_present": true,
+      "pass": true
+    },
+    {
+      "id": "T08-register-unique-challenges",
+      "action": "Compare two separately generated registration challenges (values redacted)",
+      "equal": false,
+      "pass": true
+    },
+    {
+      "id": "T08-login-begin-a",
+      "action": "POST {\"action\":\"login_begin\"}",
+      "status": 200,
+      "challenge_present": true,
+      "pass": true
+    },
+    {
+      "id": "T08-login-begin-b",
+      "action": "POST {\"action\":\"login_begin\"}",
+      "status": 200,
+      "challenge_present": true,
+      "pass": true
+    },
+    {
+      "id": "T08-login-unique-challenges",
+      "action": "Compare two separately generated authentication challenges (values redacted)",
+      "equal": false,
+      "pass": true
+    },
+    {
+      "id": "T08-invalid-registration",
+      "action": "POST register_finish with invalid authenticator response",
+      "status": 400,
+      "error": "INVALID_ATTESTATION",
+      "pass": true
+    },
+    {
+      "id": "T08-register-replay",
+      "action": "Repeat the previous register_finish with same request id",
+      "status": 409,
+      "error": "CHALLENGE_EXPIRED_OR_USED",
+      "pass": true
+    },
+    {
+      "id": "T08-invalid-authentication",
+      "action": "POST login_finish with nonexistent credential",
+      "status": 400,
+      "error": "INVALID_ASSERTION",
+      "pass": true
+    },
+    {
+      "id": "T08-login-replay",
+      "action": "Repeat previous login_finish with same request id",
+      "status": 409,
+      "error": "CHALLENGE_EXPIRED_OR_USED",
+      "pass": true
+    },
+    {
+      "id": "T08-public-html",
+      "action": "GET /t08/ from existing public Vercel deployment",
+      "status": 200,
+      "private_fixture_in_body": false,
+      "pass": true
+    },
+    {
+      "id": "T08-table-RLS",
+      "action": "SQL check all five T08 tables RLS on and anon/authenticated cannot SELECT",
+      "pass": true
+    }
+  ],
+  "not_yet_proven": [
+    "Real device WebAuthn registration and verification success (C21-C26)",
+    "Successful WebAuthn login and real session revocation (C29,C30,C32-C34)",
+    "Two real authenticators added to the same account; delete one; remaining login succeeds and removed fails (C42-C46)",
+    "Second account real passkey ownership-isolation bidirectional 403/404 with data counts unchanged (C36-C41)",
+    "Stored COSE public key of a real credential, safely displayed in submission (C22)",
+    "Actual authenticator storage provider name (C26)"
+  ],
+  "records": {
+    "accounts": 0,
+    "registered_passkeys": 0,
+    "private_notes": 0,
+    "rls_all": true,
+    "public_select_forbidden": true
+  },
+  "secret_policy": "No real passkey credential bytes, challenge strings, session tokens or private keys included."
+}
