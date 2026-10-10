@@ -158,7 +158,19 @@
       if (!recipe.missing.length) missingTags.append(node("span", "", "기본 재료를 모두 갖췄어요!"));
       missing.append(missingTags);
       card.append(missing);
-      card.append(node("div", "recipe-steps", "한 줄 조리 팁 · " + recipe.steps));
+      const details = node("details", "cooking-details");
+      const toggle = node("summary", "cooking-toggle", "단계별 조리법 보기");
+      details.append(toggle);
+      const list = node("ol", "cooking-step-list");
+      const steps = globalThis.FridgeCookingSteps && globalThis.FridgeCookingSteps[recipe.id];
+      const items = Array.isArray(steps) && steps.length >= 3 ? steps : [recipe.steps];
+      for (const instruction of items) {
+        list.append(node("li", "", instruction));
+      }
+      details.append(list);
+      const note = node("p", "cooking-caution", "※ 간소화한 조리 예시예요. 양념·수량·위생·알레르기·충분한 익힘은 직접 확인해 주세요.");
+      details.append(note);
+      card.append(details);
       return card;
     }
 

@@ -3,6 +3,8 @@
 const assert = require("node:assert/strict");
 const L = require("../logic.js");
 require("../recipes.js");
+require("../cooking-steps.js");
+const cookingSteps = globalThis.FridgeCookingSteps;
 const R = globalThis.FridgeRecipes;
 let checks = 0;
 function verify(condition, description) {
@@ -21,6 +23,10 @@ for (const r of R) {
   verify(new Set(r.ingredients.map(L.normalizeName)).size === r.ingredients.length, "no duplicate required ingredients: " + r.name);
   verify(r.ingredients.every(x => L.validateName(x) === ""), "valid ingredients: " + r.name);
   verify(typeof r.steps === "string" && r.steps.length > 0, "steps: " + r.name);
+  const instructions = cookingSteps[r.id];
+  verify(Array.isArray(instructions) && instructions.length >= 3, "detailed instructions: " + r.name);
+  verify(instructions.every(step => typeof step === "string" && step.trim().length >= 10), "meaningful steps: " + r.name);
+  verify(!instructions.some(step => /<[^>]*>/.test(step)), "no markup in steps: " + r.name);
 }
 let state = L.addIngredient([], " 계란 ");
 verify(state.added && state.name === "달걀", "egg alias");
