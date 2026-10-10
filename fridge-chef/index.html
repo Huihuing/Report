@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f2">
+  <meta name="description" content="냉장고에 있는 재료로 만들기 좋은 요리를 찾아보세요. 부족한 재료도 한눈에 확인할 수 있습니다.">
+  <title>Fridge Chef | 냉장고 파먹기</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./recipes.js"></script>
+  <script defer src="./logic.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="./index.html" aria-label="Fridge Chef 홈"><span class="brand-icon" aria-hidden="true">🥕</span> Fridge<span class="brand-accent">Chef</span></a>
+      <span class="nav-note"><span class="status-dot"></span> 설치 없이 바로 사용</span>
+    </div>
+  </header>
+  <main class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-main">
+        <span class="eyebrow"><span aria-hidden="true">✦</span> 나만의 작은 주방 비서</span>
+        <h1 id="hero-title">냉장고 속 재료가<br><span>오늘의 한 끼</span>가 되는 순간.</h1>
+        <p>남은 재료를 등록해 보세요. 만들기 좋은 요리부터 부족한 재료까지 한눈에 보여드릴게요.</p>
+        <a class="hero-link" href="#pantry">내 냉장고 채우기 <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="blob blob-one"></div><div class="blob blob-two"></div>
+        <div class="dish">🍳</div>
+        <div class="floating-badge badge-one">🥬 신선한 아이디어</div>
+        <div class="floating-badge badge-two">🥕 남김없이 활용</div>
+      </div>
+    </section>
+    <section class="stats" aria-label="서비스 정보">
+      <div><strong id="stat-count">0</strong><span>내 냉장고 재료</span></div>
+      <div><strong id="stat-ready">0</strong><span>바로 만들기 후보</span></div>
+      <div><strong id="stat-recipes">0</strong><span>살펴볼 예시 요리</span></div>
+    </section>
+    <div class="workspace">
+      <section id="pantry" class="panel pantry" aria-labelledby="pantry-title">
+        <div class="section-heading">
+          <div><span class="section-kicker">01 / MY FRIDGE</span><h2 id="pantry-title">내 냉장고</h2></div>
+          <span class="hint">이 브라우저에만 저장돼요</span>
+        </div>
+        <p class="description">지금 가지고 있는 재료를 하나씩 알려주세요.</p>
+        <form id="ingredient-form" class="input-row" autocomplete="off">
+          <label class="sr-only" for="ingredient-input">추가할 식재료</label>
+          <input id="ingredient-input" type="text" maxlength="24" placeholder="예: 계란, 양파, 두부" enterkeyhint="done" required>
+          <button type="submit" class="primary-button">+ 재료 추가</button>
+        </form>
+        <p class="inline-message" id="input-feedback" role="status" aria-live="polite"></p>
+        <div class="quick-add">
+          <h3>자주 쓰는 재료 <span>눌러서 추가해 보세요</span></h3>
+          <div class="quick-tags" id="quick-tags"></div>
+        </div>
+        <div class="pantry-list-heading"><h3>보유 재료 <span id="pantry-counter">0개</span></h3><button id="clear-all" type="button" class="text-button" hidden>전체 비우기</button></div>
+        <div id="pantry-empty" class="empty-pantry"><span aria-hidden="true">🧺</span><strong>아직 등록된 재료가 없어요</strong><p>위에서 재료를 추가하면 추천이 시작돼요.</p></div>
+        <div class="ingredient-list" id="ingredient-list" aria-label="등록된 재료 목록"></div>
+        <div class="privacy-note"><span aria-hidden="true">🔒</span> 로그인이나 서버 전송 없이 브라우저에서만 처리합니다.</div>
+      </section>
+      <section id="recommend" class="panel recommendations" aria-labelledby="recipe-title">
+        <div class="section-heading">
+          <div><span class="section-kicker">02 / WHAT TO COOK</span><h2 id="recipe-title">오늘의 요리 추천</h2></div>
+          <span class="recommend-label">맞춤 추천</span>
+        </div>
+        <p class="description">레시피에 필요한 재료 중 보유한 비율이 높은 순서로 보여드려요.</p>
+        <div class="recommend-controls">
+          <div class="segmented" role="group" aria-label="레시피 필터">
+            <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">전체 요리</button>
+            <button class="filter-button" type="button" data-filter="ready" aria-pressed="false">바로 만들기 <span id="ready-count">0</span></button>
+          </div>
+          <label class="sr-only" for="recipe-search">요리 이름 검색</label>
+          <input class="search-input" id="recipe-search" type="search" placeholder="요리 이름 검색">
+        </div>
+        <p class="results-label" id="results-label" role="status" aria-live="polite"></p>
+        <div class="recipe-grid" id="recipe-grid"></div>
+        <div id="recipe-empty" class="recipe-empty" hidden><span aria-hidden="true">🔎</span><strong>조건에 맞는 요리가 없어요</strong><p>재료를 더 추가하거나 필터를 변경해 보세요.</p></div>
+      </section>
+    </div>
+    <section class="about"><span aria-hidden="true">💡</span><p><strong>알아두세요.</strong> 표시된 요리는 내장 예시 레시피를 재료 이름으로 비교한 결과예요. 양념, 조리량, 식품 상태나 알레르기 적합성을 판단하는 기능은 아닙니다.</p></section>
+  </main>
+  <footer class="site-footer"><div class="container"><span>🥕 Fridge Chef</span><span>Made by limheejae · ALEPH Premium Project</span></div></footer>
+</body>
+</html>
